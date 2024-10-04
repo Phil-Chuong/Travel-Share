@@ -177,9 +177,9 @@ router.get('/country/:country_id', async (req, res) => {
 //POST routes
 router.post('/', async (req, res) => {
     console.log('Request body:', req.body); // Log the request body
-    const {user_id, content, image_path, country_id, created, post_likes} = req.body;
+    const {user_id, content, image_path, country_id, created, post_likes, title} = req.body;
     try {
-        const post = await Post.createPost(user_id, content, image_path, country_id, created, post_likes);
+        const post = await Post.createPost(user_id, content, image_path, country_id, created, post_likes, title);
         res.status(201).json(post);
     } catch (error) {
         console.error('Error creating new post', error);

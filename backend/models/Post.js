@@ -7,7 +7,21 @@ class Post {
         try {
             const result = await pool.query(query);
             console.log('query result:', result.rows);
-            return result.rows;
+
+            // Format image_path correctly before sending the response
+            const posts = result.rows.map(post => {
+                // Check if the image_path contains multiple paths, and split it into an array
+                if (post.image_path) {
+                    post.image_path = post.image_path.includes(',')
+                        ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
+                        : [post.image_path.trim()]; // Ensure it is always an array
+                } else {
+                    post.image_path = []; // No images, return an empty array
+                }
+                return post;
+            });
+
+            return posts;
         } catch (error) {
             console.error('Error fetching all posts:', error.message);
             throw error;
@@ -59,10 +73,10 @@ class Post {
     }
 
     //POST REQUEST - Creating a post
-    static async createPost(user_id, content, image_path, country_id) {
-        const query = 'INSERT INTO posts (user_id, content, image_path, country_id) VALUES ($1, $2, $3, $4) RETURNING *';
+    static async createPost(user_id, content, image_path, country_id, title) {
+        const query = 'INSERT INTO posts (user_id, content, image_path, country_id, title) VALUES ($1, $2, $3, $4, $5) RETURNING *';
         try {
-            const result = await pool.query(query, [user_id, content, image_path, country_id])
+            const result = await pool.query(query, [user_id, content, image_path, country_id, title])
             const newPost = result.rows[0];
             return newPost;
         } catch (error) {

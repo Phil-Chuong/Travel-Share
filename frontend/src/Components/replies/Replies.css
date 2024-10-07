@@ -1,0 +1,9 @@
+.replies {
+    margin-left: 20px; /* Indent replies for better hierarchy */
+    border-left: 2px solid #ccc; /* Left border for replies */
+    padding-left: 10px; /* Space inside the border */
+}
+
+.replies .comment {
+    margin-top: 10px; /* Space between replies */
+}

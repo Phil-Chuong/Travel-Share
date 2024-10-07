@@ -49,10 +49,10 @@ class Comment {
     }
 
     //POST REQUEST - Creating a comment
-    static async createComment(post_id, user_id, comment_content) {
-        const query = 'INSERT INTO comments (post_id, user_id, comment_content) VALUES ($1, $2, $3) RETURNING *';
+    static async createComment(post_id, user_id, comment_content, parent_comment_id = null) {
+        const query = 'INSERT INTO comments (post_id, user_id, comment_content, parent_comment_id) VALUES ($1, $2, $3, $4) RETURNING *';
         try {
-            const result = await pool.query(query, [post_id, user_id, comment_content])
+            const result = await pool.query(query, [post_id, user_id, comment_content, parent_comment_id]);
             const newComment = result.rows[0];
             return newComment;
         } catch (error) {

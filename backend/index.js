@@ -28,6 +28,7 @@ const countriesRouter = require('./routes/countries');
 const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 const authenticationRouter = require('./routes/authentication');
+const repliesRounter = require('./routes/replies');
 
 
 //Routes handlers
@@ -35,6 +36,7 @@ app.use('/users', usersRouter);
 app.use('/countries', countriesRouter);
 app.use('/posts', postsRouter);
 app.use('/comments', commentsRouter);
+app.use('/replies', repliesRounter);
 app.use('/authentication', authenticationRouter);// Register/Login routes
 app.use('/posts/photos/upload', postsRouter);
 

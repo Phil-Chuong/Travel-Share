@@ -3,7 +3,7 @@ const pool = require('../DB/db');
 class Post {
     //GET REQUEST
     static async getAllPosts() {
-        const query = 'SELECT * FROM posts';
+        const query = 'SELECT * FROM posts ORDER BY created DESC';
         try {
             const result = await pool.query(query);
             console.log('query result:', result.rows);
@@ -81,6 +81,20 @@ class Post {
             return newPost;
         } catch (error) {
             console.error('Error creating new post for user', error.message);
+            throw error;
+        }
+    }
+
+
+    //PULL REQUEST - change like states
+    static async addLike(postId) {
+        const query = 'UPDATE posts SET post_likes = post_likes + 1 WHERE id = $1 RETURNING *';
+        try {
+            const result = await pool.query(query, [postId]);
+            const updatedPost = result.rows[0]; // Get the updated post with new like count
+            return updatedPost; // Return the updated post
+        } catch (error) {
+            console.error('Error adding like to post', error.message);
             throw error;
         }
     }

@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 const multer  = require('multer');
 const path = require('path');
 const fs = require('fs');
+const pool = require('../DB/db');
 
 ///////////////////////////////////////////////////
 //MULTER SETUP
@@ -186,6 +187,17 @@ router.post('/', async (req, res) => {
         res.status(500).send({error: 'Error creating new post'});
     }
 })
+
+router.post('/:id/like', async (req, res) => {
+    const postId = req.params.id;
+
+    try {
+        const updatedPost = await Post.addLike(postId); // Replace with your model class name
+        res.json(updatedPost); // Send back the updated post
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to add like' });
+    }
+});
 
 //DELETE routes
 router.delete('/:id', async (req, res) => {

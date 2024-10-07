@@ -64,9 +64,9 @@ router.get('/users/:user_id', async (req, res) => {
 
 //POST routes
 router.post('/', async (req, res) => {
-    const {post_id, user_id, comment_content} = req.body;
+    const {post_id, user_id, comment_content, parent_comment_id} = req.body;
     try {
-        const comment = await Comment.createComment(post_id, user_id, comment_content);
+        const comment = await Comment.createComment(post_id, user_id, comment_content, parent_comment_id);
         res.status(201).json(comment);
     } catch (error) {
         console.error('Error creating new comment', error);

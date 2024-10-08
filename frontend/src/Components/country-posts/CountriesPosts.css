@@ -1,4 +1,4 @@
-.mainpost-container {
+/* .mainpost-container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -6,10 +6,6 @@
     margin: 0;
     background-color: #f9f9f9;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.mainpost-container h3 {
-    margin-top: 10px;
 }
 
 .mainpost-list {
@@ -52,10 +48,10 @@
     height: auto;
     border-radius: 6px;
     object-fit: cover;
-}
+} */
 
 /* USERNAME/COUNTRY container */
-.mainpost-info {
+/* .mainpost-info {
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
@@ -70,16 +66,16 @@
 .mainpost-info h3{
     margin: 0;
     padding: 0;
-}
+} */
 
 /* USERNAME styles */
-.mainpost-username {
+/* .mainpost-username {
     font-size: 0.7em;
     font-weight: bold;
 }
 
 /* COUNTRY styles */
-.mainpost-country {
+/*.mainpost-country {
     font-size: 0.7em;
     font-style: italic;
 }
@@ -101,11 +97,11 @@
 
 .mainpost-content p {
     margin: 0;
-}
+} */
 
 
 /* Comment Container */
-.comment-container {
+/* .comment-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -173,4 +169,4 @@
 
 .likes-section {
     cursor: pointer;
-}
+} */

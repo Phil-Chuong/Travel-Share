@@ -1,14 +1,14 @@
 import React from 'react';
-import './HomePage.css';
+import './CountryPage.css';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
-import Mainpost from '../../Components/main-post/Mainpost';
 import Navbar from '../../Components/navbar/Navbar';
+import CountriesPosts from '../../Components/country-posts/CountriesPosts';
 
-const HomePage = () => {
+const CountryPage = () => {
   return (
     <div className="parent">
       <div className='header-section'>
-        <div className="header"><h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1></div>
+      <div className="header"><h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1></div>
       </div>
 
       <div className='layout-container'> 
@@ -17,7 +17,7 @@ const HomePage = () => {
         </div>
 
         <div className='mainbody-section'>
-          <div className="mainbody"><Mainpost /></div>
+          <div className="mainbody"><CountriesPosts /></div>
         </div>
 
         <div className='section-section'>
@@ -32,4 +32,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage;
+export default CountryPage;

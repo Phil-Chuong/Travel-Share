@@ -1,16 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './Routes/homepage/HomePage';
+import MyPage from './Routes/myhome/myPage';
 import Login from './Routes/login/Login';
 import Register from './Routes/register/Register';
+import MyPageAccount from './Routes/mypageaccount/MyPageAccount';
+import CountryPage from './Routes/countrypage/CountryPage';
+
+
 
 function App() {
   
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} /> {/* Main homepage */}
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/mypage' element={<MyPage />} />
+        <Route path='/mypageaccount' element={<MyPageAccount />} />
+        <Route path="/country/:countryId" element={<CountryPage />} />
       </Routes>
     </Router>
   )

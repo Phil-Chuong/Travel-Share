@@ -1,10 +1,10 @@
 import React from 'react';
-import './HomePage.css';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
-import Mainpost from '../../Components/main-post/Mainpost';
 import Navbar from '../../Components/navbar/Navbar';
+import MyHomePage from '../../Components/my-page/MyHomePage';
 
-const HomePage = () => {
+
+const MyPage = () => {
   return (
     <div className="parent">
       <div className='header-section'>
@@ -12,12 +12,10 @@ const HomePage = () => {
       </div>
 
       <div className='layout-container'> 
-        <div className='navbar-section'>
           <Navbar />
-        </div>
 
         <div className='mainbody-section'>
-          <Mainpost />
+          <MyHomePage />
         </div>
 
         <div className='section-section'>
@@ -27,9 +25,9 @@ const HomePage = () => {
 
       <div className='footer-section'>
         <div>Footer Component </div>
-      </div>     
+      </div>
     </div>
   )
 }
 
-export default HomePage;
+export default MyPage

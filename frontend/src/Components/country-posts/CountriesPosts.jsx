@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
-// import './CountriesPosts.css';
+import './CountriesPosts.css';
 import { ChatCentered, Heart } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
@@ -23,11 +23,10 @@ function CountriesPosts() {
         const fetchPostsByCountry = async () => {
             try {
                 const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
-                    axios.get(`http://localhost:4000/posts/country/${countryId}`),
-                    //axios.get('http://localhost:4000/posts'),
-                    axios.get('http://localhost:4000/countries'),
-                    axios.get('http://localhost:4000/users'),
-                    axios.get('http://localhost:4000/comments')
+                    axios.get(`/posts/country/${countryId}`),
+                    axios.get('/countries'),
+                    axios.get('/users'),
+                    axios.get('/comments')
                 ]);
                 setPosts(postsResponse.data);
                 setCountries(countriesResponse.data);
@@ -57,13 +56,6 @@ function CountriesPosts() {
         return country ? country.country_name : 'Unknown Country';
     };
 
-    // const getCountryName = (country_id) => {
-    //     if (countries.length === 0) return 'Unknown Country'; // Ensure countries are loaded
-    //     const country = countries.find(country => country.id === country_id);
-    //     return country ? country.country_name : 'Unknown Country';
-    // };
-    
-
     const getUsername = (user_id) => {
         const user = users.find(user => user.id === user_id);
         return user ? user.username : 'Unknown User';
@@ -74,7 +66,7 @@ function CountriesPosts() {
         if (!newComment[postId]) return;
 
         try {
-            const response = await axios.post(`http://localhost:4000/comments`, {
+            const response = await axios.post(`/comments`, {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
@@ -92,7 +84,7 @@ function CountriesPosts() {
         if (!newReply[commentId]) return;
 
         try {
-            const response = await axios.post(`http://localhost:4000/comments`, {
+            const response = await axios.post(`/comments`, {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
@@ -107,7 +99,7 @@ function CountriesPosts() {
 
     const handleLikePost = async (postId) => {
         try {
-            const response = await axios.post(`http://localhost:4000/posts/${postId}/like`);
+            const response = await axios.post(`/posts/${postId}/like`);
 
             // Update likes state with the latest count from the backend
             const updatedLikes = response.data.post_likes;
@@ -141,17 +133,17 @@ function CountriesPosts() {
     }
 
     return (
-        <div className='mainpost-container'>
-            <h3>{getCountryName(Number(countryId))}</h3>
-            <ul className="mainpost-list">
+        <div className='countrypost-container'>
+            <h3 className='countryname'>{getCountryName(Number(countryId))}</h3>
+            <ul className="countrypost-list">
                 {posts.map((post) => {
                     const topLevelComments = getTopLevelCommentsForPost(post.id);
                     const currentLikes = likes[post.id] || 0; 
 
                     return (
-                        <li key={post.id} className="mainpost-item">
-                            <div className='mainpost-info'>
-                                <div className='mainpost-username'>
+                        <li key={post.id} className="countrypost-item">
+                            <div className='countrypost-info'>
+                                <div className='countrypost-username'>
                                     <h3>Traveller: {getUsername(post.user_id)}</h3>
                                 </div>
                                 {/* <div className='mainpost-country'>
@@ -161,7 +153,7 @@ function CountriesPosts() {
                                 </div> */}
                             </div>
 
-                            <div className="mainpost-title">
+                            <div className="countrypost-title">
                                 <h4>{post.title}</h4>
                             </div>
 
@@ -171,7 +163,7 @@ function CountriesPosts() {
                                 ))}
                             </div>
 
-                            <div className="mainpost-content">
+                            <div className="countrypost-content">
                                 <p>{post.content}</p>
                             </div>
 

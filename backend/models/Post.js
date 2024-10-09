@@ -43,7 +43,21 @@ class Post {
         const query = 'SELECT * FROM posts WHERE user_id = $1';
         try {
             const result = await pool.query(query, [user_id]);
-            return result.rows;
+            
+            // Format image_path correctly before sending the response
+            const posts = result.rows.map(post => {
+                // Check if the image_path contains multiple paths, and split it into an array
+                if (post.image_path) {
+                    post.image_path = post.image_path.includes(',')
+                        ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
+                        : [post.image_path.trim()]; // Ensure it is always an array
+                } else {
+                    post.image_path = []; // No images, return an empty array
+                }
+                return post;
+            });
+            
+            return posts;
         } catch (error) {
             console.error('Error fetching post by user ID', error.message);
             throw error;

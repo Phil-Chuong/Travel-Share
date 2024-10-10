@@ -43,7 +43,6 @@ class Post {
         const query = 'SELECT * FROM posts WHERE user_id = $1';
         try {
             const result = await pool.query(query, [user_id]);
-            
             // Format image_path correctly before sending the response
             const posts = result.rows.map(post => {
                 // Check if the image_path contains multiple paths, and split it into an array

@@ -5,6 +5,8 @@ import { ChatCentered, Heart } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
 import { useParams } from 'react-router-dom';
+import AddNewPost from '../addnewpost/AddNewPost';
+
 
 function MyHomePage() {
     const [posts, setPosts] = useState([]);
@@ -17,7 +19,8 @@ function MyHomePage() {
     const [likes, setLikes] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { user_id } = useParams(); 
+    const { user_id } = useParams();
+    const [showAddPostForm, setShowAddPostForm] = useState(false);
 
     useEffect(() => {
         const fetchPostsByUserId = async () => {
@@ -32,7 +35,7 @@ function MyHomePage() {
                 setCountries(countriesResponse.data);
                 setUsers(usersResponse.data);
                 setComments(commentsResponse.data);
-                console.log("Fetched countries:", postsResponse.data);
+                // console.log("Fetched countries:", postsResponse.data);
 
                 const initialLikes = {};
                 postsResponse.data.forEach(post => {
@@ -50,15 +53,21 @@ function MyHomePage() {
     }, []);
 
     const getCountryName = (country_id) => {
-        console.log("Country ID passed:", country_id);
+        // console.log("Country ID passed:", country_id);
         const country = countries.find(country => country.id === country_id);
-        console.log("Matched country:", country);
+        // console.log("Matched country:", country);
         return country ? country.country_name : 'Unknown Country';
     };
 
     const getUsername = (user_id) => {
         const user = users.find(user => user.id === Number(4));
         return user ? user.username : 'Unknown User';
+    };
+
+    const handlePostCreated = (newPost) => {
+        console.log('Post Created:', newPost);
+        setPosts((prevPosts) => [...prevPosts, newPost]); // Update posts when a new one is created
+        setShowAddPostForm(false); // Hide the form after submission
     };
 
     const handleAddComment = async (e, postId) => {
@@ -136,8 +145,11 @@ function MyHomePage() {
         <div className='userpost-container'>
             <h3 className='username'>{getUsername(Number(user_id))}</h3>
 
-            <div className='addNewPost'>
-                <div><button>Add New Posts Here</button></div>
+            <div>
+                <button onClick={() => setShowAddPostForm(true)}>Create New Post</button>
+                    {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={4} />}
+            
+                {/* Existing code for displaying posts */}
             </div>
             <ul className="userpost-list">
                 {posts.map((post) => {
@@ -162,9 +174,11 @@ function MyHomePage() {
                             </div>
 
                             <div className='mainphoto-container'>
-                                {post.image_path.map((image, index) => (
-                                    <img key={index} src={`http://localhost:4000${image}`} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
-                                ))}
+                                {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
+                                    post.image_path.map((image, index) => (
+                                        <img key={index} src={`http://localhost:4000${image}`} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
+                                    ))
+                                )}
                             </div>
 
                             <div className="countrypost-content">

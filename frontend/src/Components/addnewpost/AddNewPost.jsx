@@ -7,7 +7,7 @@ function AddNewPost({ onPostCreated }) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [countryId, setCountry] = useState('');
-    const [imagePath, setImagePath] = useState('');
+    const [selectedImages, setSelectedImages] = useState([]);
     const [countries, setCountries] = useState([]);
     const [error, setError] = useState(null);
 
@@ -26,23 +26,30 @@ function AddNewPost({ onPostCreated }) {
         fetchCountries();
     }, []);
 
+    const handleImageChange = (e) => {
+        setSelectedImages(e.target.files); // Allow multiple image selection
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const postData = {
-            user_id: user,
-            title: title,
-            country_id: countryId,
-            content: content,
-            image_path: imagePath || null  // Send null if image_path is empty
-        };
+        const formData = new FormData();
+        formData.append('user_id', user);
+        formData.append('title', title);
+        formData.append('country_id', countryId);
+        formData.append('content', content);
+
+        // Append each image file to the formData
+        for (let i = 0; i < selectedImages.length; i++) {
+            formData.append('images', selectedImages[i]);
+        }
     
         // Log postData to confirm all fields are populated correctly
-        console.log(postData);
+        console.log(formData);
     
         try {
-            const response = await axios.post('/posts', postData, {
-                headers: { 'Content-Type': 'application/json' }, // Use JSON format
+            const response = await axios.post('/posts', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },  // Set multipart/form-data for file upload
             });
             console.log('New Post Response:', response.data);
             onPostCreated(response.data);
@@ -51,7 +58,7 @@ function AddNewPost({ onPostCreated }) {
             setTitle('');
             setContent('');
             setCountry('');
-            setImagePath('');
+            setSelectedImages([]);
         } catch (error) {
             if (error.response) {
                 console.error('Server Error:', error.response.data);
@@ -93,6 +100,15 @@ function AddNewPost({ onPostCreated }) {
                     <option key={country.id} value={country.id}>{country.country_name}</option>
                 ))}
             </select>
+            <div>
+                <label>Upload Images:</label>
+                <input 
+                    type="file" 
+                    multiple 
+                    onChange={handleImageChange}
+                    accept="image/*" // Accept only image files
+                />
+            </div>
             <button type="submit">Create Post</button>
             {error && <p>{error}</p>}
         </form>

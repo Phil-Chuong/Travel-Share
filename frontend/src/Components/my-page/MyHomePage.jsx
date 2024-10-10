@@ -176,7 +176,7 @@ function MyHomePage() {
                             <div className='mainphoto-container'>
                                 {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
                                     post.image_path.map((image, index) => (
-                                        <img key={index} src={`http://localhost:4000${image}`} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
+                                        <img key={index} src={`http://localhost:4000${image}`.trim()} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
                                     ))
                                 )}
                             </div>

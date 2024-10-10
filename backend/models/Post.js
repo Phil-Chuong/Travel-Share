@@ -40,7 +40,7 @@ class Post {
     }
 
     static async getPostByUserId(user_id) {
-        const query = 'SELECT * FROM posts WHERE user_id = $1';
+        const query = 'SELECT * FROM posts WHERE user_id = $1 ORDER BY created DESC';
         try {
             const result = await pool.query(query, [user_id]);
             // Format image_path correctly before sending the response
@@ -64,7 +64,7 @@ class Post {
     }
 
     static async getPostByCountryId(country_id) {
-        const query = 'SELECT * FROM posts WHERE country_id = $1';
+        const query = 'SELECT * FROM posts WHERE country_id = $1 ORDER BY created DESC';
         try {
             const result = await pool.query(query, [country_id]);
 
@@ -103,7 +103,7 @@ class Post {
     static async createPost(user_id, content, image_path, country_id, title) {
         const query = 'INSERT INTO posts (user_id, content, image_path, country_id, title) VALUES ($1, $2, $3, $4, $5) RETURNING *';
         try {
-            const result = await pool.query(query, [user_id, content, image_path, country_id, title])
+            const result = await pool.query(query, [user_id, content, image_path ? image_path : null, country_id, title])
             const newPost = result.rows[0];
             return newPost;
         } catch (error) {

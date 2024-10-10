@@ -5,6 +5,7 @@ const multer  = require('multer');
 const path = require('path');
 const fs = require('fs');
 const pool = require('../DB/db');
+const BASE_URL = 'http://localhost:4000';
 
 ///////////////////////////////////////////////////
 //MULTER SETUP
@@ -177,24 +178,50 @@ router.get('/country/:country_id', async (req, res) => {
 });
 
 //POST routes
-router.post('/', async (req, res) => {
-    console.log('Request body:', req.body); // Log the request body
-    const {user_id, content, country_id, title} = req.body;
-    const image_path = req.file ? `/uploads/${req.file.filename}` : null;
+// router.post('/', async (req, res) => {
+//     console.log('Request body:', req.body); // Log the request body
+//     const {user_id, content, country_id, title} = req.body;
+//     const image_path = req.file ? `/uploads/${req.file.filename}` : null;
 
-    // Validate user_id and other fields
+//     // Validate user_id and other fields
+//     if (!user_id || !content || !country_id || !title) {
+//         return res.status(400).json({ error: 'Missing required fields' });
+//     }
+
+//     try {
+//         const post = await Post.createPost(user_id, content, image_path, country_id, title);
+//         res.status(201).json(post);
+//     } catch (error) {
+//         console.error('Error creating new post', error);
+//         res.status(500).send({error: 'Error creating new post'});
+//     }
+// })
+
+router.post('/', upload.array('images', 6), async (req, res) => {
+    console.log('Request body:', req.body); // Log the request body
+    const { user_id, content, country_id, title } = req.body;
+
+    // Validate required fields
     if (!user_id || !content || !country_id || !title) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    // Process uploaded files (if any)
+    let image_paths = null;
+    if (req.files && req.files.length > 0) {
+        image_paths = req.files.map(file => `/uploads/${file.filename}`).join(','); // Store image paths as a comma-separated string
+    }
+
     try {
-        const post = await Post.createPost(user_id, content, image_path, country_id, title);
+        // Create the new post
+        const post = await Post.createPost(user_id, content, image_paths, country_id, title);  // Assuming image_paths is stored as an array
         res.status(201).json(post);
     } catch (error) {
         console.error('Error creating new post', error);
-        res.status(500).send({error: 'Error creating new post'});
+        res.status(500).send({ error: 'Error creating new post' });
     }
-})
+});
+
 
 router.post('/:id/like', async (req, res) => {
     const postId = req.params.id;

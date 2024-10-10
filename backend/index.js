@@ -50,6 +50,8 @@ app.use((err, req, res, next) => {
 
 //Image upload
 app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
   
 
 //TESTING BACKEND CONNECTION

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './AddNewPost.css';
+import { Trash, Image, PaperPlaneTilt } from '@phosphor-icons/react/dist/ssr';
 
 
 function AddNewPost({ onPostCreated }) {
@@ -8,8 +10,11 @@ function AddNewPost({ onPostCreated }) {
     const [content, setContent] = useState('');
     const [countryId, setCountry] = useState('');
     const [selectedImages, setSelectedImages] = useState([]);
+    const [imagePreviews, setImagePreviews] = useState([]);
     const [countries, setCountries] = useState([]);
     const [error, setError] = useState(null);
+
+    
 
     // Fetch countries from the backend
     useEffect(() => {
@@ -26,8 +31,29 @@ function AddNewPost({ onPostCreated }) {
         fetchCountries();
     }, []);
 
+    // const handleImageChange = (e) => {
+    //     setSelectedImages(e.target.files); // Allow multiple image selection
+    // };
+
     const handleImageChange = (e) => {
-        setSelectedImages(e.target.files); // Allow multiple image selection
+        const files = Array.from(e.target.files); // Convert FileList to array
+
+        // Generate preview URLs for new images
+        const newImagePreviews = files.map((file) => URL.createObjectURL(file));
+
+        // Append new files and previews to the existing ones
+        setSelectedImages((prevImages) => [...prevImages, ...files]);
+        setImagePreviews((prevPreviews) => [...prevPreviews, ...newImagePreviews]);
+    };
+
+    // Delete image preview and corresponding file
+    const handleDeleteImage = (index) => {
+        // Remove the image at the given index
+        const newSelectedImages = selectedImages.filter((_, i) => i !== index);
+        const newImagePreviews = imagePreviews.filter((_, i) => i !== index);
+
+        setSelectedImages(newSelectedImages);
+        setImagePreviews(newImagePreviews);
     };
 
     const handleSubmit = async (e) => {
@@ -73,45 +99,82 @@ function AddNewPost({ onPostCreated }) {
     
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input 
-                type="text" 
-                name="title" 
-                placeholder="Title" 
-                value={title} // Use individual state
-                onChange={(e) => setTitle(e.target.value)} // Update state for title
-                required 
-            />
-            <textarea 
-                name="content"
-                placeholder="Write your post..." 
-                value={content} // Use individual state
-                onChange={(e) => setContent(e.target.value)} // Update state for content
-                required 
-            />
-            <select 
-                name="countryId" 
-                onChange={(e) => setCountry(e.target.value)} // Update state for countryId
-                value={countryId} // Use individual state
-                required
-            >
-                <option value="">Select a country</option>
-                {countries.map(country => (
-                    <option key={country.id} value={country.id}>{country.country_name}</option>
-                ))}
-            </select>
-            <div>
-                <label>Upload Images:</label>
-                <input 
-                    type="file" 
-                    multiple 
-                    onChange={handleImageChange}
-                    accept="image/*" // Accept only image files
+        <div className='upload-container'>
+            <form onSubmit={handleSubmit} className='form-container'>
+                <div className='upload-top'>
+                    <input 
+                        className='title-text'
+                        type="text" 
+                        name="title" 
+                        placeholder="Title" 
+                        value={title} // Use individual state
+                        onChange={(e) => setTitle(e.target.value)} // Update state for title
+                        required 
+                    />
+                    <select 
+                        className='country-select'
+                        name="countryId" 
+                        onChange={(e) => setCountry(e.target.value)} // Update state for countryId
+                        value={countryId} // Use individual state
+                        required
+                    >
+                        <option value="">Destination</option>
+                        {countries.map(country => (
+                            <option key={country.id} value={country.id}>{country.country_name}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                {/* Image Previews */}
+                <div className="image-previews">
+                    {imagePreviews.map((image, index) => (
+                        <div key={index} className="image-preview-container">
+                        <img 
+                            src={image} 
+                            alt={`Preview ${index + 1}`} 
+                            style={{ width: '200px', margin: '10px', borderRadius: '8px' }} 
+                        />
+                        {/* Delete button */}
+                        <button 
+                            type="button" 
+                            onClick={() => handleDeleteImage(index)} 
+                            className="delete-image-button"
+                        >
+                        <Trash size={32} />
+                        </button>
+                    </div>
+                    ))}
+                </div>
+
+                <textarea 
+                    className='content-text'
+                    name="content"
+                    placeholder="Write your post..." 
+                    rows='5'
+                    value={content} // Use individual state
+                    onChange={(e) => setContent(e.target.value)} // Update state for content
+                    required 
                 />
-            </div>
-            <button type="submit">Create Post</button>
-            {error && <p>{error}</p>}
-        </form>
+                <div className='upload-bottom'>
+                    <label className='image-upload-label'>
+                        <Image size={32} /> {/* Place the image icon here */}
+                        <input 
+                            className='image-input'
+                            type="file" 
+                            multiple 
+                            onChange={handleImageChange}
+                            accept="image/*" // Accept only image files
+                        />
+                    </label>
+                    <button 
+                        className='confirm-post-button'
+                        type="submit"><PaperPlaneTilt size={18} />
+                    </button>
+                </div>
+                {error && <p>{error}</p>}
+            </form>
+        </div>
+        
     );
 }
 

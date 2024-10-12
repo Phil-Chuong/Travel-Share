@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import './MyHomePage.css';
-import { ChatCentered, Heart } from '@phosphor-icons/react';
+import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
 import { useParams } from 'react-router-dom';
@@ -65,8 +65,10 @@ function MyHomePage() {
     };
 
     const handlePostCreated = (newPost) => {
-        console.log('Post Created:', newPost);
-        setPosts((prevPosts) => [...prevPosts, newPost]); // Update posts when a new one is created
+        if (newPost) {
+            console.log('Post Created:', newPost);
+            setPosts((prevPosts) => [...prevPosts, newPost]); // Update posts when a new one is created
+        }
         setShowAddPostForm(false); // Hide the form after submission
     };
 
@@ -133,6 +135,20 @@ function MyHomePage() {
         return comments.filter(comment => comment.post_id === post_id).length;
     }, [comments]);
 
+
+    // Handle deleting a post
+    const handleDeletePost = async (postId) => {
+        try {
+            await axios.delete(`/posts/${postId}`);
+            // Remove the deleted post from the UI
+            setPosts(posts.filter(post => post.id !== postId));
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            setError('Failed to delete post');
+        }
+    };
+
+
     if (loading) {
         return <div>Loading posts for this country...</div>;
     }
@@ -143,14 +159,12 @@ function MyHomePage() {
 
     return (
         <div className='userpost-container'>
-            <h3 className='username'>{getUsername(Number(user_id))}</h3>
-
-            <div>
-                <button onClick={() => setShowAddPostForm(true)}>Create New Post</button>
-                    {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={4} />}
-            
-                {/* Existing code for displaying posts */}
+            <div className='header-container'>
+                <h3 className='username'>{getUsername(Number(user_id))}</h3>
+                <button className='addPost-button' onClick={() => setShowAddPostForm((prev) => !prev)}><Pen size={22} /></button>
             </div>
+                {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={4} />}
+            
             <ul className="userpost-list">
                 {posts.map((post) => {
                     const topLevelComments = getTopLevelCommentsForPost(post.id);
@@ -160,10 +174,10 @@ function MyHomePage() {
                         <li key={post.id} className="userpost-item">
                             <div className='userpost-info'>
                                 <div className='userpost-username'>
-                                    <h3>Traveller: {getUsername(post.user_id)}</h3>
+                                    <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
                                 </div>
                                 <div className='mainpost-country'>
-                                <h3>Location:                         
+                                <h3><Globe size={24} />                         
                                     {getCountryName(post.country_id)}                                 
                                 </h3>
                                 </div>
@@ -173,11 +187,19 @@ function MyHomePage() {
                                 <h4>{post.title}</h4>
                             </div>
 
-                            <div className='mainphoto-container'>
+                            <div className='myphoto-container'>
                                 {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
-                                    post.image_path.map((image, index) => (
-                                        <img key={index} src={`http://localhost:4000${image}`.trim()} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
-                                    ))
+                                    <div className='myimage-container'>
+                                        {post.image_path.map((image, index) => (
+                                            <img 
+                                                className="mypost-image"
+                                                key={index} 
+                                                src={`http://localhost:4000${image.trim()}`} 
+                                                alt={post.title} 
+                                                style={{ minWidth: '200px' }} 
+                                            />
+                                        ))}
+                                    </div>
                                 )}
                             </div>
 
@@ -185,7 +207,7 @@ function MyHomePage() {
                                 <p>{post.content}</p>
                             </div>
 
-                            <div className='comment-container'>
+                            <div className='my-comment-container'>
                                 <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
                                     <ChatCentered size={24} />
                                     {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
@@ -230,6 +252,13 @@ function MyHomePage() {
                                     )}
                                 </div>
                             )}
+
+                            {/* Delete Button */}
+                            <button className='delete-container'>
+                            <Trash size={24} 
+                            className="delete-post-button" 
+                            onClick={() => handleDeletePost(post.id)}/>
+                            </button>
                         </li>
                     );
                 })}

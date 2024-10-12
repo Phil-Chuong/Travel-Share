@@ -235,20 +235,38 @@ router.post('/:id/like', async (req, res) => {
 });
 
 //DELETE routes
+// router.delete('/:id', async (req, res) => {
+//     const postId = req.params.id;
+//     try {
+//         const result = await Post.deletePostById(postId);
+//         if (result) {
+//             res.json({ message: 'Post deleted successfully' });
+//         } else {
+//             res.status(404).send({ error: 'Post not found' });
+//         }
+//     } catch (error) {
+//         console.error('Error deleting post by ID');
+//         res.status(500).send({error: 'Error deleting post by ID'});
+//     }
+// })
+
+// DELETE route for deleting a post along with its comments and replies
 router.delete('/:id', async (req, res) => {
     const postId = req.params.id;
+
     try {
         const result = await Post.deletePostById(postId);
+        
         if (result) {
-            res.json({ message: 'Post deleted successfully' });
+            res.json({ message: result.message });
         } else {
-            res.status(404).send({ error: 'Post not found' });
+            res.status(404).json({ error: 'Post not found' });
         }
     } catch (error) {
-        console.error('Error deleting post by ID');
-        res.status(500).send({error: 'Error deleting post by ID'});
+        console.error('Error deleting post by ID:', error);
+        res.status(500).json({ error: 'Error deleting post by ID' });
     }
-})
+});
 
 
 module.exports = router;

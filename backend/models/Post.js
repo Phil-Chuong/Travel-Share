@@ -128,17 +128,46 @@ class Post {
 
 
     //DELETE REQUEST - Delete a post
+    // static async deletePostById(id) {
+    //     const query = 'DELETE FROM posts WHERE id = $1';
+    //     try {
+    //         const result = await pool.query(query, [id]);
+    //         // Return a success message or status
+    //         return { message: `Post with ID ${id} deleted successfully.` };
+    //     } catch (error) {
+    //         console.error('Error deleting post by ID');
+    //         throw error;
+    //     }
+    // }
+
+    // DELETE REQUEST - Delete a post along with associated comments and replies
     static async deletePostById(id) {
-        const query = 'DELETE FROM posts WHERE id = $1';
+        const deleteRepliesQuery = 'DELETE FROM replies WHERE comment_id IN (SELECT id FROM comments WHERE post_id = $1)';
+        const deleteCommentsQuery = 'DELETE FROM comments WHERE post_id = $1';
+        const deletePostQuery = 'DELETE FROM posts WHERE id = $1';
+
         try {
-            const result = await pool.query(query, [id]);
-            // Return a success message or status
+            // Delete replies associated with comments of the post
+            await pool.query(deleteRepliesQuery, [id]);
+
+            // Delete comments associated with the post
+            await pool.query(deleteCommentsQuery, [id]);
+
+            // Finally, delete the post itself
+            const result = await pool.query(deletePostQuery, [id]);
+
+            // Check if a post was deleted (rowCount will be greater than 0 if successful)
+            if (result.rowCount === 0) {
+                return null; // Post not found
+            }
+
             return { message: `Post with ID ${id} deleted successfully.` };
         } catch (error) {
-            console.error('Error deleting post by ID');
+            console.error('Error deleting post by ID:', error);
             throw error;
         }
     }
+
 
     // Update post images for a specific post ID
     static async updatePostImages(post_id, updatedImagePaths) {

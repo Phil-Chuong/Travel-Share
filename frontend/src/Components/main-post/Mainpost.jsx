@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Mainpost.css';
-import { ChatCentered, Heart } from '@phosphor-icons/react';
+import { ChatCentered, Heart, IdentificationCard, Globe  } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
 import { Link } from 'react-router-dom';
@@ -142,10 +142,10 @@ function Mainpost() {
                         <li key={post.id} className="mainpost-item">
                             <div className='mainpost-info'>
                                 <div className='mainpost-username'>
-                                    <h3>Traveller: {getUsername(post.user_id)}</h3>
+                                    <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
                                 </div>
                                 <div className='mainpost-country'>
-                                    <h3>Location: 
+                                    <h3><Globe size={24} /> 
                                     <Link to={`/country/${post.country_id}`}>{getCountryName(post.country_id)}</Link>
                                     </h3>
                                 </div>
@@ -156,16 +156,25 @@ function Mainpost() {
                             </div>
 
                             <div className='mainphoto-container'>
+                            <div className='photo-container'>
                                 {post.image_path.map((image, index) => (
-                                    <img key={index} src={`http://localhost:4000${image}`} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
+                                    <img 
+                                    className="post-image"
+                                    key={index} 
+                                    src={`http://localhost:4000${image}`} 
+                                    alt={post.title} 
+                                    style={{ minWidth: '200px'}}
+                                    />
                                 ))}
+                            </div>
+                                
                             </div>
 
                             <div className="mainpost-content">
                                 <p>{post.content}</p>
                             </div>
 
-                            <div className='comment-container'>
+                            <div className='main-comment-container'>
                                 <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
                                     <ChatCentered size={24} />
                                     {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}

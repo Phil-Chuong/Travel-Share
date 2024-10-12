@@ -1,0 +1,181 @@
+.upload-container {
+    width: 100%;
+    height: auto; /* Auto height to fit content */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+/* Container for the form */
+.form-container {
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(166, 211, 213);
+    padding: 10px; /* Add padding for better spacing */
+    border-radius: 8px;
+}
+
+/* Top section of the upload form (title and destination inputs) */
+.upload-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px; /* Add margin between top inputs and content */
+}
+
+/* Title input field */
+.title-text {
+    width: 48%; /* Adjust width for better spacing */
+    margin: 3px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Adds a subtle border */
+    background-color: #f9f9f9; /* Soft background */
+    font-size: 16px; /* Improve readability */
+}
+
+.title-text:focus {
+    outline: none; /* Removes the default black outline */
+    border: 2px solid #4caf50; /* Optionally, you can add a custom border color on focus */
+}
+
+.form-container input {
+    border: none;
+}
+
+/* Country select dropdown */
+.country-select {
+    width: 48%; /* Match title input size */
+    margin: 3px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Content text area */
+.content-text {
+    width: 100%;
+    margin: 3px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allow resizing vertically */
+}
+
+.content-text:focus {
+    outline: none;
+    border: 2px solid #4caf50;
+}
+
+/* Image previews section */
+.image-previews {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.image-previews img {
+    margin-right: 10px;
+    border-radius: 8px;
+    width: 200px; /* Adjust width of image preview */
+}
+
+/* Bottom section for image input and post button */
+.upload-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align input and button */
+    margin: 5px;
+    background-color: rgb(166, 211, 213);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Image input field */
+.image-input {
+    width: 60px;
+    margin: 3px;
+}
+
+/* Confirm post button */
+.confirm-post-button {
+    width: 40px;
+    padding: 3px;
+    margin: 3px;
+    background-color: #28a745;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-post-button:hover {
+    background-color: #218838;
+}
+
+
+/* Container for image preview and delete button */
+.image-preview-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Delete button for image preview */
+.delete-image-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.delete-image-button:hover {
+    background-color: darkred;
+}
+
+
+.upload-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    align-items: center;
+}
+
+.image-upload-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer; /* Makes the label clickable */
+}
+
+.image-upload-label input {
+    display: none; /* Hide the actual input */
+}
+
+.image-input {
+    display: none; /* Hide the file input */
+}
+
+.confirm-post-button {
+    width: 60px;
+    margin: 3px;
+}
+

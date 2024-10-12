@@ -12,6 +12,7 @@ const HomePage = () => {
       </div>
 
       <div className='layout-container'> 
+
         <div className='navbar-section'>
           <Navbar />
         </div>
@@ -23,6 +24,7 @@ const HomePage = () => {
         <div className='section-section'>
           <div>Section Component </div>
         </div>
+        
       </div>
 
       <div className='footer-section'>

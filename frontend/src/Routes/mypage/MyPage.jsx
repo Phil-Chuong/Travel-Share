@@ -2,28 +2,33 @@ import React from 'react';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Navbar from '../../Components/navbar/Navbar';
 import MyHomePage from '../../Components/my-page/MyHomePage';
+import './MyPage.css';
 
 
 const MyPage = () => {
   return (
-    <div className="parent">
+    <div className="myparent">
       <div className='header-section'>
         <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
       </div>
 
-      <div className='layout-container'> 
-          <Navbar />
+      <div className='mylayout-container'> 
 
-        <div className='mainbody-section'>
+        <div className='mynavbar-section'>
+          <Navbar />
+        </div>
+
+        <div className='mymainbody-section'>
           <MyHomePage />
         </div>
 
-        <div className='section-section'>
+        <div className='mysection-section'>
           <div>Section Component </div>
         </div>
+
       </div>
 
-      <div className='footer-section'>
+      <div className='myfooter-section'>
         <div>Footer Component </div>
       </div>
     </div>

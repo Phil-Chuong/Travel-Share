@@ -1,19 +1,20 @@
 import React from 'react';
+import './CountryPage.css';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Navbar from '../../Components/navbar/Navbar';
 import CountriesPosts from '../../Components/country-posts/CountriesPosts';
 
 const CountryPage = () => {
   return (
-    <div className="parent">
-      <div className='header-section'>
+    <div className="countryparent">
+      <div className='countryheader-section'>
         <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
       </div>
 
-      <div className='layout-container'> 
+      <div className='countrylayout-container'> 
           <Navbar />
 
-        <div className='mainbody-section'>
+        <div className='countrymainbody-section'>
           <CountriesPosts />
         </div>
 

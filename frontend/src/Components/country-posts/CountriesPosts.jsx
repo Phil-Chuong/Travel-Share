@@ -39,6 +39,14 @@ function CountriesPosts() {
                     initialLikes[post.id] = post.post_likes || 0;
                 });
                 setLikes(initialLikes);
+
+                // Check if no posts were found
+                if (postsResponse.data.length === 0) {
+                    setError('No posts found for this country. Write the first post!');
+                } else {
+                    setError(''); // Clear any previous error
+                }
+
             } catch (err) {
                 setError('Failed to fetch data');
             } finally {
@@ -134,7 +142,12 @@ function CountriesPosts() {
 
     return (
         <div className='countrypost-container'>
+            <div className='countryname-header'>
             <h3 className='countryname'>{getCountryName(Number(countryId))}</h3>
+            </div>
+            {posts.length === 0 ? (
+                <p>No posts found for this country. Write the first post!</p>
+            ) : (
             <ul className="countrypost-list">
                 {posts.map((post) => {
                     const topLevelComments = getTopLevelCommentsForPost(post.id);
@@ -157,10 +170,18 @@ function CountriesPosts() {
                                 <h4>{post.title}</h4>
                             </div>
 
-                            <div className='mainphoto-container'>
-                                {post.image_path.map((image, index) => (
-                                    <img key={index} src={`http://localhost:4000${image}`} alt={post.title} style={{ maxWidth: '300px', marginRight: '10px' }} />
-                                ))}
+                            <div className='countryphoto-container'>
+                                <div className='countryphoto-container'>
+                                    {post.image_path.map((image, index) => (
+                                        <img 
+                                        className="countrypost-image"
+                                        key={index} 
+                                        src={`http://localhost:4000${image}`} 
+                                        alt={post.title} 
+                                        style={{ minWidth: '200px'}}
+                                        />
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="countrypost-content">
@@ -216,6 +237,8 @@ function CountriesPosts() {
                     );
                 })}
             </ul>
+            )}
+            
         </div>
     );
 }

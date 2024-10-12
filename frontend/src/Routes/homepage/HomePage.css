@@ -44,7 +44,7 @@
 .mainbody-section {
     width: 100%;
     flex: 1;
-    background-color: rgb(255, 0, 183);
+    background-color: whitesmoke;
     overflow-y: auto;
 }
 

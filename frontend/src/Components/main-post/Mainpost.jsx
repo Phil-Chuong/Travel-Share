@@ -132,7 +132,9 @@ function Mainpost() {
 
     return (
         <div className='mainpost-container'>
-            <h3>World Travellers</h3>
+            <div className='mainname-header'>
+                <h3 className='mainname'>World Travellers</h3>
+            </div>
             <ul className="mainpost-list">
                 {posts.map((post) => {
                     const topLevelComments = getTopLevelCommentsForPost(post.id);
@@ -156,18 +158,17 @@ function Mainpost() {
                             </div>
 
                             <div className='mainphoto-container'>
-                            <div className='photo-container'>
-                                {post.image_path.map((image, index) => (
-                                    <img 
-                                    className="post-image"
-                                    key={index} 
-                                    src={`http://localhost:4000${image}`} 
-                                    alt={post.title} 
-                                    style={{ minWidth: '200px'}}
-                                    />
-                                ))}
-                            </div>
-                                
+                                <div className='photo-container'>
+                                    {post.image_path.map((image, index) => (
+                                        <img 
+                                        className="post-image"
+                                        key={index} 
+                                        src={`http://localhost:4000${image}`} 
+                                        alt={post.title} 
+                                        style={{ minWidth: '200px'}}
+                                        />
+                                    ))}
+                                </div>                             
                             </div>
 
                             <div className="mainpost-content">

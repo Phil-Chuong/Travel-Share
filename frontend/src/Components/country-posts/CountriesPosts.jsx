@@ -133,7 +133,7 @@ function CountriesPosts() {
     }, [comments]);
 
     if (loading) {
-        return <div>Loading posts for this country...</div>;
+        return <div className='loader'>Loading posts for this country...</div>;
     }
 
     if (error) {

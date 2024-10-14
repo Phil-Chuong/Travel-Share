@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import './MyHomePage.css';
-import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe } from '@phosphor-icons/react';
+import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe, Gear} from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import AddNewPost from '../addnewpost/AddNewPost';
 
 
@@ -26,7 +26,7 @@ function MyHomePage() {
         const fetchPostsByUserId = async () => {
             try {
                 const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
-                    axios.get(`/posts/users/${4}`),
+                    axios.get(`/posts/users/${4}`),///CHANGE WHEN USER LOGIN
                     axios.get('/countries'),
                     axios.get('/users'),
                     axios.get('/comments')
@@ -60,7 +60,7 @@ function MyHomePage() {
     };
 
     const getUsername = (user_id) => {
-        const user = users.find(user => user.id === Number(4));
+        const user = users.find(user => user.id === Number(4));///CHANGE WHEN USER LOGIN
         return user ? user.username : 'Unknown User';
     };
 
@@ -81,7 +81,7 @@ function MyHomePage() {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewComment(prev => ({ ...prev, [postId]: '' }));
@@ -99,7 +99,7 @@ function MyHomePage() {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewReply(prev => ({ ...prev, [commentId]: '' }));
@@ -150,7 +150,7 @@ function MyHomePage() {
 
 
     if (loading) {
-        return <div>Loading posts for this country...</div>;
+        return <div className='loader'>Loading posts for this country...</div>;
     }
 
     if (error) {
@@ -162,9 +162,10 @@ function MyHomePage() {
             <div className='header-container'>
                 <h3 className='username'>{getUsername(Number(user_id))}</h3>
                 <button className='addPost-button' onClick={() => setShowAddPostForm((prev) => !prev)}><Pen size={22} /></button>
+                <button className='setting-button'><Link to={'/mypageaccount'}><Gear size={22} style={{color: 'black'}}/></Link></button>
             </div>
                 {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={4} />}
-            
+
             <ul className="userpost-list">
                 {posts.map((post) => {
                     const topLevelComments = getTopLevelCommentsForPost(post.id);

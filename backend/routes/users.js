@@ -87,6 +87,27 @@ router.post('/', async (req, res) => {
     }
 })
 
+//PUT/UPDATE routes
+
+router.put('/edituser/:id', async (req, res) => {
+    const { id } = req.params;
+    const { firstname, lastname, username, email, location } = req.body;
+
+    try {
+        // Ensure the user exists
+        const result = await User.updateUsersInfo(firstname, lastname, username, email, location, id);
+        
+        if (!result) {  // If the update result is empty
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        res.json(result);  // Return the updated user data
+    } catch (error) {
+        console.error('Error editing users info', error);
+        res.status(500).send({error: 'Error editing users info'});
+    }
+});
+
 
 //DELETE routes
 router.delete('/:id', async (req, res) => {
@@ -103,19 +124,5 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-
-//UPDATE Routes
-// router.put('/update-firstname/:id', async (req, res) => {
-//     const userId = req.params.id;  // Get the user ID from the route parameter
-//     const { firstname } = req.body; // Get the new firstname from the request body
-
-//     try {
-//         const updatedUser = await User.updateFirstname(userId, firstname);
-//         res.json(updatedUser);  // Return the updated user information
-//     } catch (error) {
-//         console.error('Error updating firstname');
-//         res.status(500).send({ error: 'Error updating firstname' });
-//     }
-// });
 
 module.exports = router;

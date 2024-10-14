@@ -5,7 +5,7 @@ import { Trash, Image, PaperPlaneTilt } from '@phosphor-icons/react/dist/ssr';
 
 
 function AddNewPost({ onPostCreated }) {
-    const [user, setUser] = useState(4);
+    const [user, setUser] = useState(4);///CHANGE WHEN USER LOGIN
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [countryId, setCountry] = useState('');
@@ -31,9 +31,6 @@ function AddNewPost({ onPostCreated }) {
         fetchCountries();
     }, []);
 
-    // const handleImageChange = (e) => {
-    //     setSelectedImages(e.target.files); // Allow multiple image selection
-    // };
 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files); // Convert FileList to array

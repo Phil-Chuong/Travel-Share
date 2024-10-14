@@ -67,7 +67,7 @@ function Mainpost() {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: 4 // Assuming you have a logged-in user ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewComment(prev => ({ ...prev, [postId]: '' }));
@@ -85,7 +85,7 @@ function Mainpost() {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewReply(prev => ({ ...prev, [commentId]: '' }));
@@ -123,7 +123,7 @@ function Mainpost() {
     };
 
     if (loading) {
-        return <div>Loading posts...</div>;
+        return <div className='loader'>Loading posts...</div>;
     }
 
     if (error) {

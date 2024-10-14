@@ -37,16 +37,26 @@ class User {
     }
 
     //PUT REQUEST - updating account info
-    // static async updateFirstname(userId, newFirstname) {
-    //     const query = 'UPDATE users SET firstname = $1 WHERE id = $2 RETURNING *';
-    //     try {
-    //         const result = await pool.query(query, [newFirstname, userId]);
-    //         return result.rows[0];  // Return the updated user
-    //     } catch (error) {
-    //         console.error('Error updating firstname', error);
-    //         throw error;
-    //     }
-    // }
+    static async updateUsersInfo(firstname, lastname, username, email, location, id) {
+        const query =  `
+        UPDATE users
+        SET firstname = COALESCE($1, firstname),
+            lastname = COALESCE($2, lastname),
+            username = COALESCE($3, username),
+            email = COALESCE($4, email),
+            location = COALESCE($5, location)
+        WHERE id = $6
+        RETURNING *;
+        `;
+        
+        try {
+            const result = await pool.query(query, [firstname, lastname, username, email, location, id]);
+            return result.rows[0];  // Return the updated user
+        } catch (error) {
+            console.error('Error updating users info', error);
+            throw error;
+        }
+    }
 
     //DELETE REQUST - Delete users accounts
     static async deleteUserById(id) {

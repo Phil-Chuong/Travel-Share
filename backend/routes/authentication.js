@@ -4,7 +4,6 @@ const router = express.Router();
 const pool = require('../DB/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { authenticateToken } = require('../services/authenticateToken');
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
@@ -52,10 +51,10 @@ router.post('/refresh', (req, res) => {
 // Register route
 router.post('/register', async (req, res) => {
     try {
-        const { firstname, lastname, username, email, password } = req.body;
+        const { firstname, lastname, username, location, email, password } = req.body;
 
         // Check if all fields are provided
-        if (!firstname || !lastname || !username || !email || !password) {
+        if (!firstname || !lastname || !username  || !location || !email || !password) {
             return res.status(400).json({ error: 'Please provide all required fields' });
         }
 
@@ -68,8 +67,8 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Insert the new user into the database
-        const query = 'INSERT INTO users (firstname, lastname, username, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *';
-        const result = await pool.query(query, [firstname, lastname, username, email, hashedPassword]);
+        const query = 'INSERT INTO users (firstname, lastname, username, location, email, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+        const result = await pool.query(query, [firstname, lastname, username, location, email, hashedPassword]);
 
          // Extract the newly created user
         const newUser = result.rows[0];
@@ -85,6 +84,7 @@ router.post('/register', async (req, res) => {
                 firstname: newUser.firstname,
                 lastname: newUser.lastname,
                 username: newUser.username,
+                location: newUser.location,
                 email: newUser.email
             },
             accessToken,
@@ -138,6 +138,7 @@ router.post('/login', async (req, res) => {
                 firstname: user.firstname,
                 lastname: user.lastname,
                 username: user.username,
+                location: user.location,
                 email: user.email
             },
             accessToken, 

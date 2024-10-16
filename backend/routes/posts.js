@@ -5,6 +5,7 @@ const multer  = require('multer');
 const path = require('path');
 const fs = require('fs');
 const pool = require('../DB/db');
+// const { authenticateToken } = require('../services/authenticateToken');
 const BASE_URL = 'http://localhost:4000';
 
 ///////////////////////////////////////////////////
@@ -145,21 +146,46 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// router.get('/users/:user_id', async (req, res) => {
+//     const { user_id } = req.params;
+//     console.log(`Fetching posts by user ID: ${user_id}`);
+//     try {
+//         const posts = await Post.getPostByUserId(user_id);
+//         if (posts.length > 0) {
+//             res.json(posts);
+//         } else {
+//             console.log(res);
+//             res.status(404).send({ error: 'No posts found for this user' });
+//         }
+//     } catch (error) {
+//         console.error('Error fetching posts by user ID', error);
+//         res.status(500).send({error: 'Error fetching posts by user ID'});
+//     }
+// });
+
 router.get('/users/:user_id', async (req, res) => {
     const { user_id } = req.params;
     console.log(`Fetching posts by user ID: ${user_id}`);
+
     try {
         const posts = await Post.getPostByUserId(user_id);
+        
         if (posts.length > 0) {
-            res.json(posts);
+            // If posts are found, send them back as JSON
+            return res.json(posts);
         } else {
-            res.status(404).send({ error: 'No posts found for this user' });
+            // If no posts found, return a 404 error with a clear message
+            console.log(`No posts found for user ID: ${user_id}`);
+            return res.status(404).json({ error: 'No posts found for this user' });
         }
     } catch (error) {
-        console.error('Error fetching posts by user ID', error);
-        res.status(500).send({error: 'Error fetching posts by user ID'});
+        // Log the error for debugging purposes
+        console.error('Error fetching posts by user ID:', error);
+        // Return a 500 error to the client if something goes wrong
+        return res.status(500).json({ error: 'An error occurred while fetching posts' });
     }
 });
+
 
 router.get('/country/:country_id', async (req, res) => {
     const { country_id } = req.params;

@@ -19,19 +19,33 @@ function MyHomePage() {
     const [likes, setLikes] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { user_id } = useParams();
+    // const { user_id, id } = useParams();
     const [showAddPostForm, setShowAddPostForm] = useState(false);
 
+    const userId = localStorage.getItem('userId');
+    console.log("Retrieved userId from localStorage:", userId); // Debug log
+
     useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userResponse = await axios.get(`/users/${userId}`);
+                setUsers([userResponse.data]); // Ensure users array contains the user data
+            } catch (err) {
+                console.error('Error fetching user:', err);
+                setError('Failed to fetch user data');
+            }
+        };
+
         const fetchPostsByUserId = async () => {
             try {
                 const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
-                    axios.get(`/posts/users/${4}`),///CHANGE WHEN USER LOGIN
+                    axios.get(`/posts/users/${userId}`),///CHANGE WHEN USER LOGIN
                     axios.get('/countries'),
                     axios.get('/users'),
                     axios.get('/comments')
                 ]);
-                setPosts(postsResponse.data);
+                console.log("Fetched Users:", usersResponse.data); // Debug log
+                setPosts(postsResponse.data || []);
                 setCountries(countriesResponse.data);
                 setUsers(usersResponse.data);
                 setComments(commentsResponse.data);
@@ -43,14 +57,20 @@ function MyHomePage() {
                 });
                 setLikes(initialLikes);
             } catch (err) {
-                setError('Failed to fetch data');
+                // Handle 404 specifically
+                if (err.response && err.response.status === 404) {
+                    setPosts([]); // No posts found, set to empty
+                } else {
+                    setError('Failed to fetch data');
+                }
             } finally {
                 setLoading(false);
             }
         };
 
+        fetchUserData();
         fetchPostsByUserId();
-    }, []);
+    }, [userId]);
 
     const getCountryName = (country_id) => {
         // console.log("Country ID passed:", country_id);
@@ -59,8 +79,23 @@ function MyHomePage() {
         return country ? country.country_name : 'Unknown Country';
     };
 
+    // const getUsername = (userId) => {
+    //     console.log("User ID passed to getUsername:", userId); // Debug log
+
+    //     const user = users.find(user => user.id === Number(userId));///CHANGE WHEN USER LOGIN
+
+    //     console.log("Fetched Users:", users);
+    //     console.log("Matched user:", user); // Debug log
+
+    //     return user ? user.username : 'Unknown User';
+    // };
+
     const getUsername = (user_id) => {
-        const user = users.find(user => user.id === Number(4));///CHANGE WHEN USER LOGIN
+        console.log("User ID passed to getUsername:", user_id);
+        const user = users.find(user => user.id === Number(user_id)); // Find user by ID
+        console.log("Fetched Users:", users);
+        console.log("Matched user:", user);
+        
         return user ? user.username : 'Unknown User';
     };
 
@@ -81,7 +116,7 @@ function MyHomePage() {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
-                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
+                user_id: userId // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewComment(prev => ({ ...prev, [postId]: '' }));
@@ -99,7 +134,7 @@ function MyHomePage() {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
-                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
+                user_id: userId // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewReply(prev => ({ ...prev, [commentId]: '' }));
@@ -160,109 +195,114 @@ function MyHomePage() {
     return (
         <div className='userpost-container'>
             <div className='header-container'>
-                <h3 className='username'>{getUsername(Number(user_id))}</h3>
+                <h3 className='username'>{getUsername(Number(userId))}</h3>
                 <button className='addPost-button' onClick={() => setShowAddPostForm((prev) => !prev)}><Pen size={22} /></button>
                 <button className='setting-button'><Link to={'/mypageaccount'}><Gear size={22} style={{color: 'black'}}/></Link></button>
             </div>
-                {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={4} />}
+                {showAddPostForm && <AddNewPost onPostCreated={handlePostCreated} userId={userId} />}
+
 
             <ul className="userpost-list">
-                {posts.map((post) => {
-                    const topLevelComments = getTopLevelCommentsForPost(post.id);
-                    const currentLikes = likes[post.id] || 0; 
+                {posts.length === 0 ? (
+                    <p className='no-post'>No posts yet. Create your first post!</p>
+                ) : (
+                    posts.map((post) => {
+                        const topLevelComments = getTopLevelCommentsForPost(post.id);
+                        const currentLikes = likes[post.id] || 0; 
 
-                    return (
-                        <li key={post.id} className="userpost-item">
-                            <div className='userpost-info'>
-                                <div className='userpost-username'>
-                                    <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
-                                </div>
-                                <div className='mainpost-country'>
-                                <h3><Globe size={24} />                         
-                                    {getCountryName(post.country_id)}                                 
-                                </h3>
-                                </div>
-                            </div>
-
-                            <div className="countrypost-title">
-                                <h4>{post.title}</h4>
-                            </div>
-
-                            <div className='myphoto-container'>
-                                {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
-                                    <div className='myimage-container'>
-                                        {post.image_path.map((image, index) => (
-                                            <img 
-                                                className="mypost-image"
-                                                key={index} 
-                                                src={`http://localhost:4000${image.trim()}`} 
-                                                alt={post.title} 
-                                                style={{ minWidth: '200px' }} 
-                                            />
-                                        ))}
+                        return (
+                            <li key={post.id} className="userpost-item">
+                                <div className='userpost-info'>
+                                    <div className='userpost-username'>
+                                        <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
                                     </div>
-                                )}
-                            </div>
-
-                            <div className="countrypost-content">
-                                <p>{post.content}</p>
-                            </div>
-
-                            <div className='my-comment-container'>
-                                <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
-                                    <ChatCentered size={24} />
-                                    {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
-                                </div>
-                                <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
-                                <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                    {currentLikes > 0 && <span>{currentLikes}</span>}
-                                    <Heart size={24} />
-                                </div>
-                            </div>
-
-                            {visibleCommentsPostId === post.id && (
-                                <div className='comments-section'>
-                                    <div className="comment-input-container">
-                                        <form onSubmit={(e) => handleAddComment(e, post.id)}>
-                                            <textarea
-                                                value={newComment[post.id] || ''}
-                                                onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
-                                                placeholder="Leave a comment..."
-                                                rows="2"
-                                            />
-                                            <button type="submit" disabled={!newComment[post.id]}>Comment</button>
-                                        </form>
+                                    <div className='mainpost-country'>
+                                    <h3><Globe size={24} />                         
+                                        {getCountryName(post.country_id)}                                 
+                                    </h3>
                                     </div>
-                                    {topLevelComments.length > 0 ? (
-                                        topLevelComments.map(comment => (
-                                            <div key={`comment-${comment.id}`}>
-                                                <Comments
-                                                    comment={comment}
-                                                    allComments={comments}
-                                                    getUsername={getUsername}
-                                                    postId={post.id}
-                                                    setComments={setComments}
-                                                    newReply={newReply}
-                                                    setNewReply={setNewReply}
-                                                    handleAddReply={handleAddReply}
+                                </div>
+
+                                <div className="countrypost-title">
+                                    <h4>{post.title}</h4>
+                                </div>
+
+                                <div className='myphoto-container'>
+                                    {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
+                                        <div className='myimage-container'>
+                                            {post.image_path.map((image, index) => (
+                                                <img 
+                                                    className="mypost-image"
+                                                    key={index} 
+                                                    src={`http://localhost:4000${image.trim()}`} 
+                                                    alt={post.title} 
+                                                    style={{ minWidth: '200px' }} 
                                                 />
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>No comments yet.</p>
+                                            ))}
+                                        </div>
                                     )}
                                 </div>
-                            )}
 
-                            {/* Delete Button */}
-                            <button className='delete-container'>
-                            <Trash size={24} 
-                            className="delete-post-button" 
-                            onClick={() => handleDeletePost(post.id)}/>
-                            </button>
-                        </li>
-                    );
-                })}
+                                <div className="countrypost-content">
+                                    <p>{post.content}</p>
+                                </div>
+
+                                <div className='my-comment-container'>
+                                    <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
+                                        <ChatCentered size={24} />
+                                        {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
+                                    </div>
+                                    <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
+                                    <div className='likes-section' onClick={() => handleLikePost(post.id)}>
+                                        {currentLikes > 0 && <span>{currentLikes}</span>}
+                                        <Heart size={24} />
+                                    </div>
+                                </div>
+
+                                {visibleCommentsPostId === post.id && (
+                                    <div className='comments-section'>
+                                        <div className="comment-input-container">
+                                            <form onSubmit={(e) => handleAddComment(e, post.id)}>
+                                                <textarea
+                                                    value={newComment[post.id] || ''}
+                                                    onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
+                                                    placeholder="Leave a comment..."
+                                                    rows="2"
+                                                />
+                                                <button type="submit" disabled={!newComment[post.id]}>Comment</button>
+                                            </form>
+                                        </div>
+                                        {topLevelComments.length > 0 ? (
+                                            topLevelComments.map(comment => (
+                                                <div key={`comment-${comment.id}`}>
+                                                    <Comments
+                                                        comment={comment}
+                                                        allComments={comments}
+                                                        getUsername={getUsername}
+                                                        postId={post.id}
+                                                        setComments={setComments}
+                                                        newReply={newReply}
+                                                        setNewReply={setNewReply}
+                                                        handleAddReply={handleAddReply}
+                                                    />
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No comments yet.</p>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Delete Button */}
+                                <button className='delete-container'>
+                                <Trash size={24} 
+                                className="delete-post-button" 
+                                onClick={() => handleDeletePost(post.id)}/>
+                                </button>
+                            </li>
+                        );
+                    })
+                )}
             </ul>
         </div>
     );

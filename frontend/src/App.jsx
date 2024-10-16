@@ -6,20 +6,26 @@ import Register from './Routes/register/Register';
 import MyPageAccount from './Routes/mypageaccount/MyPageAccount';
 import CountryPage from './Routes/countrypage/CountryPage';
 import axios from 'axios';
+import ProtectedRoutes from './services/ProtectedRoutes';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 
 function App() {
+  console.log("Rendering App");
   
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Main homepage */}
+      <Routes>      
         <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/mypage' element={<MyPage />} />
-        <Route path='/mypageaccount' element={<MyPageAccount />} />
-        <Route path="/country/:countryId" element={<CountryPage />} />
+        <Route path='/register' element={<Register />} />  
+
+        {/* <Route element={<ProtectedRoutes />}> */}
+          <Route path="/" element={<HomePage />} /> {/* Main homepage */}
+          <Route path='/mypage' element={<MyPage />} />
+          <Route path='/mypageaccount' element={<MyPageAccount />} />
+          <Route path="/country/:countryId" element={<CountryPage />} />
+        {/* </Route> */}
+
       </Routes>
     </Router>
   )

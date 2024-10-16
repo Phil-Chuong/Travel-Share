@@ -5,7 +5,10 @@ import { Trash, Image, PaperPlaneTilt } from '@phosphor-icons/react/dist/ssr';
 
 
 function AddNewPost({ onPostCreated }) {
-    const [user, setUser] = useState(4);///CHANGE WHEN USER LOGIN
+
+    const userId = localStorage.getItem('userId');
+
+    const [user, setUser] = useState(userId);///CHANGE WHEN USER LOGIN
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [countryId, setCountry] = useState('');

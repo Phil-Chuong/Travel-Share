@@ -14,10 +14,12 @@ function Account() {
     const [editingField, setEditingField] = useState('');
     const [newFieldValue, setNewFieldValue] = useState('');
 
+    const userId = localStorage.getItem('userId');
+
     useEffect(() => {
         const fetchUserInfoData = async () => {
             try {
-                const response = await axios.get(`/users/${4}`); ///CHANGE WHEN USER LOGIN
+                const response = await axios.get(`/users/${userId}`); ///CHANGE WHEN USER LOGIN
                 setUser(response.data);
             } catch (err) {
                 setError('Failed to fetch users info')
@@ -48,7 +50,7 @@ function Account() {
     // Save changes and update user info
     const handleSave = async () => {
         try {
-        await axios.put(`/users/edituser/${4}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
+        await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
         setUser({ ...user, [editingField]: newFieldValue }); // Update UI
         closeModal(); // Close the modal
         setError(null); // Clear any previous errors

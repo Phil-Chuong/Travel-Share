@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Country = require('../models/Country');
-
+// const { authenticateToken } = require('../services/authenticateToken');
 
 //GET routes
 router.get('/', async (req, res) => {

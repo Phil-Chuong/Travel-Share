@@ -42,7 +42,10 @@ class Post {
     static async getPostByUserId(user_id) {
         const query = 'SELECT * FROM posts WHERE user_id = $1 ORDER BY created DESC';
         try {
+            console.log(`Fetching posts for user ID: ${user_id}`); // Add logging
             const result = await pool.query(query, [user_id]);
+            console.log(`Posts retrieved: ${result.rows.length}`); // Add logging
+            
             // Format image_path correctly before sending the response
             const posts = result.rows.map(post => {
                 // Check if the image_path contains multiple paths, and split it into an array

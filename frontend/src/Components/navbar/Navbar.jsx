@@ -59,6 +59,15 @@ const Navbar = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropdownVisible]);
+  
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Clear the JWT
+    localStorage.removeItem('userId'); // Clear the user ID
+    // Optionally redirect to the login page
+    // window.location.href = '/login'; // or use navigate from react-router
+  };
+
 
   return (
     <div className='navbar'>
@@ -97,8 +106,10 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className='nav-logout'>
-          <Link to={'/login'}><SignOut size={32} style={{color: 'black'}}/></Link>
+        <div className='nav-logout' onClick={handleLogout}>
+          <Link to={'/login'}>
+            <SignOut size={32} style={{color: 'black'}}/>
+          </Link>
         </div>
         
       </div>

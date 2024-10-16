@@ -171,6 +171,13 @@
     padding: 0;
 }
 
+.no-post {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    color: red
+}
+
 .userpost-username {
     font-size: 0.7em;
     font-weight: bold;

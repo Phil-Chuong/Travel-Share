@@ -18,6 +18,8 @@ function Mainpost() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const userId = localStorage.getItem('userId');
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -67,7 +69,7 @@ function Mainpost() {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
-                user_id: 4 // Assuming you have a logged-in user ///CHANGE WHEN USER LOGIN
+                user_id: userId // Assuming you have a logged-in user ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewComment(prev => ({ ...prev, [postId]: '' }));
@@ -85,7 +87,7 @@ function Mainpost() {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
-                user_id: 4 // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
+                user_id: userId // Assuming you have a logged-in user  ///CHANGE WHEN USER LOGIN
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewReply(prev => ({ ...prev, [commentId]: '' }));

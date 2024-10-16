@@ -19,6 +19,8 @@ function CountriesPosts() {
     const [error, setError] = useState(null);
     const { countryId } = useParams(); 
 
+    const userId = localStorage.getItem('userId');
+
     useEffect(() => {
         const fetchPostsByCountry = async () => {
             try {
@@ -78,7 +80,7 @@ function CountriesPosts() {
                 post_id: postId,
                 parent_comment_id: null,
                 comment_content: newComment[postId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: userId // Assuming you have a logged-in user
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewComment(prev => ({ ...prev, [postId]: '' }));
@@ -96,7 +98,7 @@ function CountriesPosts() {
                 post_id: postId,
                 parent_comment_id: commentId,
                 comment_content: newReply[commentId],
-                user_id: 4 // Assuming you have a logged-in user
+                user_id: userId // Assuming you have a logged-in user
             });
             setComments(prevComments => [...prevComments, response.data]);
             setNewReply(prev => ({ ...prev, [commentId]: '' }));

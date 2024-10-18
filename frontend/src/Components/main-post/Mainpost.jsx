@@ -125,7 +125,7 @@ function Mainpost() {
     };
 
     if (loading) {
-        return <div className='loader'>Loading posts...</div>;
+        return <div>Loading posts...</div>;
     }
 
     if (error) {
@@ -145,13 +145,18 @@ function Mainpost() {
                     return (
                         <li key={post.id} className="mainpost-item">
                             <div className='mainpost-info'>
-                                <div className='mainpost-username'>
-                                    <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
+                                <div className='left-info'>
+                                    <h3><IdentificationCard size={32} /></h3>
+                                    <div className='mainpost-username'>
+                                        {getUsername(post.user_id)}
+                                    </div>
                                 </div>
-                                <div className='mainpost-country'>
-                                    <h3><Globe size={24} /> 
-                                    <Link to={`/country/${post.country_id}`}>{getCountryName(post.country_id)}</Link>
-                                    </h3>
+
+                                <div className='right-info'>
+                                    {/* <h3><Globe size={24} /></h3> */}
+                                    <div className='mainpost-country'>
+                                        <Link to={`/country/${post.country_id}`}>{getCountryName(post.country_id)}</Link>                  
+                                    </div>
                                 </div>
                             </div>
 
@@ -167,7 +172,7 @@ function Mainpost() {
                                         key={index} 
                                         src={`http://localhost:4000${image}`} 
                                         alt={post.title} 
-                                        style={{ minWidth: '200px'}}
+                                        style={{ minWidth: '240px'}}
                                         />
                                     ))}
                                 </div>                             
@@ -184,9 +189,10 @@ function Mainpost() {
                                 </div>
                                 <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
                                 <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                    {currentLikes > 0 && <span>{currentLikes}</span>} {/* Show current like count */}
                                     <Heart size={24} />
-                                    </div>
+                                    {currentLikes > 0 && <span>{currentLikes}</span>} {/* Show current like count */}
+                                </div>
+                                    
                             </div>
 
                             {visibleCommentsPostId === post.id && (

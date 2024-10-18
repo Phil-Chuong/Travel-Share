@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import './MyHomePage.css';
-import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe, Gear} from '@phosphor-icons/react';
+import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe, Gear, SmileyXEyes} from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddNewPost from '../addnewpost/AddNewPost';
 
 
@@ -78,17 +78,6 @@ function MyHomePage() {
         // console.log("Matched country:", country);
         return country ? country.country_name : 'Unknown Country';
     };
-
-    // const getUsername = (userId) => {
-    //     console.log("User ID passed to getUsername:", userId); // Debug log
-
-    //     const user = users.find(user => user.id === Number(userId));///CHANGE WHEN USER LOGIN
-
-    //     console.log("Fetched Users:", users);
-    //     console.log("Matched user:", user); // Debug log
-
-    //     return user ? user.username : 'Unknown User';
-    // };
 
     const getUsername = (user_id) => {
         console.log("User ID passed to getUsername:", user_id);
@@ -185,7 +174,7 @@ function MyHomePage() {
 
 
     if (loading) {
-        return <div className='loader'>Loading posts for this country...</div>;
+        return <div>Loading posts for this country...</div>;
     }
 
     if (error) {
@@ -204,7 +193,10 @@ function MyHomePage() {
 
             <ul className="userpost-list">
                 {posts.length === 0 ? (
-                    <p className='no-post'>No posts yet. Create your first post!</p>
+                    <div className='no-post'>
+                        <SmileyXEyes size={48} />
+                        <p>No posts yet. Create your first post!</p>
+                    </div>
                 ) : (
                     posts.map((post) => {
                         const topLevelComments = getTopLevelCommentsForPost(post.id);
@@ -213,13 +205,17 @@ function MyHomePage() {
                         return (
                             <li key={post.id} className="userpost-item">
                                 <div className='userpost-info'>
-                                    <div className='userpost-username'>
-                                        <h3><IdentificationCard size={24} /> {getUsername(post.user_id)}</h3>
+                                    <div className='left-info'>
+                                        <h3><IdentificationCard size={32} /></h3>
+                                        <div className='userpost-username'>
+                                            {getUsername(post.user_id)}
+                                        </div>       
                                     </div>
-                                    <div className='mainpost-country'>
-                                    <h3><Globe size={24} />                         
-                                        {getCountryName(post.country_id)}                                 
-                                    </h3>
+
+                                    <div className='right-info'>
+                                        <div className='userpost-country'>                       
+                                            {getCountryName(post.country_id)}                                 
+                                        </div>
                                     </div>
                                 </div>
 
@@ -228,7 +224,7 @@ function MyHomePage() {
                                 </div>
 
                                 <div className='myphoto-container'>
-                                    {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && (
+                                    {/* {post.image_path && Array.isArray(post.image_path) && post.image_path.length > 0 && ( */}
                                         <div className='myimage-container'>
                                             {post.image_path.map((image, index) => (
                                                 <img 
@@ -236,11 +232,11 @@ function MyHomePage() {
                                                     key={index} 
                                                     src={`http://localhost:4000${image.trim()}`} 
                                                     alt={post.title} 
-                                                    style={{ minWidth: '200px' }} 
+                                                    style={{ minWidth: '231px' }} 
                                                 />
                                             ))}
                                         </div>
-                                    )}
+                                    {/* )} */}
                                 </div>
 
                                 <div className="countrypost-content">
@@ -254,8 +250,8 @@ function MyHomePage() {
                                     </div>
                                     <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
                                     <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                        {currentLikes > 0 && <span>{currentLikes}</span>}
                                         <Heart size={24} />
+                                        {currentLikes > 0 && <span>{currentLikes}</span>}
                                     </div>
                                 </div>
 

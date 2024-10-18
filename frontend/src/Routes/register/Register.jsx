@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import './Register.css';
+import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
+import { useNavigate, Link } from 'react-router-dom';
+import PopoverDropdown from '../../Components/countrypopover/PopoverDropdown';
 
 function Register() {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [username, setUsername] = useState('');
-    const [location, setLocation] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [countryId, setCountryId] = useState('');
+    const [countries, setCountries] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+    // Fetch countries from the backend
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get('/countries');
+                setCountries(response.data); // Set the countries directly
+            } catch (err) {
+                console.error('Error fetching countries:', err);
+                setError('Failed to load countries');
+            }
+        };
+
+        fetchCountries();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/authentication/register', { firstname, lastname, username, location, email, password });
+            const response = await axios.post('/authentication/register', { firstname, lastname, username, location: countryId, email, password });
             // Store JWT in local storage
             const { accessToken, newUser } = response.data;
 
@@ -34,48 +53,61 @@ function Register() {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text"
-                    placeholder="First Name"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                />
-                <input 
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                />
-                <input 
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input 
-                    type="text"
-                    placeholder="Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                />
-                <input 
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input 
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Register</button>
-            </form>
-            {error && <p>{error}</p>}
+        <div className='register-container'>
+            <div className='register-box'>
+                <div className='register-logo'>
+                    <AirplaneTilt size={58} color="red" />
+                </div>
+                <h2>Sign Up</h2>
+                <div className='form-container'>
+                    <form onSubmit={handleSubmit}>
+                        <input 
+                            type="text"
+                            placeholder="First Name"
+                            value={firstname}
+                            onChange={(e) => setFirstname(e.target.value)}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Last Name"
+                            value={lastname}
+                            onChange={(e) => setLastname(e.target.value)}
+                        />
+                        <input 
+                            type="text"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <PopoverDropdown 
+                            options={countries} 
+                            selected={countryId} 
+                            onSelect={(country) => {
+                                setCountryId(country);
+                            }} 
+                        />
+                        <input 
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input 
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    <button type="submit"><p>Register</p></button>
+                    </form>
+                </div>
+                <div className='link-login'>
+                    <Link to={'/login'}><p>Login here</p></Link>
+                </div>
+                {error && <p className='register-error'>{error}</p>}
+            </div>
         </div>
     );
 }

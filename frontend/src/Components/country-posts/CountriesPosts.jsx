@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import './CountriesPosts.css';
-import { ChatCentered, Heart } from '@phosphor-icons/react';
+import { ChatCentered, Heart, IdentificationCard, SmileyXEyes } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import Comments from '../comment/Comments';
 import { useParams } from 'react-router-dom';
@@ -31,7 +31,7 @@ function CountriesPosts() {
                     axios.get('/comments')
                 ]);
                 setPosts(postsResponse.data);
-                setCountries(countriesResponse.data);
+                setCountries(countriesResponse.data || []);
                 setUsers(usersResponse.data);
                 setComments(commentsResponse.data);
                 console.log("Fetched countries:", countriesResponse.data);
@@ -41,16 +41,12 @@ function CountriesPosts() {
                     initialLikes[post.id] = post.post_likes || 0;
                 });
                 setLikes(initialLikes);
-
-                // Check if no posts were found
-                if (postsResponse.data.length === 0) {
-                    setError('No posts found for this country. Write the first post!');
-                } else {
-                    setError(''); // Clear any previous error
-                }
-
             } catch (err) {
-                setError('Failed to fetch data');
+                if (err.response && err.response.status === 404) {
+                    setPosts([]);
+                } else {
+                    setError('Failed to fetch data');
+                }
             } finally {
                 setLoading(false);
             }
@@ -61,8 +57,10 @@ function CountriesPosts() {
 
     const getCountryName = (country_id) => {
         console.log("Country ID passed:", country_id);
-        const country = countries.find(country => country.id === country_id);
+        const country = countries.find(country => country.id === Number(country_id));
+        console.log("Fetched Countries", countries)
         console.log("Matched country:", country);
+
         return country ? country.country_name : 'Unknown Country';
     };
 
@@ -145,102 +143,109 @@ function CountriesPosts() {
     return (
         <div className='countrypost-container'>
             <div className='countryname-header'>
-            <h3 className='countryname'>{getCountryName(Number(countryId))}</h3>
+                <h3 className='countryname'>{getCountryName(Number(countryId))}</h3>
             </div>
-            {posts.length === 0 ? (
-                <p>No posts found for this country. Write the first post!</p>
-            ) : (
+
             <ul className="countrypost-list">
-                {posts.map((post) => {
-                    const topLevelComments = getTopLevelCommentsForPost(post.id);
-                    const currentLikes = likes[post.id] || 0; 
+                {posts.length === 0 ? (
+                    <div className='nopost-country'>
+                        <SmileyXEyes size={48} />
+                        <p>No posts found for this country!</p>
+                    </div>
+                ) : (
+                    posts.map((post) => {
+                        const topLevelComments = getTopLevelCommentsForPost(post.id);
+                        const currentLikes = likes[post.id] || 0; 
 
-                    return (
-                        <li key={post.id} className="countrypost-item">
-                            <div className='countrypost-info'>
-                                <div className='countrypost-username'>
-                                    <h3>Traveller: {getUsername(post.user_id)}</h3>
-                                </div>
-                                {/* <div className='mainpost-country'>
-                                <h3>Location:                         
-                                    {getCountryName(post.country_id)}                                 
-                                </h3>
-                                </div> */}
-                            </div>
-
-                            <div className="countrypost-title">
-                                <h4>{post.title}</h4>
-                            </div>
-
-                            <div className='countryphoto-container'>
-                                <div className='countryphoto-container'>
-                                    {post.image_path.map((image, index) => (
-                                        <img 
-                                        className="countrypost-image"
-                                        key={index} 
-                                        src={`http://localhost:4000${image}`} 
-                                        alt={post.title} 
-                                        style={{ minWidth: '200px'}}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="countrypost-content">
-                                <p>{post.content}</p>
-                            </div>
-
-                            <div className='comment-container'>
-                                <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
-                                    <ChatCentered size={24} />
-                                    {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
-                                </div>
-                                <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
-                                <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                    {currentLikes > 0 && <span>{currentLikes}</span>}
-                                    <Heart size={24} />
-                                </div>
-                            </div>
-
-                            {visibleCommentsPostId === post.id && (
-                                <div className='comments-section'>
-                                    <div className="comment-input-container">
-                                        <form onSubmit={(e) => handleAddComment(e, post.id)}>
-                                            <textarea
-                                                value={newComment[post.id] || ''}
-                                                onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
-                                                placeholder="Leave a comment..."
-                                                rows="2"
-                                            />
-                                            <button type="submit" disabled={!newComment[post.id]}>Comment</button>
-                                        </form>
+                        return (
+                            <li key={post.id} className="countrypost-item">
+                                <div className='countrypost-info'>
+                                    <div className='countryleft-info'>
+                                        <h3><IdentificationCard size={24} /></h3>
+                                        <div className='countrypost-username'>
+                                            {getUsername(post.user_id)}
+                                        </div>
                                     </div>
-                                    {topLevelComments.length > 0 ? (
-                                        topLevelComments.map(comment => (
-                                            <div key={`comment-${comment.id}`}>
-                                                <Comments
-                                                    comment={comment}
-                                                    allComments={comments}
-                                                    getUsername={getUsername}
-                                                    postId={post.id}
-                                                    setComments={setComments}
-                                                    newReply={newReply}
-                                                    setNewReply={setNewReply}
-                                                    handleAddReply={handleAddReply}
-                                                />
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>No comments yet.</p>
-                                    )}
+                                    {/* <div className='mainpost-country'>
+                                    <h3>Location:                         
+                                        {getCountryName(post.country_id)}                                 
+                                    </h3>
+                                    </div> */}
+                                    
                                 </div>
-                            )}
-                        </li>
-                    );
-                })}
-            </ul>
-            )}
-            
+
+                                <div className="countrypost-title">
+                                    <h4>{post.title}</h4>
+                                </div>
+
+                                <div className='maincountryphoto-container'>
+                                    <div className='countryphoto-container'>
+                                        {post.image_path.map((image, index) => (
+                                            <img 
+                                            className="countrypost-image"
+                                            key={index} 
+                                            src={`http://localhost:4000${image}`} 
+                                            alt={post.title} 
+                                            style={{ minWidth: '240px'}}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="countrypost-content">
+                                    <p>{post.content}</p>
+                                </div>
+
+                                <div className='comment-container'>
+                                    <div className='comment-section' onClick={() => toggleCommentsVisibility(post.id)}>
+                                        <ChatCentered size={24} />
+                                        {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
+                                    </div>
+                                    <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
+                                    <div className='likes-section' onClick={() => handleLikePost(post.id)}>
+                                        <Heart size={24} />
+                                        {currentLikes > 0 && <span>{currentLikes}</span>}
+                                    </div>
+                                </div>
+
+                                {visibleCommentsPostId === post.id && (
+                                    <div className='comments-section'>
+                                        <div className="comment-input-container">
+                                            <form onSubmit={(e) => handleAddComment(e, post.id)}>
+                                                <textarea
+                                                    value={newComment[post.id] || ''}
+                                                    onChange={(e) => setNewComment(prev => ({ ...prev, [post.id]: e.target.value }))}
+                                                    placeholder="Leave a comment..."
+                                                    rows="2"
+                                                />
+                                                <button type="submit" disabled={!newComment[post.id]}>Comment</button>
+                                            </form>
+                                        </div>
+                                        {topLevelComments.length > 0 ? (
+                                            topLevelComments.map(comment => (
+                                                <div key={`comment-${comment.id}`}>
+                                                    <Comments
+                                                        comment={comment}
+                                                        allComments={comments}
+                                                        getUsername={getUsername}
+                                                        postId={post.id}
+                                                        setComments={setComments}
+                                                        newReply={newReply}
+                                                        setNewReply={setNewReply}
+                                                        handleAddReply={handleAddReply}
+                                                    />
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No comments yet.</p>
+                                        )}
+                                    </div>
+                                )}
+                            </li>
+                        );
+                    })
+                )}
+            </ul>            
         </div>
     );
 }

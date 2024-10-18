@@ -1,0 +1,91 @@
+.register-container {
+    width: auto;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+.register-logo {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.register-box {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0.5, 0.5);
+    border: 1px solid #388e3c;
+}
+
+.register-box h2 {
+    margin: 5px;
+    padding: 5px;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    padding-bottom: 0;
+    background-color: whitesmoke;
+}
+
+.register-box input {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.register-box button {
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #388e3c;
+}
+
+.register-box button p {
+    color: whitesmoke;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.link-login {
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.link-login p {
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 700;
+}
+
+.register-error {
+    margin: 5px;
+    padding: 5px;
+    color: red;
+}

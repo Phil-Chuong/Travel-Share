@@ -5,6 +5,7 @@ const multer  = require('multer');
 const path = require('path');
 const fs = require('fs');
 const pool = require('../DB/db');
+const { error } = require('console');
 // const { authenticateToken } = require('../services/authenticateToken');
 const BASE_URL = 'http://localhost:4000';
 
@@ -190,12 +191,16 @@ router.get('/users/:user_id', async (req, res) => {
 router.get('/country/:country_id', async (req, res) => {
     const { country_id } = req.params;
     console.log(`Fetching posts by users ID: ${country_id}`);
+
     try {
         const posts = await Post.getPostByCountryId(country_id);
+
+        // Check if no posts are found and return an empty array
         if (posts.length > 0) {
-            res.json(posts);
+            return res.json(posts);
         } else {
-            res.status(404).send({ error: 'No posts found for this country' });
+            console.log(`No posts found for country: ${country_id}`);
+            return res.status(404).json({ error: 'No posts for this country is found'}); // Return an empty array if no posts found
         }
     } catch (error) {
         console.error('Error fetching post by country ID', error);

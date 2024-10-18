@@ -16,7 +16,7 @@
 .header-section {
     width: 100%;
     height: 70px;
-    background-color: aqua;
+    background-color: rgb(120, 197, 203);
     display: flex;
     justify-content: center;
     align-items: center;

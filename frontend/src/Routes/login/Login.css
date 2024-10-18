@@ -2,7 +2,74 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+.login-logo {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.login-box {
+    width: 70%;
+    height: fit-content;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0.5, 0.5);
+    border: 1px solid #388e3c;
+}
+
+.login-box h2 {
+    margin: 5px;
+    padding: 5px;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.login-box input {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.login-box button {
+    margin: 5px;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #388e3c;
+}
+
+.login-box button p {
+    color: whitesmoke;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.link-register {
+    margin: 5px;
+    padding: 5px;
+}
+
+.link-register p {
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 700;
+}
+
+
+.login-error {
+    margin: 5px;
+    padding: 5px;
+    color: red;
 }

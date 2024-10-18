@@ -1,0 +1,47 @@
+.popover-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    margin-top: -15px;
+    margin-bottom: 5px;
+    padding: 0;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.popover-dropdown button {
+    background-color: white;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: white;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    max-height: 200px; /* Set max height */
+    overflow-y: auto;  /* Scroll if content exceeds max height */
+    width: 100%; /* Match the width of the toggle */
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #388e3c; /* Highlight color on hover */
+    color: white; /* Change text color on hover */
+}

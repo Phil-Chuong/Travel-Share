@@ -24,7 +24,7 @@ function Comment({ comment, allComments, getUsername, postId, setComments, newRe
                         placeholder="Write a reply..."
                         rows="2"
                     />
-                    <button type="submit">Reply</button>
+                    <button className='comment-submit' type="submit">Reply</button>
                 </form>
             )}
 

@@ -13,6 +13,7 @@ function Account() {
     const [modalOpen, setModalOpen] = useState(false);
     const [editingField, setEditingField] = useState('');
     const [newFieldValue, setNewFieldValue] = useState('');
+    const [countries, setCountries] = useState([]); 
 
     const userId = localStorage.getItem('userId');
 
@@ -26,6 +27,16 @@ function Account() {
             }
         };
 
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get('/countries'); // Adjust this API as needed
+                setCountries(response.data); // Set countries data
+            } catch (err) {
+                setError('Failed to fetch countries');
+            }
+        };
+
+        fetchCountries();
         fetchUserInfoData();
     }, [id]);
 
@@ -50,12 +61,12 @@ function Account() {
     // Save changes and update user info
     const handleSave = async () => {
         try {
-        await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
-        setUser({ ...user, [editingField]: newFieldValue }); // Update UI
-        closeModal(); // Close the modal
-        setError(null); // Clear any previous errors
+            await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
+            setUser({ ...user, [editingField]: newFieldValue }); // Update UI
+            closeModal(); // Close the modal
+            setError(null); // Clear any previous errors
         } catch (error) {
-        setError('Failed to update user info');
+            setError('Failed to update user info');
         }
     };
 
@@ -71,44 +82,58 @@ function Account() {
 
                 {/* Firstname */}
                 <div className='info-first'>
-                    Forename: {user.firstname}
-                    <button onClick={() => openEditModal('firstname', user.firstname)}>
-                        Edit
-                    </button>
+                    <strong>Forename: </strong>
+                    <div className='rows'>
+                        {user.firstname}
+                        <button onClick={() => openEditModal('firstname', user.firstname)}>
+                            Edit
+                        </button>
+                    </div>
                 </div>
 
                 {/* Lastname */}
                 <div className='info-last'>
-                    Surname: {user.lastname}
-                    <button onClick={() => openEditModal('lastname', user.lastname)}>
-                        Edit
-                    </button>
+                    <strong>Surname: </strong>
+                    <div className='rows'>
+                        {user.lastname}
+                        <button onClick={() => openEditModal('lastname', user.lastname)}>
+                            Edit
+                        </button>
+                    </div>
                 </div>
 
                 {/* Username */}
                 <div className='info-username'>
-                    Username: {user.username}
-                    <button onClick={() => openEditModal('username', user.username)}>
-                        Edit
-                    </button>
+                    <strong>Username: </strong>
+                    <div className='rows'>
+                        {user.username}
+                        <button onClick={() => openEditModal('username', user.username)}>
+                            Edit
+                        </button>    
+                    </div>               
                 </div>
 
                 {/* Email */}
                 <div className='info-email'>
-                    Email: {user.email}
-                    <button onClick={() => openEditModal('email', user.email)}>
-                        Edit
-                    </button>
+                    <strong>Email: </strong>
+                    <div className='rows'>
+                        {user.email}
+                        <button onClick={() => openEditModal('email', user.email)}>
+                            Edit
+                        </button>
+                    </div>
                 </div>
 
                 {/* Location */}
                 <div className='info-location'>
-                    Location: {user.location}
-                    <button onClick={() => openEditModal('location', user.location)}>
-                        Edit
-                    </button>
+                    <strong>Location:</strong>
+                    <div className='rows'>
+                        {user.location}
+                        <button onClick={() => openEditModal('location', user.location)}>
+                            Edit
+                        </button>
+                    </div>
                 </div>
-
             </div>          
         </div>
 
@@ -120,6 +145,7 @@ function Account() {
             field={editingField}
             value={newFieldValue}
             onChange={handleInputChange}
+            locations={countries} // Pass countries to the EditModal
         />
     </div>
   )

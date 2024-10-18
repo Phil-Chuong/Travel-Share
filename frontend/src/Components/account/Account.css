@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
+    font-family:'Courier New', Courier, monospace;
 }
 
 .account-header {
@@ -28,27 +29,41 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-items: flex-start;
-    background-color: rgb(166, 211, 213);
+    background-color: #45a049;
     border: 1px solid rgb(166, 211, 213);
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
 }
 
-.info-first {
+.account-info button {
+    font-family:'Courier New', Courier, monospace;
+}
+
+.rows {
     width: 100%;
-    margin: 3px;
-    padding: 3px;
     display: flex;
     justify-content: space-between;
+    margin-left: 3px;
+}
+
+.info-first {
+    width: 100%;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content:space-between;
     background-color: whitesmoke;
 }
 
 .info-last {
     width: 100%;
-    margin: 3px;
-    padding: 3px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     background-color: whitesmoke;
@@ -56,8 +71,10 @@
 
 .info-username {
     width: 100%;
-    margin: 3px;
-    padding: 3px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     background-color: whitesmoke;
@@ -65,8 +82,10 @@
 
 .info-email {
     width: 100%;
-    margin: 3px;
-    padding: 3px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     background-color: whitesmoke;
@@ -74,8 +93,9 @@
 
 .info-location {
     width: 100%;
-    margin: 3px;
-    padding: 3px;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     background-color: whitesmoke;

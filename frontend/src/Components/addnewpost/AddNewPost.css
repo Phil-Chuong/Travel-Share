@@ -15,7 +15,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: rgb(166, 211, 213);
+    /* background-color: rgb(166, 211, 213); */
     padding: 10px; /* Add padding for better spacing */
     border-radius: 8px;
 }
@@ -34,9 +34,9 @@
     margin: 3px;
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #ccc; /* Adds a subtle border */
-    background-color: #f9f9f9; /* Soft background */
+    background-color: white; /* Soft background */
     font-size: 16px; /* Improve readability */
+    font-family:'Courier New', Courier, monospace;
 }
 
 .title-text:focus {
@@ -55,6 +55,7 @@
     padding: 8px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-family:'Courier New', Courier, monospace;
 }
 
 /* Content text area */
@@ -93,9 +94,13 @@
     justify-content: space-between;
     align-items: center; /* Align input and button */
     margin: 5px;
-    background-color: rgb(166, 211, 213);
+    background-color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+.image-upload-label svg {
+    color: #218838;
 }
 
 /* Image input field */
@@ -132,7 +137,7 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: red;
+    background-color: rgb(239, 82, 82);
     color: white;
     border: none;
     border-radius: 50%;
@@ -149,7 +154,7 @@
 }
 
 .delete-image-button:hover {
-    background-color: darkred;
+    background-color: rgb(239, 82, 82);
 }
 
 

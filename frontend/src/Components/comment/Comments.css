@@ -5,6 +5,7 @@
     margin: 10px 0; /* Space between comments */
     background-color: #f9f9f9; /* Light background for comments */
     transition: background-color 0.3s; /* Smooth transition */
+    font-family:'Courier New', Courier, monospace;
 }
 
 .comment:hover {
@@ -15,8 +16,13 @@
     margin-bottom: 5px; /* Space between username and content */
 }
 
+.comment-info span {
+    color: #45a049;
+}
+
 .comment-actions {
     margin-top: 10px; /* Space above the action buttons */
+    font-family:'Courier New', Courier, monospace;
 }
 
 .comment textarea {
@@ -37,8 +43,13 @@
     cursor: pointer; /* Pointer cursor on hover */
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s; /* Smooth transition */
+    font-family:'Courier New', Courier, monospace;
 }
 
 .comment button:hover {
     background-color: #45a049; /* Darker green on hover */
+}
+
+.comment-submit {
+    font-family:'Courier New', Courier, monospace;
 }

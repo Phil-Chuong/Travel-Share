@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family:'Courier New', Courier, monospace;
   }
   
   .modal-content {
@@ -18,6 +19,10 @@
     max-width: 500px;
     width: 100%;
     text-align: center;
+  }
+
+  .modal-content h3 {
+    margin-bottom: 10px;
   }
   
   .modal-buttons {
@@ -34,6 +39,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family:'Courier New', Courier, monospace;
   }
   
   .modal-buttons button:hover {

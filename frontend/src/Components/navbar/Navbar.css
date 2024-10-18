@@ -10,17 +10,18 @@
     display: flex;
     justify-content:space-evenly;
     align-items:center;
-    background-color: rgb(166, 211, 213);
+    background-color: #45a049;
     position: sticky;
     top: 0;
     z-index: 1000;
+    font-family:'Courier New', Courier, monospace;
 }
 
 /* Style the dropdown container */
 .globe-button {
     outline: none;
     border: none;
-    background-color: rgb(166, 211, 213);
+    background-color: #45a049;
     cursor: pointer;
 }
 

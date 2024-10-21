@@ -139,7 +139,7 @@
     overflow-x: auto; /* Enable horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
     max-width: 100%; /* Limit container width */
-    padding: 10px;
+    padding: 5px;
     gap: 10px; /* Add space between images */
 }
 

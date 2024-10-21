@@ -1,9 +1,9 @@
 import React from 'react';
+import './MyPage.css';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Navbar from '../../Components/navbar/Navbar';
 import MyHomePage from '../../Components/my-page/MyHomePage';
-import './MyPage.css';
-
+import Footer from '../../Components/footer/footer';
 
 const MyPage = () => {
   return (
@@ -29,7 +29,7 @@ const MyPage = () => {
       </div>
 
       <div className='myfooter-section'>
-        <div>Footer Component </div>
+        <Footer />
       </div>
     </div>
   )

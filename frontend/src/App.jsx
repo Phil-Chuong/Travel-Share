@@ -12,7 +12,6 @@ import AuthenticatedLayout from './services/AuthenticatedLayout';
 axios.defaults.baseURL = 'http://localhost:4000';
 
 function App() {
-  console.log("Rendering App");
   
   return (
     <Router>

@@ -5,6 +5,7 @@ const pool = require('../DB/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET;
 
@@ -47,6 +48,7 @@ router.post('/refresh', (req, res) => {
         res.json({ accessToken });
     });
 });
+
 
 // Register route
 router.post('/register', async (req, res) => {

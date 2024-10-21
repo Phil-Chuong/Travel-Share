@@ -3,6 +3,7 @@ import './HomePage.css';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Mainpost from '../../Components/main-post/Mainpost';
 import Navbar from '../../Components/navbar/Navbar';
+import Footer from '../../Components/footer/footer';
 
 const HomePage = () => {
   return (
@@ -28,7 +29,7 @@ const HomePage = () => {
       </div>
 
       <div className='footer-section'>
-        <div>Footer Component </div>
+        <Footer />
       </div>     
     </div>
   )

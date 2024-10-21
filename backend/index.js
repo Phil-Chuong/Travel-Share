@@ -5,6 +5,7 @@ const express = require('express');
 const path = require('path');
 const { Pool } = require('pg');
 const cors = require('cors');
+// const helmet = require('helmet');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
@@ -16,8 +17,18 @@ const pool = new Pool({
     connectionString: process.env.DB,
 });
 
-//Allow requests from specific origins
-app.use(cors());
+// Allow requests from specific origins
+app.use(cors({
+  origin: ['http://localhost:3000'], // Replace with your frontend URLs
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+  credentials: true, // Allow credentials like cookies to be sent
+}));
+
+// Apply security headers using Helmet, including COOP
+// app.use(helmet({
+//   crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" }
+// }));
+
 
 //Middleware
 app.use(express.json());
@@ -29,6 +40,7 @@ const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 const authenticationRouter = require('./routes/authentication');
 const repliesRounter = require('./routes/replies');
+const googleRouter = require('./routes/googleAuthentication');
 
 
 //Routes handlers
@@ -39,6 +51,7 @@ app.use('/comments', commentsRouter);
 app.use('/replies', repliesRounter);
 app.use('/authentication', authenticationRouter);// Register/Login routes
 app.use('/posts/photos/upload', postsRouter);
+app.use('/googleAuthentication', googleRouter);
 
 
 //Error Handling

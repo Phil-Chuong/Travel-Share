@@ -115,6 +115,7 @@
     font-size: 1em;
     font-weight: bold;
     color: #333;
+    margin-top: 5px;
 }
 
 .mainpost-title h4 {
@@ -148,7 +149,7 @@
     overflow-x: auto; /* Enable horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
     max-width: 100%; /* Limit container width */
-    padding: 10px;
+    padding: 5px;
     gap: 10px; /* Add space between images */
 }
 

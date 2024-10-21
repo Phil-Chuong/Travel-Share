@@ -166,10 +166,12 @@
     font-size: 1em;
     font-weight: bold;
     color: #333;
+    margin-top: 5px;
 }
 
 .countrypost-title h4 {
     margin: 5px;
+    
 }
 
 
@@ -181,7 +183,7 @@
     gap: 10px;
     overflow-x: auto; /* Enable horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling effect */
-    padding: 10px; 
+    padding: 5px; 
 }
 
 .myphoto-container {
@@ -190,12 +192,13 @@
     overflow-x: auto; /* Enable horizontal scrolling */
     scroll-behavior: smooth; /* Smooth scrolling */
     max-width: 100%; /* Limit container width */
-    padding: 10px;
+    padding: 5px;
     gap: 10px; /* Add space between images */
+    justify-content: center;
 }
 
 .mypost-image {
-    min-width: 200px;
+    min-width: 250px;
     height: auto;
     border-radius: 5px;
 }

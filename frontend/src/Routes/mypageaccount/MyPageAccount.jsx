@@ -3,6 +3,7 @@ import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Navbar from '../../Components/navbar/Navbar';
 import './MyPageAccount.css';
 import Account from '../../Components/account/Account';
+import Footer from '../../Components/footer/footer';
 
 const MyPageAccount = () => {
   return (
@@ -28,7 +29,7 @@ const MyPageAccount = () => {
       </div>
 
       <div className='settingfooter-section'>
-        <div>Footer Component </div>
+        <Footer />
       </div>
     </div>
   )

@@ -1,14 +1,72 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { jwtDecode as jwt_decode } from 'jwt-decode';
+
 import { Link, useNavigate } from 'react-router-dom';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import './Login.css';
+
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+            // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            client_id: '734440703520-bjfaf3jd6pcp6u3a1jc413pf05e43gtc.apps.googleusercontent.com',
+            callback: handleGoogleLogin
+        });
+
+        google.accounts.id.renderButton(
+            document.getElementById('googleSignIn'),
+            { theme: "outline", size: "large" }
+        );
+
+    }, []);
+
+    const handleGoogleLogin = async (credentialResponse) => {
+        try {
+            console.log("Encoded JWT ID token: ", credentialResponse);
+            const { credential } = credentialResponse;
+
+            if (!credential) {
+                throw new Error('Missing credential');
+            }
+
+            const response = await axios.post('/googleAuthentication/google-login', { token: credential });
+            console.log('Backend response:', response.data);
+
+            // Extract userId from the token or user object
+            const userId = response.data.user.id;
+            const { accessToken, refreshToken} = response.data;
+
+            console.log('Received accessToken:', accessToken);
+            console.log('Received refreshToken:', refreshToken);
+            console.log('Received userId:', userId );
+
+            if (accessToken && refreshToken && userId) {
+                // Store tokens and userId in localStorage (or state management if applicable)
+                localStorage.setItem('token', accessToken);
+                localStorage.setItem('refreshToken', refreshToken);
+                localStorage.setItem('userId', userId);
+
+                console.log('Navigating to mypage');
+                // Ensure you navigate after storing everything
+                navigate('/mypage');
+              } else {
+                setError('Missing data from server response');
+              }
+            } catch (error) {
+              setError('Google login failed.');
+        }
+    };
+        
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,6 +112,7 @@ function Login() {
                     />
                     <button type="submit"><p>Login</p></button>
                 </form>
+                <div id='googleSignIn'></div>
                 <div className='link-register'>
                     <Link to={'/register'}><p>Create Account</p></Link>
                 </div>

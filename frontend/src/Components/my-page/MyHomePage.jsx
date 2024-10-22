@@ -232,7 +232,7 @@ function MyHomePage() {
                                                     key={index} 
                                                     src={`http://localhost:4000${image.trim()}`} 
                                                     alt={post.title} 
-                                                    style={{ minWidth: '268px' }} 
+                                                    style={{ minWidth: '251px' }} 
                                                 />
                                             ))}
                                         </div>

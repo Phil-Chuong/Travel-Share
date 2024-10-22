@@ -39,6 +39,10 @@
     height: 50px;
     display: flex;
     background-color: rgb(31, 158, 86);
+    /* position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family:'Courier New', Courier, monospace; */
 }
 
 .mainbody-section {

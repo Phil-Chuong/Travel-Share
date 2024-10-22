@@ -60,7 +60,7 @@
 
   .navbar-section {
     width: 10%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content:flex-start;
     align-items: center;

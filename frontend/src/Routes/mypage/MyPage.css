@@ -91,7 +91,17 @@
         height: fit-content;
         gap: 20px;
         padding: 10px;
+        /* position: sticky;
+        top: 0;
+        z-index: 1000;
+        font-family:'Courier New', Courier, monospace; */
     }
 
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        font-family:'Courier New', Courier, monospace;
+    }
     
   }

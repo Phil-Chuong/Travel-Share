@@ -8,7 +8,7 @@ import Footer from '../../Components/footer/footer';
 const MyPage = () => {
   return (
     <div className="myparent">
-      <div className='header-section'>
+      <div className='myheader-section'>
         <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
       </div>
 

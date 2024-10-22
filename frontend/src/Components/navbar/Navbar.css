@@ -10,7 +10,7 @@
     display: flex;
     justify-content:space-evenly;
     align-items:center;
-    background-color: #45a049;
+    background-color: rgb(31, 158, 86);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -21,11 +21,13 @@
 .globe-button {
     outline: none;
     border: none;
-    background-color: #45a049;
+    background-color: rgb(31, 158, 86);
     cursor: pointer;
 }
 
 .custom-dropdown {
+    height: 240px;
+    overflow-y: auto;
     position: absolute;
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -46,4 +48,27 @@
     background-color: #f0f0f0;
   }
   
+
+  /* TABLET MODE VIEW */
+@media only screen and (min-width: 768px) {
+  .navbar {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-section {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  
+}
   

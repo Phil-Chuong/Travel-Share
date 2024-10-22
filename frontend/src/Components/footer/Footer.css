@@ -6,3 +6,9 @@
     align-items: center;
     text-align: center;
 }
+
+.footer-info {
+    margin: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+}

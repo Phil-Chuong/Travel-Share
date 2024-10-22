@@ -148,7 +148,7 @@
 .userpost-country {
     font-size: 1em;
     font-weight: bold;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 /* -- NO POST MESSAGE -- */
 .no-post {
@@ -245,6 +245,7 @@
 
 .comment-section {
     cursor: pointer;
+    margin-left: 5px;
 }
 
 .comment-section span {
@@ -318,5 +319,6 @@
 
 .likes-section {
     cursor: pointer;
+    margin-right: 5px;
 }
 

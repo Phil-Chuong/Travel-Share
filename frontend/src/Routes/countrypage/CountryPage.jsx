@@ -13,7 +13,10 @@ const CountryPage = () => {
       </div>
 
       <div className='countrylayout-container'> 
+
+        <div className='countrynavbar-section'>
           <Navbar />
+        </div>      
 
         <div className='countrymainbody-section'>
           <CountriesPosts />
@@ -22,6 +25,7 @@ const CountryPage = () => {
         <div className='section-section'>
           <div>Section Component </div>
         </div>
+        
       </div>
 
       <div className='footer-section'>

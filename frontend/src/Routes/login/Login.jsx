@@ -97,21 +97,24 @@ function Login() {
                     <AirplaneTilt size={58} color="red" />
                 </div>
                 <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <input 
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button type="submit"><p>Login</p></button>
-                </form>
+                <div className='loginform-container'>
+                    <form onSubmit={handleSubmit}>
+                        <input 
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input 
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button type="submit"><p>Login</p></button>
+                    </form>
+                </div>
+                
                 <div id='googleSignIn'></div>
                 <div className='link-register'>
                     <Link to={'/register'}><p>Create Account</p></Link>

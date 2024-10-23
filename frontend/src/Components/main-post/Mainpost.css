@@ -18,7 +18,7 @@
 .mainpost-container h3 {
     margin: 0;
     padding: 0;
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 .mainname {
@@ -102,7 +102,7 @@
 }
 
 .mainpost-country {
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     margin-left: 5px;
 }
@@ -265,5 +265,17 @@
     img.post-image {
         width: 600px;
         object-fit: cover;
+    }
+
+    .mainpost-container h3 {
+        font-size: 2em;
+    }
+
+    .mainpost-country {
+        font-size: 1.5em;
+    }
+
+    .mainpost-username {
+        font-size: 1.2em;
     }
 }

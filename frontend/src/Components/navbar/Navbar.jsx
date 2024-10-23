@@ -70,24 +70,33 @@ const Navbar = () => {
 
 
   return (
-    <div className='navbar'>
-      <div className='navbar-section'>
+    <div className='navbar-main'>
+      <div className='navbar-container'>
 
         <div className='nav-mainpage'>
-          <Link to={'/'}><House size={32} style={{color: 'black'}}/></Link>
+          <Link to={'/'}>
+            <House className='icons' size={32} style={{color: 'black'}}/>
+            <p className='iconsName'>MAIN</p>
+          </Link>
         </div>
 
         <div className='nav-mypage'>
-          <Link to={'/mypage'}><IdentificationBadge size={32} style={{color: 'black'}}/></Link>
+          <Link to={'/mypage'}>
+            <IdentificationBadge className='icons' size={32} style={{color: 'black'}}/>
+            <p className='iconsName'>HOME</p>
+          </Link>
         </div>
 
         {/* World Posts Dropdown with Globe Icon Button */}
         <div className='nav-worldposts'>
+
           <div className='dropdown-icon'>
             {/* Globe button toggles the dropdown */}
             <button onClick={toggleDropdown} className='globe-button'>
-              <Globe size={32} style={{ color: 'black' }} />
+              <Globe className='icons' size={32} style={{ color: 'black' }} />
+              <p className='iconsName'>WORLD</p>
             </button>
+            
 
             {/* Conditionally render the country list when dropdown is visible */}
             {dropdownVisible && (
@@ -104,11 +113,13 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
         </div>
 
         <div className='nav-logout' onClick={handleLogout}>
           <Link to={'/login'}>
             <SignOut size={32} style={{color: 'black'}}/>
+            <p className='iconsName'>LOGOUT</p>
           </Link>
         </div>
         

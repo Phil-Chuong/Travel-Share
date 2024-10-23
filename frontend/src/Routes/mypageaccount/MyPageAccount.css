@@ -70,28 +70,27 @@
     color: white;
 }
 
-
+/* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {
-    .settingparent {
-        display: inline;
-    }
-
     .settinglayout-container {
-        display: flex;
-        flex-direction: row;
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+        /* background-color: blueviolet; */
     }
 
     .settingnavbar-section {
-        width: 10%;
+        width: 15%;
+        height: 100vh;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: fit-content;
-        gap: 20px;
-        padding: 10px;
     }
 
-    
+    .settingmainbody-section {
+        width: 50%;
+        display: flex;
+        /* background-color: darkkhaki; */
+    }
+
   }

@@ -1,11 +1,10 @@
-.navbar {
+.navbar-main {
     width: 100%;
     display: flex;  
     flex-wrap: wrap; 
-    
 }
 
-.navbar-section {
+.navbar-container {
     width: 100%;
     display: flex;
     justify-content:space-evenly;
@@ -47,28 +46,122 @@
   .dropdown-item:hover {
     background-color: #f0f0f0;
   }
+
+  .iconsName {
+    display: none;
+  }
   
 
-  /* TABLET MODE VIEW */
+  /* TABLET MODE MIN-767PX */
 @media only screen and (min-width: 768px) {
-  .navbar {
-    height: 100vh;
+  .navbar-main {
+    height: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    /* background-color: chartreuse; */
   }
 
-  .navbar-section {
-    width: 10%;
-    height: auto;
+  .navbar-container {
+    width: 100%;
+    height: 100vh;
     display: flex;
-    justify-content:flex-start;
+    flex-wrap: wrap;
+    justify-content:center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
     padding: 10px;
+    /* background-color: darkred; */
   }
-
   
 }
+
+
+/* DESKTOP MODE MIN-992PX */
+@media only screen and (min-width: 992px) {
+  /* .navbar {
+    background-color: coral;
+
+  }
+  .navbar-container {
+    background-color: chartreuse;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-container p {
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+
+  .navbar-section {
+    display: flex;
+    width: 20%;
+    background-color: rgb(93, 93, 172);
+  }
+
+  .iconsName {
+    display: contents;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+  }
+
+  .navbar-section a {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin: 10px;
+    text-decoration: none;
+  }
+
+  .nav-mainpage {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-mypage {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-worldposts {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-worldposts button {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-left: 13px;
+    font-size: 15px;
+  }
+
+  .nav-logout {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin-left: 13px;
+  } */
+
+}
+
+
   

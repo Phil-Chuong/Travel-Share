@@ -39,10 +39,10 @@
     height: 50px;
     display: flex;
     background-color: rgb(31, 158, 86);
-    /* position: sticky;
+    position: sticky;
     top: 0;
     z-index: 1000;
-    font-family:'Courier New', Courier, monospace; */
+    font-family:'Courier New', Courier, monospace;
 }
 
 .mainbody-section {
@@ -70,14 +70,35 @@
     color: white;
 }
 
+
+/* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {
-    .parent {
-        display: inline;
-    }
     .layout-container {
-        display: flex;
-        flex-direction: row;
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+        /* background-color: blueviolet; */
     }
-    
-  }
+
+    .navbar-section {
+        width: 15%;
+        height: 100vh;
+        display: flex;
+    }
+
+    .mainbody-section {
+        width: 50%;
+        display: flex;
+        /* background-color: darkkhaki; */
+    }
+}
+
+
+/* DESKTOP MODE MIN-992PX */
+/* @media only screen and (min-width: 992px) {
+    .navbar-section {
+        background-color: blue;
+    }
+} */

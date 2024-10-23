@@ -1,0 +1,26 @@
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: inline-block;
+    background-color: #31b86d;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000; /* Ensures the button stays on top */
+}
+
+.scroll-to-top:hover {
+    background-color: #28a358;
+}
+
+.scroll-to-top.show {
+    display: block; /* Button appears */
+}

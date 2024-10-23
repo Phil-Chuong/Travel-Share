@@ -70,7 +70,6 @@
     color: white;
 }
 
-
 /* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {
     .layout-container {

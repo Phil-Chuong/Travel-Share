@@ -101,3 +101,11 @@
     justify-content: space-between;
     background-color: whitesmoke;
 }
+
+
+@media only screen and (min-width: 768px) {
+    .account-container {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}

@@ -18,13 +18,11 @@ function AddNewPost({ onPostCreated }) {
     const [error, setError] = useState(null);
 
     
-
-    // Fetch countries from the backend
     useEffect(() => {
         const fetchCountries = async () => {
             try {
                 const response = await axios.get('/countries');
-                setCountries(response.data); // Set the countries directly
+                setCountries(response.data);
             } catch (err) {
                 console.error('Error fetching countries:', err);
                 setError('Failed to load countries');
@@ -107,15 +105,15 @@ function AddNewPost({ onPostCreated }) {
                         type="text" 
                         name="title" 
                         placeholder="Title" 
-                        value={title} // Use individual state
-                        onChange={(e) => setTitle(e.target.value)} // Update state for title
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         required 
                     />
                     <select 
                         className='country-select'
                         name="countryId" 
-                        onChange={(e) => setCountry(e.target.value)} // Update state for countryId
-                        value={countryId} // Use individual state
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={countryId}
                         required
                     >
                         <option value="">Destination</option>
@@ -151,13 +149,13 @@ function AddNewPost({ onPostCreated }) {
                     name="content"
                     placeholder="Write your post..." 
                     rows='5'
-                    value={content} // Use individual state
-                    onChange={(e) => setContent(e.target.value)} // Update state for content
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
                     required 
                 />
                 <div className='upload-bottom'>
                     <label className='image-upload-label'>
-                        <Image size={32} /> {/* Place the image icon here */}
+                        <Image size={32} />
                         <input 
                             className='image-input'
                             type="file" 

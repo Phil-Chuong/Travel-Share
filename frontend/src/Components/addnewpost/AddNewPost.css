@@ -1,6 +1,6 @@
 .upload-container {
     width: 100%;
-    height: auto; /* Auto height to fit content */
+    height: auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -15,8 +15,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    /* background-color: rgb(166, 211, 213); */
-    padding: 10px; /* Add padding for better spacing */
+    padding: 10px;
     border-radius: 8px;
 }
 
@@ -25,23 +24,23 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 3px; /* Add margin between top inputs and content */
+    margin-bottom: 3px;
 }
 
 /* Title input field */
 .title-text {
-    width: 48%; /* Adjust width for better spacing */
+    width: 48%;
     margin: 3px;
     padding: 8px;
     border-radius: 5px;
-    background-color: white; /* Soft background */
-    font-size: 16px; /* Improve readability */
+    background-color: white;
+    font-size: 16px;
     font-family:'Courier New', Courier, monospace;
 }
 
 .title-text:focus {
     outline: none; /* Removes the default black outline */
-    border: 2px solid #4caf50; /* Optionally, you can add a custom border color on focus */
+    border: 2px solid #4caf50;
 }
 
 .form-container input {
@@ -50,7 +49,7 @@
 
 /* Country select dropdown */
 .country-select {
-    width: 48%; /* Match title input size */
+    width: 48%;
     margin: 3px;
     padding: 8px;
     border-radius: 5px;
@@ -65,7 +64,7 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    resize: vertical; /* Allow resizing vertically */
+    resize: vertical;
 }
 
 .content-text:focus {
@@ -84,7 +83,7 @@
 .image-previews img {
     margin-right: 10px;
     border-radius: 8px;
-    width: 200px; /* Adjust width of image preview */
+    width: 200px;
 }
 
 /* Bottom section for image input and post button */
@@ -92,7 +91,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align input and button */
+    align-items: center;
     margin: 5px;
     background-color: white;
     padding: 5px;
@@ -157,7 +156,6 @@
     background-color: rgb(239, 82, 82);
 }
 
-
 .upload-bottom {
     display: flex;
     justify-content: space-between;
@@ -168,15 +166,15 @@
 .image-upload-label {
     display: flex;
     align-items: center;
-    cursor: pointer; /* Makes the label clickable */
+    cursor: pointer;
 }
 
 .image-upload-label input {
-    display: none; /* Hide the actual input */
+    display: none;
 }
 
 .image-input {
-    display: none; /* Hide the file input */
+    display: none;
 }
 
 .confirm-post-button {

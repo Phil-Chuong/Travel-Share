@@ -6,7 +6,6 @@ const ProtectedRoutes = () => {
     const token = localStorage.getItem('token'); // Get token from localStorage
     // console.log('Token:', token); // Log the token for debugging
     // console.log('ProtectedRoutes rendered');
-
     return token ? <Outlet /> : <Navigate to="/login" />;
 };
 

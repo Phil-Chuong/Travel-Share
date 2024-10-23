@@ -159,6 +159,11 @@
     align-items: center;
     color: #45a049;
     font-family:'Courier New', Courier, monospace;
+
+}
+
+.no-post p {
+    margin-top: 50px;
 }
 
 /* --- Post Title --- */
@@ -174,26 +179,24 @@
     
 }
 
-
 /* --- Horizontal Image Scrolling --- */
-
 .myimage-container {
     display: flex;
     justify-content:flex-start;
     gap: 10px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling effect */
+    overflow-x: auto;
+    scroll-behavior: smooth;
     padding: 5px; 
 }
 
 .myphoto-container {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping for horizontal scroll */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling */
-    max-width: 100%; /* Limit container width */
+    flex-wrap: nowrap;
+    overflow-x: auto; 
+    scroll-behavior: smooth;
+    max-width: 100%;
     padding: 5px;
-    gap: 10px; /* Add space between images */
+    gap: 10px;
     justify-content: center;
 }
 
@@ -212,7 +215,7 @@
 .myphoto-container::-webkit-scrollbar-thumb,
 .myimage-container::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 4px; /* Rounded corners for scrollbar */
+    border-radius: 4px;
 }
 
 .myphoto-container img {
@@ -221,16 +224,6 @@
     border-radius: 6px;
     object-fit: cover;
 }
-
-/* --- Post Content --- */
-/* .countrypost-content {
-    font-size: 1em;
-    color: #666;
-} */
-
-/* .countrypost-content p {
-    margin: 0;
-} */
 
 /* --- Comment Container --- */
 .my-comment-container {

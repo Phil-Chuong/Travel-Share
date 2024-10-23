@@ -46,6 +46,7 @@
     display: flex;
     justify-content: space-between;
     margin-left: 3px;
+    font-weight: 500;
 }
 
 .info-first {

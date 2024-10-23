@@ -3,6 +3,8 @@ import axios from 'axios';
 import './CountriesPosts.css';
 import { ChatCentered, Heart, IdentificationCard, SmileyXEyes } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { useParams } from 'react-router-dom';
 
@@ -34,7 +36,7 @@ function CountriesPosts() {
                 setCountries(countriesResponse.data || []);
                 setUsers(usersResponse.data);
                 setComments(commentsResponse.data);
-                console.log("Fetched countries:", countriesResponse.data);
+                //console.log("Fetched countries:", countriesResponse.data);
 
                 const initialLikes = {};
                 postsResponse.data.forEach(post => {
@@ -56,10 +58,10 @@ function CountriesPosts() {
     }, [countryId]);
 
     const getCountryName = (country_id) => {
-        console.log("Country ID passed:", country_id);
+        //console.log("Country ID passed:", country_id);
         const country = countries.find(country => country.id === Number(country_id));
-        console.log("Fetched Countries", countries)
-        console.log("Matched country:", country);
+        //console.log("Fetched Countries", countries)
+        //console.log("Matched country:", country);
 
         return country ? country.country_name : 'Unknown Country';
     };
@@ -133,7 +135,7 @@ function CountriesPosts() {
     }, [comments]);
 
     if (loading) {
-        return <div className='loader'>Loading posts for this country...</div>;
+        return <div><FontAwesomeIcon icon={faSync} spin size="3x" /></div>;
     }
 
     if (error) {

@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Reply = require('../models/Reply');
 
-
 // Helper function to nest replies
 const nestReplies = (replies) => {
     const replyMap = {};

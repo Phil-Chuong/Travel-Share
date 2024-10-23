@@ -22,6 +22,7 @@
     align-items: center;
     margin: 0;
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Layout container now grows to fill remaining height */
@@ -78,7 +79,6 @@
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: row;
-        /* background-color: blueviolet; */
     }
 
     .settingnavbar-section {
@@ -90,7 +90,6 @@
     .settingmainbody-section {
         width: 50%;
         display: flex;
-        /* background-color: darkkhaki; */
     }
 
   }

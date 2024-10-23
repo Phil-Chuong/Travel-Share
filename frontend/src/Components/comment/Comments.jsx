@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Replies from '../replies/Replies'; // Import the Replies component
+import Replies from '../replies/Replies';
 import './Comments.css';
 
 function Comment({ comment, allComments, getUsername, postId, setComments, newReply, setNewReply, handleAddReply }) {

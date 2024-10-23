@@ -131,28 +131,24 @@
     
 }
 
-/* .mainpost-content p {
-    margin: 0;
-} */
-
 /* --- Horizontal Image Scrolling --- */
 .mainphoto-container {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-bottom: 10px;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling effect */
+    overflow-x: auto; 
+    scroll-behavior: smooth;
 }
 
 .photo-container {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping for horizontal scroll */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    scroll-behavior: smooth; /* Smooth scrolling */
-    max-width: 100%; /* Limit container width */
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    max-width: 100%;
     padding: 5px;
-    gap: 10px; /* Add space between images */
+    gap: 10px;
 }
 
 .post-image {
@@ -198,7 +194,6 @@
     margin-left: 5px;
     color: red;
 }
-
 
 /* --- Comment Input Area --- */
 .comment-input-container {

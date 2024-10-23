@@ -3,6 +3,8 @@ import axios from 'axios';
 import './MyHomePage.css';
 import { ChatCentered, Heart, Trash, Pen, IdentificationCard, Globe, Gear, SmileyXEyes} from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { Link } from 'react-router-dom';
 import AddNewPost from '../addnewpost/AddNewPost';
@@ -19,17 +21,16 @@ function MyHomePage() {
     const [likes, setLikes] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // const { user_id, id } = useParams();
     const [showAddPostForm, setShowAddPostForm] = useState(false);
 
     const userId = localStorage.getItem('userId');
-    console.log("Retrieved userId from localStorage:", userId); // Debug log
+    //console.log("Retrieved userId from localStorage:", userId); // Debug log
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const userResponse = await axios.get(`/users/${userId}`);
-                setUsers([userResponse.data]); // Ensure users array contains the user data
+                setUsers([userResponse.data]);
             } catch (err) {
                 console.error('Error fetching user:', err);
                 setError('Failed to fetch user data');
@@ -44,7 +45,7 @@ function MyHomePage() {
                     axios.get('/users'),
                     axios.get('/comments')
                 ]);
-                console.log("Fetched Users:", usersResponse.data); // Debug log
+                //console.log("Fetched Users:", usersResponse.data); // Debug log
                 setPosts(postsResponse.data || []);
                 setCountries(countriesResponse.data);
                 setUsers(usersResponse.data);
@@ -80,10 +81,10 @@ function MyHomePage() {
     };
 
     const getUsername = (user_id) => {
-        console.log("User ID passed to getUsername:", user_id);
+        //console.log("User ID passed to getUsername:", user_id);
         const user = users.find(user => user.id === Number(user_id)); // Find user by ID
-        console.log("Fetched Users:", users);
-        console.log("Matched user:", user);
+        //console.log("Fetched Users:", users);
+        //console.log("Matched user:", user);
         
         return user ? user.username : 'Unknown User';
     };
@@ -174,7 +175,7 @@ function MyHomePage() {
 
 
     if (loading) {
-        return <div>Loading posts for this country...</div>;
+        return <div><FontAwesomeIcon icon={faSync} spin size="3x" /></div>;
     }
 
     if (error) {

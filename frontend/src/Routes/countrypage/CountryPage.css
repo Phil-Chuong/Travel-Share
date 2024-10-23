@@ -5,9 +5,9 @@
 
 .countryparent {
     width: 100%;
-    min-height: 100vh; /* Ensure the parent fills at least the viewport height */
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack the header, main content, and footer vertically */
+    flex-direction: column;
     margin: 0;
     padding: 0;
     background-color: cornflowerblue;
@@ -15,13 +15,14 @@
 
 .countryheader-section {
     width: 100%;
-    height: 70px; /* Fixed height for the header */
+    height: 70px;
     background-color: rgb(143, 225, 175);
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Layout container now grows to fill remaining height */
@@ -48,7 +49,7 @@
 
 .countrymainbody-section {
     width: 100%;
-    flex: 1; /*This will allow the main content to grow and take available space */
+    flex: 1;
     display: flex;
     overflow-y: auto;
 }
@@ -62,7 +63,7 @@
 
 .footer-section {
     width: 100%;
-    height: 50px; /* Set a fixed height for the footer */
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +80,6 @@
         flex-wrap: wrap;
         justify-content: center;
         flex-direction: row;
-        /* background-color: blueviolet; */
     }
 
     .countrynavbar-section {
@@ -91,7 +91,6 @@
     .countrymainbody-section {
         width: 50%;
         display: flex;
-        /* background-color: darkkhaki; */
     } 
     
   }

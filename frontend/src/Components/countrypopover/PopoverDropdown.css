@@ -30,9 +30,9 @@
     background-color: white;
     border: 2px solid black;
     border-radius: 5px;
-    max-height: 200px; /* Set max height */
-    overflow-y: auto;  /* Scroll if content exceeds max height */
-    width: 100%; /* Match the width of the toggle */
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%; 
 }
 
 .dropdown-item {
@@ -42,6 +42,6 @@
 }
 
 .dropdown-item:hover {
-    background-color: #388e3c; /* Highlight color on hover */
-    color: white; /* Change text color on hover */
+    background-color: #388e3c;
+    color: white; 
 }

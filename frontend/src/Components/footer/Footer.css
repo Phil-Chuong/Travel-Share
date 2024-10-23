@@ -14,8 +14,7 @@
     font-size: 0.7em;
 }
 
-
-
+/* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {
     .footer-info {
         font-size: 1em;

@@ -29,8 +29,8 @@ function Account() {
 
         const fetchCountries = async () => {
             try {
-                const response = await axios.get('/countries'); // Adjust this API as needed
-                setCountries(response.data); // Set countries data
+                const response = await axios.get('/countries');
+                setCountries(response.data);
             } catch (err) {
                 setError('Failed to fetch countries');
             }
@@ -63,7 +63,7 @@ function Account() {
         try {
             await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
             setUser({ ...user, [editingField]: newFieldValue }); // Update UI
-            closeModal(); // Close the modal
+            closeModal();
             setError(null); // Clear any previous errors
         } catch (error) {
             setError('Failed to update user info');

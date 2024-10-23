@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Mainpost.css';
 import { ChatCentered, Heart, IdentificationCard, Globe  } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { Link } from 'react-router-dom';
 
@@ -99,13 +101,12 @@ function Mainpost() {
     // New function to handle liking posts
     const handleLikePost = async (postId) => {
         try {
-            // Send a request to update the like count in the backend
             await axios.post(`/posts/${postId}/like`);
     
             // Update local state after successfully liking the post
             setLikes(prevLikes => ({
                 ...prevLikes,
-                [postId]: (prevLikes[postId] || 0) + 1 // Increment likes for this post
+                [postId]: (prevLikes[postId] || 0) + 1 
             }));
         } catch (error) {
             console.error('Error liking post:', error);
@@ -125,7 +126,7 @@ function Mainpost() {
     };
 
     if (loading) {
-        return <div>Loading posts...</div>;
+        return <div><FontAwesomeIcon icon={faSync} spin size="3x" /></div>;
     }
 
     if (error) {

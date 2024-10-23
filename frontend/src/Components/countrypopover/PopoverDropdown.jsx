@@ -1,6 +1,6 @@
 // PopoverDropdown.js
 import React, { useState } from 'react';
-import './PopoverDropdown.css'; // Create your own styles
+import './PopoverDropdown.css';
 
 const PopoverDropdown = ({ options, selected, onSelect }) => {
     const [isOpen, setIsOpen] = useState(false);

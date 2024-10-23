@@ -1,7 +1,7 @@
 /* Scroll to Top Button */
 .scroll-to-top {
     position: fixed;
-    bottom: 20px;
+    bottom: 30px;
     right: 20px;
     display: inline-block;
     background-color: #31b86d;

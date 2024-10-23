@@ -1,6 +1,6 @@
 import React from 'react';
 import './Editmodal.css';
-import PopoverDropdown from '../countrypopover/PopoverDropdown'; // Import the Popover component
+import PopoverDropdown from '../countrypopover/PopoverDropdown'; 
 
 function Editmodal({ isOpen, onClose, onSave, field, value, onChange, locations }) {
     if (!isOpen) return null;

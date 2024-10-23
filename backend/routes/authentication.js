@@ -18,7 +18,7 @@ function generateAccessToken(user) {
     return jwt.sign(
         { id: user.id, username: user.username, email: user.email }, 
         ACCESS_TOKEN_SECRET, 
-        { expiresIn: '5m' } // 15 minutes is typical for short-lived access tokens
+        { expiresIn: '15m' }
     );
 }
 

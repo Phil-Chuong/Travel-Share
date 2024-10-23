@@ -88,7 +88,6 @@ router.post('/', async (req, res) => {
 })
 
 //PUT/UPDATE routes
-
 router.put('/edituser/:id', async (req, res) => {
     const { id } = req.params;
     const { firstname, lastname, username, email, location } = req.body;
@@ -97,7 +96,7 @@ router.put('/edituser/:id', async (req, res) => {
         // Ensure the user exists
         const result = await User.updateUsersInfo(firstname, lastname, username, email, location, id);
         
-        if (!result) {  // If the update result is empty
+        if (!result) {
             return res.status(404).json({ error: 'User not found' });
         }
 

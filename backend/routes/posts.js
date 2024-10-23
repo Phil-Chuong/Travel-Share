@@ -147,23 +147,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// router.get('/users/:user_id', async (req, res) => {
-//     const { user_id } = req.params;
-//     console.log(`Fetching posts by user ID: ${user_id}`);
-//     try {
-//         const posts = await Post.getPostByUserId(user_id);
-//         if (posts.length > 0) {
-//             res.json(posts);
-//         } else {
-//             console.log(res);
-//             res.status(404).send({ error: 'No posts found for this user' });
-//         }
-//     } catch (error) {
-//         console.error('Error fetching posts by user ID', error);
-//         res.status(500).send({error: 'Error fetching posts by user ID'});
-//     }
-// });
-
 router.get('/users/:user_id', async (req, res) => {
     const { user_id } = req.params;
     console.log(`Fetching posts by user ID: ${user_id}`);
@@ -209,25 +192,6 @@ router.get('/country/:country_id', async (req, res) => {
 });
 
 //POST routes
-// router.post('/', async (req, res) => {
-//     console.log('Request body:', req.body); // Log the request body
-//     const {user_id, content, country_id, title} = req.body;
-//     const image_path = req.file ? `/uploads/${req.file.filename}` : null;
-
-//     // Validate user_id and other fields
-//     if (!user_id || !content || !country_id || !title) {
-//         return res.status(400).json({ error: 'Missing required fields' });
-//     }
-
-//     try {
-//         const post = await Post.createPost(user_id, content, image_path, country_id, title);
-//         res.status(201).json(post);
-//     } catch (error) {
-//         console.error('Error creating new post', error);
-//         res.status(500).send({error: 'Error creating new post'});
-//     }
-// })
-
 router.post('/', upload.array('images', 6), async (req, res) => {
     console.log('Request body:', req.body); // Log the request body
     const { user_id, content, country_id, title } = req.body;
@@ -253,7 +217,6 @@ router.post('/', upload.array('images', 6), async (req, res) => {
     }
 });
 
-
 router.post('/:id/like', async (req, res) => {
     const postId = req.params.id;
 
@@ -266,22 +229,6 @@ router.post('/:id/like', async (req, res) => {
 });
 
 //DELETE routes
-// router.delete('/:id', async (req, res) => {
-//     const postId = req.params.id;
-//     try {
-//         const result = await Post.deletePostById(postId);
-//         if (result) {
-//             res.json({ message: 'Post deleted successfully' });
-//         } else {
-//             res.status(404).send({ error: 'Post not found' });
-//         }
-//     } catch (error) {
-//         console.error('Error deleting post by ID');
-//         res.status(500).send({error: 'Error deleting post by ID'});
-//     }
-// })
-
-// DELETE route for deleting a post along with its comments and replies
 router.delete('/:id', async (req, res) => {
     const postId = req.params.id;
 

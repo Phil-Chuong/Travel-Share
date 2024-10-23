@@ -17,7 +17,7 @@ const Navbar = () => {
     const fetchCountries = async () => {
         try {
             const response = await axios.get('/countries');
-            setCountries(response.data); // Set the countries directly
+            setCountries(response.data);
         } catch (err) {
             console.error('Error fetching countries:', err);
             setError('Failed to load countries');
@@ -32,7 +32,6 @@ const Navbar = () => {
     setCountry(id);
     console.log('Selected country ID:', id);
     if (id) {
-      // Navigate to the selected country's page
       navigate(`/country/${id}`);
     }
   };
@@ -64,8 +63,6 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token'); // Clear the JWT
     localStorage.removeItem('userId'); // Clear the user ID
-    // Optionally redirect to the login page
-    // window.location.href = '/login'; // or use navigate from react-router
   };
 
 
@@ -95,8 +92,7 @@ const Navbar = () => {
             <button onClick={toggleDropdown} className='globe-button'>
               <Globe className='icons' size={32} style={{ color: 'black' }} />
               <p className='iconsName'>WORLD </p>
-            </button>
-            
+            </button>          
 
             {/* Conditionally render the country list when dropdown is visible */}
             {dropdownVisible && (
@@ -115,7 +111,6 @@ const Navbar = () => {
           </div>
 
         </div>
-
         <div className='nav-list' onClick={handleLogout}>
           <Link to={'/login'}>
             <SignOut size={32} style={{color: 'black'}}/>

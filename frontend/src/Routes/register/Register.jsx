@@ -21,7 +21,7 @@ function Register() {
         const fetchCountries = async () => {
             try {
                 const response = await axios.get('/countries');
-                setCountries(response.data); // Set the countries directly
+                setCountries(response.data);
             } catch (err) {
                 console.error('Error fetching countries:', err);
                 setError('Failed to load countries');
@@ -42,10 +42,10 @@ function Register() {
             localStorage.setItem('userId', newUser.id);
             console.log('Stored userId:', localStorage.getItem('userId'));
             
-            console.log('Token:', accessToken); // This looks fine as per your logs
-            console.log('User ID:', newUser.id); // Verify this logs the correct ID
+            console.log('Token:', accessToken);
+            console.log('User ID:', newUser.id);
 
-            navigate('/mypage'); // Navigate to the dashboard after registration
+            navigate('/mypage');
         } catch (error) {
             setError('Error registering user');
             console.error('Login error:', error);

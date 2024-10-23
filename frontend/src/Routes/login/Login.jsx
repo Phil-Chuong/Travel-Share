@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { jwtDecode as jwt_decode } from 'jwt-decode';
-
+// import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import './Login.css';
@@ -56,7 +55,6 @@ function Login() {
                 localStorage.setItem('userId', userId);
 
                 console.log('Navigating to mypage');
-                // Ensure you navigate after storing everything
                 navigate('/mypage');
               } else {
                 setError('Missing data from server response');
@@ -80,10 +78,10 @@ function Login() {
             localStorage.setItem('userId', user.id); 
             console.log('Stored userId:', localStorage.getItem('userId'));
 
-            console.log('Token:', accessToken); // This looks fine as per your logs
-            console.log('User ID:', user.id); // Verify this logs the correct ID
+            console.log('Token:', accessToken);
+            console.log('User ID:', user.id); 
 
-            navigate('/mypage'); // Navigate to the dashboard after login
+            navigate('/mypage');
         } catch (error) {
             setError('Invalid credentials');
             console.error('Login error:', error);

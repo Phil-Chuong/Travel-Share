@@ -81,85 +81,52 @@
 
 /* DESKTOP MODE MIN-992PX */
 @media only screen and (min-width: 992px) {
-  /* .navbar {
-    background-color: coral;
-
+  .iconsName {
+    display: contents;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
   }
-  .navbar-container {
-    background-color: chartreuse;
-    width: 80%;
+
+  .nav-list {
+    width: 100%;
+    /* background-color: aqua; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .nav-list a {
     display: flex;
-    flex-wrap: wrap;
     justify-content: start;
+    text-align: center;
+    text-decoration-line: none;
+    margin-left: 10%;
+  }
+
+  .iconsName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin-left: 10px;
+  }
+
+  .globe-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: medium;
     margin: 0;
     padding: 0;
   }
 
-  .navbar-container p {
-    font-family: 'Courier New', Courier, monospace;
-    color: black;
-    font-weight: 600;
-    font-size: 1.1em;
-  }
-
-  .navbar-section {
+  .dropdown-icon {
     display: flex;
-    width: 20%;
-    background-color: rgb(93, 93, 172);
-  }
-
-  .iconsName {
-    display: contents;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 600;
-  }
-
-  .navbar-section a {
-    width: 100px;
-    display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    text-align: center;
-    gap: 10px;
-    margin: 10px;
-    text-decoration: none;
+    margin-left: 10%;
   }
-
-  .nav-mainpage {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .nav-mypage {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .nav-worldposts {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .nav-worldposts button {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 10px;
-    margin-left: 13px;
-    font-size: 15px;
-  }
-
-  .nav-logout {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    margin-left: 13px;
-  } */
 
 }
 

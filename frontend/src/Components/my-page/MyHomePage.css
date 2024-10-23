@@ -115,7 +115,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background-color: #45a049;
+    background-color: rgb(143, 225, 175);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -163,7 +163,7 @@
 
 /* --- Post Title --- */
 .countrypost-title {
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: bold;
     color: #333;
     margin-top: 5px;
@@ -240,7 +240,7 @@
     align-items: center;
     margin-top: 5px;
     padding: 4px;
-    background-color: #45a049;
+    background-color: rgb(143, 225, 175);
 }
 
 .comment-section {

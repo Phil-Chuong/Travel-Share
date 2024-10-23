@@ -71,7 +71,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #45a049;
+    background-color: rgb(143, 225, 175);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -102,13 +102,13 @@
 }
 
 .mainpost-country {
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: bold;
     margin-left: 5px;
 }
 
 .mainpost-country a {
-    color: red;
+    color: rgb(31, 158, 86);
     margin-right: 5px;
 }
 
@@ -185,7 +185,7 @@
     align-items: center;
     margin-top: 5px;
     padding: 4px;
-    background-color: #45a049;
+    background-color: rgb(143, 225, 175);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -260,3 +260,10 @@
     color: red;
 }
 
+/* TABLET MODE MIN-768PX */
+@media only screen and (min-width: 768px) {
+    img.post-image {
+        width: 600px;
+        object-fit: cover;
+    }
+}

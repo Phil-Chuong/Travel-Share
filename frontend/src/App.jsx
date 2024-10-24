@@ -9,7 +9,8 @@ import axios from 'axios';
 import ProtectedRoutes from './services/ProtectedRoutes';
 import AuthenticatedLayout from './services/AuthenticatedLayout';
 
-axios.defaults.baseURL = 'http://localhost:4000';
+//axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = process.env.VITE_API_URL || 'http://localhost:4000';
 
 function App() {
   

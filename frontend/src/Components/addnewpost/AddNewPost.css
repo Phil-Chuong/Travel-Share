@@ -182,3 +182,20 @@
     margin: 3px;
 }
 
+
+/* TABLET MODE MIN-768PX */
+@media only screen and (min-width: 768px) {
+    img {
+        min-width: 350px;
+        object-fit: cover;
+    }
+
+}
+
+
+/* LATOP MODE MIN-996PX */
+@media only screen and (min-width: 996px) {
+    img {
+        min-width: 350px;
+    }
+}

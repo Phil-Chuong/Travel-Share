@@ -141,7 +141,7 @@
 }
 
 .countrypost-image {
-    min-width: 200px;
+    min-width: 261px;
     height: auto;
     border-radius: 5px;
 }
@@ -256,4 +256,22 @@
 
 .nopost-country p {
     margin-top: 50px;
+}
+
+
+/* TABLET MODE MIN-768PX */
+@media only screen and (min-width: 768px) {
+    img.countrypost-image {
+        min-width: 350px;
+        object-fit: cover;
+    }
+
+}
+
+
+/* LATOP MODE MIN-996PX */
+@media only screen and (min-width: 996px) {
+    img.countrypost-image {
+        min-width: 350px;
+    }
 }

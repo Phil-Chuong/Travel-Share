@@ -173,7 +173,7 @@ function Mainpost() {
                                         key={index} 
                                         src={`http://localhost:4000${image}`} 
                                         alt={post.title} 
-                                        style={{ minWidth: '261px'}}
+                                        style={{ maxWidth: '261px'}}
                                         />
                                     ))}
                                 </div>                             

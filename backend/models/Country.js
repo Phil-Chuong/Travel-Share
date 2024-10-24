@@ -4,7 +4,7 @@ const pool = require('../DB/db');
 class Country {
     //GET REQUEST
     static async getAllCountries() {
-        const query = 'SELECT * FROM countries';
+        const query = 'SELECT * FROM countries ORDER BY country_name ASC';
         try {
             const result = await pool.query(query);
             console.log('Query result:', result.rows);

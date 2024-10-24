@@ -81,6 +81,12 @@
 
 /* DESKTOP MODE MIN-992PX */
 @media only screen and (min-width: 992px) {
+  /* .navbar-main {
+    width: 10%;
+    background-color: aqua;
+  } */
+
+
   .iconsName {
     display: contents;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

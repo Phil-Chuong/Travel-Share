@@ -19,6 +19,11 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const country = await Country.getCountryById(id);
+
+        if (!country) {  // Use country instead of result
+            return res.status(404).json({ error: 'Country not found' });
+        }
+
         res.json(country);
     } catch  (error) {
         console.error('Error fetching country by ID', error.message);

@@ -26,14 +26,19 @@ function CountriesPosts() {
     useEffect(() => {
         const fetchPostsByCountry = async () => {
             try {
-                const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
+                // Fetch country by ID
+                const countryResponse = await axios.get(`/countries/${countryId}`);
+                setCountries([countryResponse.data]); // Assuming you want to store it like the list
+
+
+                const [postsResponse, usersResponse, commentsResponse] = await Promise.all([
                     axios.get(`/posts/country/${countryId}`),
-                    axios.get('/countries'),
+                    // axios.get('/countries'),
                     axios.get('/users'),
                     axios.get('/comments')
                 ]);
                 setPosts(postsResponse.data);
-                setCountries(countriesResponse.data || []);
+                // setCountries(countriesResponse.data || []);
                 setUsers(usersResponse.data);
                 setComments(commentsResponse.data);
                 //console.log("Fetched countries:", countriesResponse.data);
@@ -188,7 +193,7 @@ function CountriesPosts() {
                                             key={index} 
                                             src={`http://localhost:4000${image}`} 
                                             alt={post.title} 
-                                            style={{ minWidth: '261px'}}
+                                            style={{ maxWidth: '261px'}}
                                             />
                                         ))}
                                     </div>

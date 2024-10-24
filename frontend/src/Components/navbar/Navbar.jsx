@@ -28,7 +28,7 @@ const Navbar = () => {
   }, []);
 
   // Handle country selection
-  const handleCountryChange = (id) => {
+  const handleCountryChange = ( id) => {
     setCountry(id);
     console.log('Selected country ID:', id);
     if (id) {
@@ -73,14 +73,14 @@ const Navbar = () => {
         <div className='nav-list'>
           <Link to={'/'}>
             <House className='icons' size={32} style={{color: 'black'}}/>
-            <p className='iconsName'>MAIN</p>
+            <p className='iconsName'>Home</p>
           </Link>
         </div>
 
         <div className='nav-list'>
           <Link to={'/mypage'}>
             <IdentificationBadge className='icons' size={32} style={{color: 'black'}}/>
-            <p className='iconsName'>HOME</p>
+            <p className='iconsName'>Profile</p>
           </Link>
         </div>
 
@@ -91,7 +91,7 @@ const Navbar = () => {
             {/* Globe button toggles the dropdown */}
             <button onClick={toggleDropdown} className='globe-button'>
               <Globe className='icons' size={32} style={{ color: 'black' }} />
-              <p className='iconsName'>WORLD </p>
+              <p className='iconsName'>Destinations</p>
             </button>          
 
             {/* Conditionally render the country list when dropdown is visible */}
@@ -114,7 +114,7 @@ const Navbar = () => {
         <div className='nav-list' onClick={handleLogout}>
           <Link to={'/login'}>
             <SignOut size={32} style={{color: 'black'}}/>
-            <p className='iconsName'>LOGOUT</p>
+            <p className='iconsName'>Logout</p>
           </Link>
         </div>
         

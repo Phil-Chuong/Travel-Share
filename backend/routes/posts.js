@@ -180,7 +180,7 @@ router.get('/country/:country_id', async (req, res) => {
 
         // Check if no posts are found and return an empty array
         if (posts.length > 0) {
-            return res.json(posts);
+            return res.json(posts || []);
         } else {
             console.log(`No posts found for country: ${country_id}`);
             return res.status(404).json({ error: 'No posts for this country is found'}); // Return an empty array if no posts found

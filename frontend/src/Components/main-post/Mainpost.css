@@ -258,7 +258,7 @@
 /* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {
     img.post-image {
-        width: 600px;
+        max-width: 350px;
         object-fit: cover;
     }
 
@@ -272,5 +272,12 @@
 
     .mainpost-username {
         font-size: 1.2em;
+    }
+}
+
+/* LATOP MODE MIN-996PX */
+@media only screen and (min-width: 996px) {
+    img.post-image {
+        min-width: 350px;
     }
 }

@@ -233,7 +233,7 @@ function MyHomePage() {
                                                     key={index} 
                                                     src={`http://localhost:4000${image.trim()}`} 
                                                     alt={post.title} 
-                                                    style={{ minWidth: '251px' }} 
+                                                    style={{ maxWidth: '251px' }} 
                                                 />
                                             ))}
                                         </div>

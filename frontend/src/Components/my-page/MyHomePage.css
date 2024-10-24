@@ -41,7 +41,7 @@
     padding: 1px;
     margin: 2px;
     margin-right: 5%;
-    background-color: #28a745;
+    background-color: rgb(76, 160, 112);
     color: black;
     border: none;
     border-radius: 5px;
@@ -61,7 +61,7 @@
     padding: 1px;
     margin: 2px;
     margin-right: 5%;
-    background-color: #28a745;
+    background-color: rgb(76, 160, 112);
     color: black;
     border: none;
     border-radius: 5px;
@@ -157,7 +157,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #45a049;
+    color: rgb(76, 160, 112);
     font-family:'Courier New', Courier, monospace;
 }
 

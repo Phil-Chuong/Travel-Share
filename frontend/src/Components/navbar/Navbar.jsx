@@ -71,15 +71,15 @@ const Navbar = () => {
       <div className='navbar-container'>
 
         <div className='nav-list'>
-          <Link to={'/'}>
-            <House className='icons' size={32} style={{color: 'black'}}/>
+          <Link to={'/'} >
+            <House className='icons' size={32} style={{color: 'black'}} alt='Home'/>
             <p className='iconsName'>Home</p>
           </Link>
         </div>
 
         <div className='nav-list'>
           <Link to={'/mypage'}>
-            <IdentificationBadge className='icons' size={32} style={{color: 'black'}}/>
+            <IdentificationBadge className='icons' size={32} style={{color: 'black'}} alt='Profile'/>
             <p className='iconsName'>Profile</p>
           </Link>
         </div>
@@ -90,7 +90,7 @@ const Navbar = () => {
           <div className='dropdown-icon'>
             {/* Globe button toggles the dropdown */}
             <button onClick={toggleDropdown} className='globe-button'>
-              <Globe className='icons' size={32} style={{ color: 'black' }} />
+              <Globe className='icons' size={32} style={{ color: 'black' }} alt='Destination Posts'/>
               <p className='iconsName'>Destinations</p>
             </button>          
 
@@ -113,7 +113,7 @@ const Navbar = () => {
         </div>
         <div className='nav-list' onClick={handleLogout}>
           <Link to={'/login'}>
-            <SignOut size={32} style={{color: 'black'}}/>
+            <SignOut size={32} style={{color: 'black'}} alt='Logout'/>
             <p className='iconsName'>Logout</p>
           </Link>
         </div>

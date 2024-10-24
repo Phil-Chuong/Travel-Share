@@ -9,7 +9,7 @@
   display: flex;
   justify-content:space-evenly;
   align-items:center;
-  background-color: rgb(31, 158, 86);
+  background-color: rgb(76, 160, 112);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -20,7 +20,7 @@
 .globe-button {
   outline: none;
   border: none;
-  background-color: rgb(31, 158, 86);
+  background-color: rgb(76, 160, 112);
   cursor: pointer;
 }
 

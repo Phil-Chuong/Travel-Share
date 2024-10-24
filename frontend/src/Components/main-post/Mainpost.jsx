@@ -136,7 +136,7 @@ function Mainpost() {
     return (
         <div className='mainpost-container'>
             <div className='mainname-header'>
-                <h3 className='mainname'>World Travellers</h3>
+                <h3 className='mainname'>Travellers</h3>
             </div>
             <ul className="mainpost-list">
                 {posts.map((post) => {

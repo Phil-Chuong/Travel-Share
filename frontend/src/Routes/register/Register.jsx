@@ -63,13 +63,13 @@ function Register() {
                     <form onSubmit={handleSubmit}>
                         <input 
                             type="text"
-                            placeholder="First Name"
+                            placeholder="Forename"
                             value={firstname}
                             onChange={(e) => setFirstname(e.target.value)}
                         />
                         <input 
                             type="text"
-                            placeholder="Last Name"
+                            placeholder="Surname"
                             value={lastname}
                             onChange={(e) => setLastname(e.target.value)}
                         />

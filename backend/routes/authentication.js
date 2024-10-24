@@ -93,6 +93,15 @@ router.post('/register', async (req, res) => {
             refreshToken
         });
     } catch (error) {
+        // Check if the error is a unique constraint violation
+        if (err.code === '23505') {  // PostgreSQL code for unique violation
+            if (err.constraint === 'unique_username') {
+                return res.status(400).json({ error: 'Username already exists' });
+            }
+            if (err.constraint === 'unique_email') {
+                return res.status(400).json({ error: 'Email already exists' });
+            }
+        }
         console.error('Error registering new user', error);
         res.status(500).json({ error: 'Error registering new user' });
     }

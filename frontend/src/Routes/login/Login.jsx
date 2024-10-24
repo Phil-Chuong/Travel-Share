@@ -15,16 +15,20 @@ function Login() {
 
     useEffect(() => {
         /* global google */
-        google.accounts.id.initialize({
-            // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-            client_id: '734440703520-bjfaf3jd6pcp6u3a1jc413pf05e43gtc.apps.googleusercontent.com',
-            callback: handleGoogleLogin
-        });
+        if (typeof google !== 'undefined') {
+            google.accounts.id.initialize({
+                // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+                client_id: process.env.VITE_GOOGLE_CLIENT_ID,
+                callback: handleGoogleLogin
+            });
 
-        google.accounts.id.renderButton(
-            document.getElementById('googleSignIn'),
-            { theme: "outline", size: "large" }
-        );
+            google.accounts.id.renderButton(
+                document.getElementById('googleSignIn'),
+                { theme: "outline", size: "large" }
+            );
+        } else {
+            console.error("Google API not loaded");
+        }
 
     }, []);
 
@@ -63,7 +67,6 @@ function Login() {
               setError('Google login failed.');
         }
     };
-        
 
 
     const handleSubmit = async (e) => {

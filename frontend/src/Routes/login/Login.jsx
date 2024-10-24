@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-// import { jwtDecode as jwt_decode } from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
 import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import './Login.css';
@@ -10,6 +9,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
 
@@ -71,6 +71,9 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError(null); // Reset error before new submission
+        
         try {
             const response = await axios.post('/authentication/login', { email, password });
 
@@ -88,6 +91,8 @@ function Login() {
         } catch (error) {
             setError('Invalid credentials');
             console.error('Login error:', error);
+        } finally {
+            setLoading(false); // Always reset loading state
         }
     };
 

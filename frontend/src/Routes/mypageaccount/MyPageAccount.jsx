@@ -3,7 +3,7 @@ import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Navbar from '../../Components/navbar/Navbar';
 import './MyPageAccount.css';
 import Account from '../../Components/account/Account';
-import Footer from '../../Components/footer/footer';
+import Footer from '../../Components/footer/Footer';
 
 const MyPageAccount = () => {
   return (

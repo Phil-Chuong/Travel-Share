@@ -4,7 +4,7 @@ import { AirplaneTilt } from '@phosphor-icons/react/dist/ssr';
 import Mainpost from '../../Components/main-post/Mainpost';
 import Navbar from '../../Components/navbar/Navbar';
 import ScrollToTopButton from '../../Components/scrollToTopButton/ScrollToTopButton';
-import Footer from '../../Components/footer/footer';
+import Footer from '../../Components/footer/Footer';
 
 const HomePage = () => {
   return (

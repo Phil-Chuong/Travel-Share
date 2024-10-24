@@ -91,6 +91,7 @@ function Login() {
     return (
         <div className='login-container'>
             <div className='login-box'>
+                <p className='login-titleHeader'>Travel-Share</p>
                 <div className='login-logo'>
                     <AirplaneTilt size={58} color="red" />
                 </div>

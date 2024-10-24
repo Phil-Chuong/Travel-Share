@@ -55,6 +55,7 @@ function Register() {
     return (
         <div className='register-container'>
             <div className='register-box'>
+                <p className='register-titleHeader'>Travel-Share</p>
                 <div className='register-logo'>
                     <AirplaneTilt size={58} color="red" />
                 </div>

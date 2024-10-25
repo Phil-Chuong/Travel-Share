@@ -1,17 +1,3 @@
-// import { defineConfig } from 'vite'
-// import react from '@vitejs/plugin-react'
-
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-//   server: {
-//     port: 3000,
-//     proxy: {
-//       '/api': 'http://localhost:4000',
-//     },
-//   },
-// })
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -21,7 +7,8 @@ export default defineConfig({
   server: {
     port: 3000, // Local development port
     proxy: {
-      '/api': 'http://localhost:4000', // Development API endpoint
+      // '/api': 'http://localhost:4000', // Development API endpoint
+      '/api': 'https://travel-share-backend-11c4.onrender.com'
     },
   },
   // Set base URL depending on environment (useful in production)

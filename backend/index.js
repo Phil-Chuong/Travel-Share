@@ -9,6 +9,8 @@ const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+const pool = require('./DB/db'); // Ensure this imports the pool directly
+
 // Initialize the app
 const app = express();
 
@@ -43,11 +45,9 @@ const pool = new Pool({
 // }
 
 
+// Test the database connection on startup
 pool.connect()
-    .then(client => {
-        console.log("PostgreSQL connection established");
-        client.release(); // Release the client back to the pool
-    })
+    .then(() => console.log("PostgreSQL connection established"))
     .catch(err => console.error("Database connection error", err));
 
 
@@ -137,7 +137,11 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //Listen on PORT 4000
-app.listen(config.PORT, () => {
-console.log(`App listening on port ${config.PORT}`)
-// testConnection();
+// app.listen(config.PORT, () => {
+// console.log(`App listening on port ${config.PORT}`)
+// });
+
+// Listen on specified PORT
+app.listen(process.env.PORT || 4000, () => {
+  console.log(`App listening on port ${process.env.PORT || 4000}`);
 });

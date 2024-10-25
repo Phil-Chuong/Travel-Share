@@ -9,7 +9,7 @@ const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const pool = require('./DB/db'); // Ensure this imports the pool directly
+//const pool = require('./DB/db'); // Ensure this imports the pool directly
 
 // Initialize the app
 const app = express();

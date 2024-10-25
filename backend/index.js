@@ -14,8 +14,10 @@ const app = express();
 
 //DATABASE POSTGRESSQL CONNECTION
 const pool = new Pool({
-    connectionString: process.env.DB,
-    ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false, // Handle SSL based on environment
+    connectionString: process.env.DB_CONFIG,
+    ssl: {
+      rejectUnauthorized: true // Change this based on your security needs
+  }
 });
 
 // async function testConnection() {

@@ -11,9 +11,9 @@ module.exports = {
     },
     DB_CONFIG: {
         connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }
+        // ssl: {
+        //     rejectUnauthorized: false
+        // }
     },
     // SESSION_SECRET: process.env.SESSION_SECRET
 };

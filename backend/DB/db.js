@@ -1,13 +1,13 @@
 //DB/db.js
+require('dotenv').config();
+
 const { Pool } = require('pg');
-const config = require('../config');
 
-const pool = new Pool(config.DATABASE_URL);
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false } // Adjust if needed
+});
+
 console.log('Connected to PGadmin Database');
-
-// Test the connection
-pool.connect()
-    .then(() => console.log('PostgreSQL connection established'))
-    .catch(err => console.error('Database connection error', err));
 
 module.exports = pool;

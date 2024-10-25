@@ -15,9 +15,9 @@ const app = express();
 //DATABASE POSTGRESSQL CONNECTION
 const pool = new Pool({
     connectionString: process.env.DB_CONFIG,
-    ssl: {
-      rejectUnauthorized: true // Change this based on your security needs
-  }
+  //   ssl: {
+  //     rejectUnauthorized: false // Change this based on your security needs
+  // }
 });
 
 // async function testConnection() {
@@ -41,6 +41,14 @@ const pool = new Pool({
 //       console.error("Connection error:", error);
 //   }
 // }
+
+
+pool.connect()
+    .then(client => {
+        console.log("PostgreSQL connection established");
+        client.release(); // Release the client back to the pool
+    })
+    .catch(err => console.error("Database connection error", err));
 
 
 

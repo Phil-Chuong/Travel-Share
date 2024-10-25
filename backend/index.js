@@ -1,5 +1,6 @@
 // Import config and services
 const config = require('./config');
+require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
@@ -13,12 +14,12 @@ const app = express();
 
 //DATABASE POSTGRESSQL CONNECTION
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+    connectionString: process.env.DB_CONFIG,
 });
 
 // Allow requests from specific origins
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
+  origin: ['https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
   credentials: true, // Allow credentials like cookies to be sent
 }));
@@ -70,6 +71,11 @@ const swaggerOptions = {
         version: "1.0.0",
         description: "API documentation for Travel Share",
       },
+      servers: [
+        {
+          url: 'https://travel-share-backend-11c4.onrender.com',
+        },
+      ],
       components: {
         schemas: {
           User: {
@@ -85,7 +91,7 @@ const swaggerOptions = {
         }
       }
     },
-    apis: ['./routes/*.js'],
+    apis: ['./routes/*.js', './models/*.js'],
 };
   
   

@@ -4,53 +4,15 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
-const { Pool } = require('pg');
+// const { Pool } = require('pg');
 const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-//const pool = require('./DB/db'); // Ensure this imports the pool directly
+const { pool } = require('./DB/db'); // Ensure this imports the pool directly
 
 // Initialize the app
 const app = express();
-
-//DATABASE POSTGRESSQL CONNECTION
-const pool = new Pool({
-    connectionString: process.env.DB_CONFIG,
-  //   ssl: {
-  //     rejectUnauthorized: false // Change this based on your security needs
-  // }
-});
-
-// async function testConnection() {
-//   try {
-//       // Configure the PostgreSQL connection
-//       const pool = new Pool({
-//           connectionString: process.env.DATABASE_URL,
-//           ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false, // Remove SSL if not required
-//           password: process.env.PGPASSWORD // Ensures password is read as a string
-//       });
-
-//       // Test database connection
-//       await pool.connect();
-//       console.log("Connected to PostgreSQL Database");
-
-//       // Additional query to ensure connection is active (optional)
-//       const res = await pool.query("SELECT NOW()");
-//       console.log("Database time:", res.rows[0].now);
-
-//   } catch (error) {
-//       console.error("Connection error:", error);
-//   }
-// }
-
-
-// Test the database connection on startup
-pool.connect()
-    .then(() => console.log("PostgreSQL connection established"))
-    .catch(err => console.error("Database connection error", err));
-
-
 
 // Allow requests from specific origins
 app.use(cors({
@@ -61,6 +23,14 @@ app.use(cors({
 
 //Middleware
 app.use(express.json());
+
+// pool.connect()
+//     .then(client => {
+//         console.log("PostgreSQL connection established");
+//         client.release(); // Release the client back to the pool
+//     })
+//     .catch(err => console.error("Database connection error:", err));
+
 
 //Import routes
 const usersRouter = require('./routes/users');

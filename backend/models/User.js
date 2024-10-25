@@ -10,7 +10,7 @@ class User {
             return result.rows;
         } catch (error) {
             console.error('Error fetching all users:', error.message);
-            throw error;
+            throw new Error('Error fetching all users');
         }
     }
 

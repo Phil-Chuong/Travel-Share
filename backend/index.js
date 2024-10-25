@@ -15,7 +15,32 @@ const app = express();
 //DATABASE POSTGRESSQL CONNECTION
 const pool = new Pool({
     connectionString: process.env.DB_CONFIG,
+    ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false, // Handle SSL based on environment
 });
+
+// async function testConnection() {
+//   try {
+//       // Configure the PostgreSQL connection
+//       const pool = new Pool({
+//           connectionString: process.env.DATABASE_URL,
+//           ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false, // Remove SSL if not required
+//           password: process.env.PGPASSWORD // Ensures password is read as a string
+//       });
+
+//       // Test database connection
+//       await pool.connect();
+//       console.log("Connected to PostgreSQL Database");
+
+//       // Additional query to ensure connection is active (optional)
+//       const res = await pool.query("SELECT NOW()");
+//       console.log("Database time:", res.rows[0].now);
+
+//   } catch (error) {
+//       console.error("Connection error:", error);
+//   }
+// }
+
+
 
 // Allow requests from specific origins
 app.use(cors({
@@ -104,4 +129,5 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 //Listen on PORT 4000
 app.listen(config.PORT, () => {
 console.log(`App listening on port ${config.PORT}`)
+// testConnection();
 });

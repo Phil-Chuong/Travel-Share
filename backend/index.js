@@ -58,7 +58,7 @@ app.use((err, req, res, next) => {
 });
 
 //Image upload
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/https://travel-share-backend-11c4.onrender.com/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //TESTING BACKEND CONNECTION
 app.get('/', (req, res) => {

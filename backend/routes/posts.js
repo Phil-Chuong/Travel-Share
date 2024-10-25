@@ -7,7 +7,8 @@ const fs = require('fs');
 const pool = require('../DB/db');
 const { error } = require('console');
 // const { authenticateToken } = require('../services/authenticateToken');
-const BASE_URL = 'http://localhost:4000';
+//const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
 
 ///////////////////////////////////////////////////
 //MULTER SETUP

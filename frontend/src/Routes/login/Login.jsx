@@ -13,60 +13,60 @@ function Login() {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
-        /* global google */
-        if (typeof google !== 'undefined') {
-            google.accounts.id.initialize({
-                // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                client_id: process.env.VITE_GOOGLE_CLIENT_ID,
-                callback: handleGoogleLogin
-            });
+    // useEffect(() => {
+    //     /* global google */
+    //     if (typeof google !== 'undefined') {
+    //         google.accounts.id.initialize({
+    //             // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    //             client_id: process.env.VITE_GOOGLE_CLIENT_ID,
+    //             callback: handleGoogleLogin
+    //         });
 
-            google.accounts.id.renderButton(
-                document.getElementById('googleSignIn'),
-                { theme: "outline", size: "large" }
-            );
-        } else {
-            console.error("Google API not loaded");
-        }
+    //         google.accounts.id.renderButton(
+    //             document.getElementById('googleSignIn'),
+    //             { theme: "outline", size: "large" }
+    //         );
+    //     } else {
+    //         console.error("Google API not loaded");
+    //     }
 
-    }, []);
+    // }, []);
 
-    const handleGoogleLogin = async (credentialResponse) => {
-        try {
-            console.log("Encoded JWT ID token: ", credentialResponse);
-            const { credential } = credentialResponse;
+    // const handleGoogleLogin = async (credentialResponse) => {
+    //     try {
+    //         console.log("Encoded JWT ID token: ", credentialResponse);
+    //         const { credential } = credentialResponse;
 
-            if (!credential) {
-                throw new Error('Missing credential');
-            }
+    //         if (!credential) {
+    //             throw new Error('Missing credential');
+    //         }
 
-            const response = await axios.post('/googleAuthentication/google-login', { token: credential });
-            console.log('Backend response:', response.data);
+    //         const response = await axios.post('/googleAuthentication/google-login', { token: credential });
+    //         console.log('Backend response:', response.data);
 
-            // Extract userId from the token or user object
-            const userId = response.data.user.id;
-            const { accessToken, refreshToken} = response.data;
+    //         // Extract userId from the token or user object
+    //         const userId = response.data.user.id;
+    //         const { accessToken, refreshToken} = response.data;
 
-            console.log('Received accessToken:', accessToken);
-            console.log('Received refreshToken:', refreshToken);
-            console.log('Received userId:', userId );
+    //         console.log('Received accessToken:', accessToken);
+    //         console.log('Received refreshToken:', refreshToken);
+    //         console.log('Received userId:', userId );
 
-            if (accessToken && refreshToken && userId) {
-                // Store tokens and userId in localStorage (or state management if applicable)
-                localStorage.setItem('token', accessToken);
-                localStorage.setItem('refreshToken', refreshToken);
-                localStorage.setItem('userId', userId);
+    //         if (accessToken && refreshToken && userId) {
+    //             // Store tokens and userId in localStorage (or state management if applicable)
+    //             localStorage.setItem('token', accessToken);
+    //             localStorage.setItem('refreshToken', refreshToken);
+    //             localStorage.setItem('userId', userId);
 
-                console.log('Navigating to mypage');
-                navigate('/mypage');
-              } else {
-                setError('Missing data from server response');
-              }
-            } catch (error) {
-              setError('Google login failed.');
-        }
-    };
+    //             console.log('Navigating to mypage');
+    //             navigate('/mypage');
+    //           } else {
+    //             setError('Missing data from server response');
+    //           }
+    //         } catch (error) {
+    //           setError('Google login failed.');
+    //     }
+    // };
 
 
     const handleSubmit = async (e) => {
@@ -122,7 +122,7 @@ function Login() {
                     </form>
                 </div>
                 
-                <div id='googleSignIn'></div>
+                {/* <div id='googleSignIn'></div> */}
                 <div className='link-register'>
                     <Link to={'/register'}><p>Create Account</p></Link>
                 </div>

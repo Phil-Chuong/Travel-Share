@@ -231,7 +231,8 @@ function MyHomePage() {
                                                 <img 
                                                     className="mypost-image"
                                                     key={index} 
-                                                    src={`http://localhost:4000${image.trim()}`} 
+                                                    // src={`http://localhost:4000${image.trim()}`} 
+                                                    src={`${image.trim()}`}
                                                     alt={post.title} 
                                                     style={{ maxWidth: '251px' }} 
                                                 />

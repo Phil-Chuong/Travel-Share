@@ -171,7 +171,8 @@ function Mainpost() {
                                         <img 
                                         className="post-image"
                                         key={index} 
-                                        src={`http://localhost:4000${image}`} 
+                                        // src={`http://localhost:4000${image}`} 
+                                        src={`${image}`}
                                         alt={post.title} 
                                         style={{ maxWidth: '261px'}}
                                         />

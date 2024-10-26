@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const { OAuth2Client } = require('google-auth-library');
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET);
 const JWT_SECRET = process.env.ACCESS_TOKEN_SECRET
 
 // POST Route to handle Google login
@@ -34,7 +34,7 @@ router.post('/google-login', async (req, res) => {
         const googleUser = ticket.getPayload();
         console.log('Google payload', googleUser);
 
-        const { sub: userId, email, name } = googleUser;
+        const { sub: email, name } = googleUser; //remove userId
         const fullName = name.split(' ') // Assuming name is a full name
         const [firstname, lastname] = fullName.length > 1 ? [fullName[0], fullName.slice(1).join(' ')] : [fullName[0], null];
 

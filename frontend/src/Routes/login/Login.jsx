@@ -19,7 +19,7 @@ function Login() {
         if (typeof google !== 'undefined') {
             google.accounts.id.initialize({
                 // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                client_id: process.env.GOOGLE_CLIENT_ID,
+                client_id: '734440703520-bjfaf3jd6pcp6u3a1jc413pf05e43gtc.apps.googleusercontent.com',
                 callback: handleGoogleLogin
             });
 

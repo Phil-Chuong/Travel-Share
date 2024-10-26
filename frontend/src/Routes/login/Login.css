@@ -112,3 +112,12 @@
     }
 
 }
+
+/* LAPTOP MODE MIN-966PX */
+@media only screen and (min-width: 966px) {
+    .login-box {
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+
+}

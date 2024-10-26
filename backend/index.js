@@ -60,6 +60,9 @@ app.use((err, req, res, next) => {
 //Image upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Serve static files from the frontend build folder
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
 //TESTING BACKEND CONNECTION
 app.get('/', (req, res) => {
     res.send({
@@ -105,6 +108,11 @@ const swaggerDocs = swaggerJsdoc(swaggerOptions);
   
 // Serve Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+// Catch-all route to serve `index.html` for unknown routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
 
 //Listen on PORT 4000
 // app.listen(config.PORT, () => {

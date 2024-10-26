@@ -1,4 +1,5 @@
 const pool = require('../DB/db');
+const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
 
 class Post {
     //GET REQUEST
@@ -13,8 +14,10 @@ class Post {
                 // Check if the image_path contains multiple paths, and split it into an array
                 if (post.image_path) {
                     post.image_path = post.image_path.includes(',')
-                        ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
-                        : [post.image_path.trim()]; // Ensure it is always an array
+                        // ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
+                        // : [post.image_path.trim()]; // Ensure it is always an array
+                        ? post.image_path.replace(/"/g, '').split(',').map(path => `${BASE_URL}${path.trim()}`)
+                        : [`${BASE_URL}${post.image_path.trim()}`];
                 } else {
                     post.image_path = []; // No images, return an empty array
                 }
@@ -51,8 +54,10 @@ class Post {
                 // Check if the image_path contains multiple paths, and split it into an array
                 if (post.image_path) {
                     post.image_path = post.image_path.includes(',')
-                        ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
-                        : [post.image_path.trim()]; // Ensure it is always an array
+                        // ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
+                        // : [post.image_path.trim()]; // Ensure it is always an array
+                        ? post.image_path.replace(/"/g, '').split(',').map(path => `${BASE_URL}${path.trim()}`)
+                        : [`${BASE_URL}${post.image_path.trim()}`];
                 } else {
                     post.image_path = []; // No images, return an empty array
                 }
@@ -76,8 +81,10 @@ class Post {
                 // Check if the image_path contains multiple paths, and split it into an array
                 if (post.image_path) {
                     post.image_path = post.image_path.includes(',')
-                        ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
-                        : [post.image_path.trim()]; // Ensure it is always an array
+                        // ? post.image_path.replace(/"/g, '').split(',').map(path => path.trim())
+                        // : [post.image_path.trim()]; // Ensure it is always an array
+                        ? post.image_path.replace(/"/g, '').split(',').map(path => `${BASE_URL}${path.trim()}`)
+                        : [`${BASE_URL}${post.image_path.trim()}`];
                 } else {
                     post.image_path = []; // No images, return an empty array
                 }

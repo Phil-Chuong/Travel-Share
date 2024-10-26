@@ -133,11 +133,12 @@ function AddNewPost({ onPostCreated }) {
                             style={{ width: '200px', margin: '10px', borderRadius: '8px' }} 
                         />
                         {/* Delete button */}
-                        <button className="delete-image-button">
-                        <Trash size={24} 
-                            type="button"             
-                            onClick={() => handleDeleteImage(index)}
-                        />
+                        <button 
+                            type="button" 
+                            onClick={() => handleDeleteImage(index)} 
+                            className="delete-image-button"
+                        >
+                        <Trash size={24} />
                         </button>
                     </div>
                     ))}

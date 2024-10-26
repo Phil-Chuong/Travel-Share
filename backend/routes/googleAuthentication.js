@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const { OAuth2Client } = require('google-auth-library');
 
-const client = new OAuth2Client(process.env.VITE_GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const JWT_SECRET = process.env.ACCESS_TOKEN_SECRET
 
 // POST Route to handle Google login
@@ -26,7 +26,7 @@ router.post('/google-login', async (req, res) => {
 
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: process.env.VITE_GOOGLE_CLIENT_ID,
+            audience: process.env.GOOGLE_CLIENT_ID,
         });
 
         // Check if user exists in DB or create a new one

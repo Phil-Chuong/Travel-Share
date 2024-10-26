@@ -18,7 +18,7 @@ function Login() {
         if (typeof google !== 'undefined') {
             google.accounts.id.initialize({
                 // client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-                client_id: process.env.VITE_GOOGLE_CLIENT_ID,
+                client_id: process.env.GOOGLE_CLIENT_ID,
                 callback: handleGoogleLogin
             });
 

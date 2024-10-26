@@ -10,6 +10,9 @@ const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_CLIENT_SECRET);
 const JWT_SECRET = process.env.ACCESS_TOKEN_SECRET
 
+console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
+
+
 // POST Route to handle Google login
 router.post('/google-login', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*"); // Allow any origin to access this endpoint
@@ -71,7 +74,7 @@ router.post('/google-login', async (req, res) => {
                 id: dbUser.id,
                 firstname: dbUser.firstname,
                 email: dbUser.email,
-                picture: dbUser.picture,
+                picture: dbUser.picture || null,
             },
             accessToken,
             refreshToken

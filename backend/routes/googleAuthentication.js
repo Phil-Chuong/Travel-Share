@@ -37,7 +37,7 @@ router.post('/google-login', async (req, res) => {
         const googleUser = ticket.getPayload();
         console.log('Google payload', googleUser);
 
-        const { sub: email, name } = googleUser; //remove userId
+        const { sub: userId, email, name } = googleUser; //remove userId
         const fullName = name.split(' ') // Assuming name is a full name
         const [firstname, lastname] = fullName.length > 1 ? [fullName[0], fullName.slice(1).join(' ')] : [fullName[0], null];
 

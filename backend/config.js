@@ -15,5 +15,5 @@ module.exports = {
         //     rejectUnauthorized: false
         // }
     },
-    // SESSION_SECRET: process.env.SESSION_SECRET
+
 };

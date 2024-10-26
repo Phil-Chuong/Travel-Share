@@ -71,18 +71,6 @@ class User {
         }
     }
 
-    
-    // Compare hashed password
-    // static async comparePassword(user, password) {
-    //     try {
-    //         return await bcrypt.compare(password, user.password);
-    //     } catch (error) {
-    //         console.error('Error comparing password:', error.message); // Log error details
-    //         throw error;
-    //     }
-    // }
-
-
 }
 
 module.exports = User;

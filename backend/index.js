@@ -39,7 +39,7 @@ const postsRouter = require('./routes/posts');
 const commentsRouter = require('./routes/comments');
 const authenticationRouter = require('./routes/authentication');
 const repliesRounter = require('./routes/replies');
-// const googleRouter = require('./routes/googleAuthentication');
+const googleRouter = require('./routes/googleAuthentication');
 
 //Routes handlers
 app.use('/users', usersRouter);
@@ -49,7 +49,7 @@ app.use('/comments', commentsRouter);
 app.use('/replies', repliesRounter);
 app.use('/authentication', authenticationRouter);// Register/Login routes
 app.use('/posts/photos/upload', postsRouter);
-// app.use('/googleAuthentication', googleRouter);
+app.use('/googleAuthentication', googleRouter);
 
 //Error Handling
 app.use((err, req, res, next) => {

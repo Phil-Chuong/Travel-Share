@@ -57,8 +57,8 @@ app.use((err, req, res, next) => {
     res.status(500).json({ error: 'Something went wrong!' });
 });
 
-//Image upload
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve static files from the uploads directory without requiring JWT
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
 
 // Serve static files from the frontend build folder
 app.use(express.static(path.join(__dirname, '../frontend/build')));

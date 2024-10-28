@@ -61,7 +61,7 @@ const Navbar = () => {
   
 
   const handleLogout = () => {
-    // localStorage.removeItem('token'); // Clear the JWT
+    localStorage.removeItem('token'); // Clear the JWT
     localStorage.removeItem('userId'); // Clear the user ID
   };
 

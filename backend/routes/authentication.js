@@ -18,7 +18,7 @@ function generateAccessToken(user) {
     return jwt.sign(
         { id: user.id, username: user.username, email: user.email }, 
         ACCESS_TOKEN_SECRET, 
-        { expiresIn: '7d' }
+        { expiresIn: '15m' }
     );
 }
 
@@ -137,7 +137,6 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
 
-        //const accessToken = jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: '1m' });
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
 

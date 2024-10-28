@@ -58,7 +58,7 @@ app.use((err, req, res, next) => {
 });
 
 // Serve static files from the uploads directory without requiring JWT
-app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Serve static files from the frontend build folder
 app.use(express.static(path.join(__dirname, '../frontend/build')));

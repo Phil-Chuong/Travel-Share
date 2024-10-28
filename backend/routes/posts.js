@@ -5,10 +5,10 @@ const multer  = require('multer');
 const path = require('path');
 const fs = require('fs');
 const pool = require('../DB/db');
-const { error } = require('console');
-// const { authenticateToken } = require('../services/authenticateToken');
+const { authenticateToken } = require('../services/authenticateToken');
+
 //const BASE_URL = 'http://localhost:4000';
-const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
+//const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
 
 ///////////////////////////////////////////////////
 //MULTER SETUP
@@ -54,9 +54,11 @@ router.post('/photos/upload', upload.array('photos', 6), (req, res) => {
     }
 
     // Return details of uploaded files
+    const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
     res.json({
         message: 'Photos uploaded successfully',
-        files: req.files
+        // files: req.files
+        files: imagePaths,
     });
 });
 
@@ -105,7 +107,7 @@ router.delete('/:post_id/photos/:filename', async (req, res) => {
 ///////////////////////////////////////////////
 
 //GET routes
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     console.log('Fetching posts....');
     try {
         const posts = await Post.getAllPosts();
@@ -116,7 +118,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/date', async (req, res) => {
+router.get('/date', authenticateToken, async (req, res) => {
     const { created } = req.query;
     console.log(`Fetching posts by created date: ${created}`);
     try {
@@ -132,7 +134,7 @@ router.get('/date', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
     console.log(`Fetching posts by ID: ${id}`);
     try {
@@ -148,7 +150,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.get('/users/:user_id', async (req, res) => {
+router.get('/users/:user_id', authenticateToken, async (req, res) => {
     const { user_id } = req.params;
     console.log(`Fetching posts by user ID: ${user_id}`);
 
@@ -172,7 +174,7 @@ router.get('/users/:user_id', async (req, res) => {
 });
 
 
-router.get('/country/:country_id', async (req, res) => {
+router.get('/country/:country_id', authenticateToken, async (req, res) => {
     const { country_id } = req.params;
     console.log(`Fetching posts by users ID: ${country_id}`);
 

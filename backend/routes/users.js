@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-//const { authenticateToken } = require('../services/authenticateToken');
+const { authenticateToken } = require('../services/authenticateToken');
 
 /**
  * @swagger
@@ -20,7 +20,7 @@ const User = require('../models/User');
  *                 $ref: '#/components/schemas/User'
  */
 //GET routes
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
     console.log('Fetching users....');
     try {
         const users = await User.getAllUsers();
@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
  *       404:
  *         description: User not found
  */
-router.get('/:id', async (req, res) => {
+router.get('/:id', authenticateToken, async (req, res) => {
     const { id } = req.params;
     console.log(`Fetching users by ID: ${id}`);
     try {

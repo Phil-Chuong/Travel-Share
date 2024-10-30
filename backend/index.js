@@ -67,7 +67,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 //TESTING BACKEND CONNECTION
 app.get('/', (req, res) => {
     res.send({
-        message: "Hello World from Express API backend!"
+        message: "Hello World from Express API backend! Am Connected!"
     })
 });
 

@@ -39,8 +39,8 @@ router.post('/refresh', (req, res) => {
         return res.status(401).json({ error: 'Unauthorized, no token provided' });
     }
     
-    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) {
+    jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (error, user) => {
+        if (error) {
             return res.status(403).json({ error: 'Forbidden, invalid token' });
         }
         
@@ -94,11 +94,11 @@ router.post('/register', async (req, res) => {
         });
     } catch (error) {
         // Check if the error is a unique constraint violation
-        if (err.code === '23505') {  // PostgreSQL code for unique violation
-            if (err.constraint === 'unique_username') {
+        if (error.code === '23505') {  // PostgreSQL code for unique violation
+            if (error.constraint === 'unique_username') {
                 return res.status(400).json({ error: 'Username already exists' });
             }
-            if (err.constraint === 'unique_email') {
+            if (error.constraint === 'unique_email') {
                 return res.status(400).json({ error: 'Email already exists' });
             }
         }

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { authenticateToken } = require('../services/authenticateToken');
+//const { authenticateToken } = require('../services/authenticateToken');
 
 /**
  * @swagger
@@ -20,7 +20,7 @@ const { authenticateToken } = require('../services/authenticateToken');
  *                 $ref: '#/components/schemas/User'
  */
 //GET routes
-router.get('/', authenticateToken, async (req, res) => {
+router.get('/', async (req, res) => {
     console.log('Fetching users....');
     try {
         const users = await User.getAllUsers();
@@ -55,7 +55,7 @@ router.get('/', authenticateToken, async (req, res) => {
  *       404:
  *         description: User not found
  */
-router.get('/:id', authenticateToken, async (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
     console.log(`Fetching users by ID: ${id}`);
     try {
@@ -72,7 +72,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
 
 
 //POST routes
-router.post('/', authenticateToken, async (req, res) => {
+router.post('/', async (req, res) => {
     const { firstname, lastname, username, email, password } = req.body;
     try {
         if (!firstname || !lastname || !username || !email || !password) {
@@ -88,7 +88,7 @@ router.post('/', authenticateToken, async (req, res) => {
 })
 
 //PUT/UPDATE routes
-router.put('/edituser/:id', authenticateToken, async (req, res) => {
+router.put('/edituser/:id', async (req, res) => {
     const { id } = req.params;
     const { firstname, lastname, username, email, location } = req.body;
 
@@ -109,7 +109,7 @@ router.put('/edituser/:id', authenticateToken, async (req, res) => {
 
 
 //DELETE routes
-router.delete('/:id', authenticateToken, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const userId = req.params.id;
     try {
         const result = await User.deleteUserById(userId);

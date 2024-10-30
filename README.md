@@ -1,2 +1,2 @@
 # Travel-Share
- A PERN Project: A travellers social platform to share posts about their journey.
+ Travel Share, is a social platform designed for travelers to document and share their journeys with a global community. Users can create posts with photos and tag specific countries, creating a unique travel log that others can explore. Each country has its own feed, allowing users to discover destinations and experiences tagged by fellow travelers. With features for liking, commenting, and sharing posts, Travel Share aims to connect adventurers worldwide, fostering inspiration and community through shared travel experiences.

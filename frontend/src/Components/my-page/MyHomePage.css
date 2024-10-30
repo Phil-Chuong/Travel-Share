@@ -239,6 +239,10 @@
     margin-left: 5px;
 }
 
+.no-comment {
+    padding: 15px;
+}
+
 .comment-section span {
     margin-left: 5px;
     color: red;

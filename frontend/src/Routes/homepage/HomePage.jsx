@@ -8,31 +8,34 @@ import Footer from '../../Components/footer/Footer';
 
 const HomePage = () => {
   return (
-    <div className="parent">
-      <div className='header-section'>
-        <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
-      </div>
+    <main className="parent">
+      <header className='header-section'>
+        <h1>
+          TRAVEL<AirplaneTilt size={32} color="red" />
+          SHARE 
+        </h1>
+      </header>
 
       <div className='layout-container'> 
-
-        <div className='navbar-section'>
+        <nav className='navbar-section'>
           <Navbar />
-        </div>
+        </nav>
 
-        <div className='mainbody-section'>
+        <section className='mainbody-section'>
           <Mainpost />
-        </div>
+        </section>
 
-        <div className='section-section'>
-          <div>Section Component </div>
-        </div>
-        
+        <aside className='section-section'>
+          <section>Section Component </section>
+        </aside>        
       </div>
+
       <ScrollToTopButton />
-      <div className='footer-section'>
+
+      <footer className='footer-section'>
         <Footer />
-      </div>
-    </div>
+      </footer>
+    </main>
   )
 }
 

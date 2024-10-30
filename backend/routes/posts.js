@@ -222,14 +222,36 @@ router.post('/', upload.array('images', 6), async (req, res) => {
 
 router.post('/:id/like', async (req, res) => {
     const postId = req.params.id;
+    const userId = req.body.user_id; // Get the user ID from the request body
+    console.log('User ID:', userId, 'Post ID:', postId);
+
+    // Check if userId is defined to avoid null issues
+    if (!userId) {
+        return res.status(400).json({ message: "User ID is required" });
+    }
 
     try {
-        const updatedPost = await Post.addLike(postId); // Replace with your model class name
-        res.json(updatedPost); // Send back the updated post
+        // Corrected query to check if a like already exists
+        const existingLike = await pool.query('SELECT * FROM likes WHERE user_id = $1 AND post_id = $2', [userId, postId]);
+
+        if (existingLike.rows.length > 0) {
+            // User already liked this post; remove the like
+            await pool.query('DELETE FROM likes WHERE user_id = $1 AND post_id = $2', [userId, postId]);
+            const updatedPost = await pool.query('UPDATE posts SET post_likes = post_likes - 1 WHERE id = $1 RETURNING *', [postId]);
+            return res.json(updatedPost.rows[0]);
+        } else {
+            // User has not liked this post; add the like
+            await pool.query('INSERT INTO likes (user_id, post_id) VALUES ($1, $2)', [userId, postId]);
+            const updatedPost = await pool.query('UPDATE posts SET post_likes = post_likes + 1 WHERE id = $1 RETURNING *', [postId]);
+            return res.json(updatedPost.rows[0]);
+        }
     } catch (error) {
-        res.status(500).json({ message: 'Failed to add like' });
+        console.error('Error processing like:', error); // Log the error for debugging
+        res.status(500).json({ message: 'Failed to add like', error: error.message }); // Send error message to client
     }
 });
+
+
 
 //DELETE routes
 router.delete('/:id', async (req, res) => {

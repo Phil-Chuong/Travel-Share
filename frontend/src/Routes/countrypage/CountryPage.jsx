@@ -8,31 +8,34 @@ import Footer from '../../Components/footer/Footer';
 
 const CountryPage = () => {
   return (
-    <div className="countryparent">
-      <div className='countryheader-section'>
-        <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
-      </div>
+    <main className="countryparent">
+      <header className='countryheader-section'>
+        <h1>
+          TRAVEL<AirplaneTilt size={32} color="red" />
+          SHARE 
+        </h1>
+      </header>
 
       <div className='countrylayout-container'> 
-
-        <div className='countrynavbar-section'>
+        <nav className='countrynavbar-section'>
           <Navbar />
-        </div>      
+        </nav>      
 
-        <div className='countrymainbody-section'>
+        <section className='countrymainbody-section'>
           <CountriesPosts />
-        </div>
+        </section>
 
-        <div className='section-section'>
-          <div>Section Component </div>
-        </div>
-        
+        <aside className='section-section'>
+          <section>Section Component </section>
+        </aside>  
       </div>
+
       <ScrollToTopButton />
-      <div className='footer-section'>
+
+      <footer className='footer-section'>
         <Footer />
-      </div>     
-    </div>
+      </footer>     
+    </main>
   )
 }
 

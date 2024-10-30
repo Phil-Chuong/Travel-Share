@@ -8,6 +8,7 @@ import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { Link } from 'react-router-dom';
 import AddNewPost from '../addnewpost/AddNewPost';
+import LikeButton from '../like-button/likeButton';
 
 
 function MyHomePage() {
@@ -28,8 +29,13 @@ function MyHomePage() {
 
     useEffect(() => {
         const fetchUserData = async () => {
+            const token = localStorage.getItem('token');
             try {
-                const userResponse = await axios.get(`/users/${userId}`);
+                const userResponse = await axios.get(`/users/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setUsers([userResponse.data]);
             } catch (err) {
                 console.error('Error fetching user:', err);
@@ -38,11 +44,17 @@ function MyHomePage() {
         };
 
         const fetchPostsByUserId = async () => {
+            const token = localStorage.getItem('token');
+
             try {
                 const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
                     axios.get(`/posts/users/${userId}`),///CHANGE WHEN USER LOGIN
                     axios.get('/countries'),
-                    axios.get('/users'),
+                    axios.get('/users', {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }),
                     axios.get('/comments')
                 ]);
                 //console.log("Fetched Users:", usersResponse.data); // Debug log
@@ -133,21 +145,6 @@ function MyHomePage() {
         }
     };
 
-    const handleLikePost = async (postId) => {
-        try {
-            const response = await axios.post(`/posts/${postId}/like`);
-
-            // Update likes state with the latest count from the backend
-            const updatedLikes = response.data.post_likes;
-            setLikes(prevLikes => ({
-                ...prevLikes,
-                [postId]: updatedLikes
-            }));
-        } catch (error) {
-            console.error('Error liking post:', error);
-        }
-    };
-
     const toggleCommentsVisibility = (post_id) => {
         setVisibleCommentsPostId(visibleCommentsPostId === post_id ? null : post_id);
     };
@@ -231,7 +228,7 @@ function MyHomePage() {
                                                 <img 
                                                     className="mypost-image"
                                                     key={index} 
-                                                    // src={`http://localhost:4000${image.trim()}`} 
+                                                    //src={`http://localhost:4000${image.trim()}`} 
                                                     src={`${image.trim()}`}
                                                     alt={post.title} 
                                                     style={{ maxWidth: '251px' }} 
@@ -251,9 +248,8 @@ function MyHomePage() {
                                         {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
                                     </div>
                                     <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
-                                    <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                        <Heart size={24} />
-                                        {currentLikes > 0 && <span>{currentLikes}</span>}
+                                    <div className='likes-section'>
+                                        <LikeButton postId={post.id} initialLikes={post.post_likes} userId={post.user_id} />
                                     </div>
                                 </div>
 
@@ -286,7 +282,7 @@ function MyHomePage() {
                                                 </div>
                                             ))
                                         ) : (
-                                            <p>No comments yet.</p>
+                                            <p className='no-comment'>No comments yet.</p>
                                         )}
                                     </div>
                                 )}

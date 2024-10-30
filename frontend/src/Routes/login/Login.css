@@ -11,6 +11,7 @@
 }
 
 .login-box {
+    min-width: 260px;
     max-width: 100%;
     height: fit-content;
     display: flex;

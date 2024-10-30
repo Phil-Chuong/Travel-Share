@@ -59,6 +59,9 @@ function Login() {
                 localStorage.setItem('refreshToken', refreshToken);
                 localStorage.setItem('userId', userId);
 
+                console.log('Stored userId after login:', localStorage.getItem('userId')); // After setting userId
+
+
                 console.log('Navigating to mypage');
                 navigate('/mypage');
               } else {
@@ -79,14 +82,18 @@ function Login() {
             const response = await axios.post('/authentication/login', { email, password });
 
             // Store JWT in local storage
-            const { accessToken, user } = response.data;
+            const userId = response.data.user.id;
+            const { accessToken } = response.data;
 
             localStorage.setItem('token', accessToken);
-            localStorage.setItem('userId', user.id); 
+            localStorage.setItem('userId', userId); 
             console.log('Stored userId:', localStorage.getItem('userId'));
 
+            console.log('Stored userId after login:', localStorage.getItem('userId')); // After setting userId
+
+
             console.log('Token:', accessToken);
-            console.log('User ID:', user.id); 
+            console.log('User ID:', userId); 
 
             navigate('/mypage');
         } catch (error) {

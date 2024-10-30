@@ -1,5 +1,6 @@
 const pool = require('../DB/db');
-const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
+//const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
+const BASE_URL = 'http://localhost:4000'
 
 class Post {
     //GET REQUEST
@@ -124,31 +125,19 @@ class Post {
 
 
     //PULL REQUEST - change like states
-    static async addLike(postId) {
-        const query = 'UPDATE posts SET post_likes = post_likes + 1 WHERE id = $1 RETURNING *';
-        try {
-            const result = await pool.query(query, [postId]);
-            const updatedPost = result.rows[0]; // Get the updated post with new like count
-            return updatedPost; // Return the updated post
-        } catch (error) {
-            console.error('Error adding like to post', error.message);
-            throw error;
-        }
-    }
-
-
-    //DELETE REQUEST - Delete a post
-    // static async deletePostById(id) {
-    //     const query = 'DELETE FROM posts WHERE id = $1';
+    // static async addLike(postId) {
+    //     const query = 'UPDATE posts SET post_likes = post_likes + 1 WHERE id = $1 RETURNING *';
     //     try {
-    //         const result = await pool.query(query, [id]);
-    //         // Return a success message or status
-    //         return { message: `Post with ID ${id} deleted successfully.` };
+    //         const result = await pool.query(query, [postId]);
+    //         const updatedPost = result.rows[0]; // Get the updated post with new like count
+    //         return updatedPost; // Return the updated post
     //     } catch (error) {
-    //         console.error('Error deleting post by ID');
+    //         console.error('Error adding like to post', error.message);
     //         throw error;
     //     }
     // }
+
+
 
     // DELETE REQUEST - Delete a post along with associated comments and replies
     static async deletePostById(id) {

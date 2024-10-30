@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Mainpost.css';
-import { ChatCentered, Heart, IdentificationCard, Globe  } from '@phosphor-icons/react';
+import { ChatCentered, IdentificationCard, Globe  } from '@phosphor-icons/react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { Link } from 'react-router-dom';
+import LikeButton from '../like-button/likeButton';
 
 function Mainpost() {
     const [posts, setPosts] = useState([]);
@@ -23,12 +24,19 @@ function Mainpost() {
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
+        
         const fetchData = async () => {
+            const token = localStorage.getItem('token');
+
             try {
                 const [postsResponse, countriesResponse, usersResponse, commentsResponse] = await Promise.all([
                     axios.get('/posts'),
                     axios.get('/countries'),
-                    axios.get('/users'),
+                    axios.get('/users', {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }),
                     axios.get('/comments')
                 ]);
                 setPosts(postsResponse.data);
@@ -98,21 +106,6 @@ function Mainpost() {
         }
     };
 
-    // New function to handle liking posts
-    const handleLikePost = async (postId) => {
-        try {
-            await axios.post(`/posts/${postId}/like`);
-    
-            // Update local state after successfully liking the post
-            setLikes(prevLikes => ({
-                ...prevLikes,
-                [postId]: (prevLikes[postId] || 0) + 1 
-            }));
-        } catch (error) {
-            console.error('Error liking post:', error);
-        }
-    };
-
     const toggleCommentsVisibility = (post_id) => {
         setVisibleCommentsPostId(visibleCommentsPostId === post_id ? null : post_id);
     };
@@ -171,7 +164,7 @@ function Mainpost() {
                                         <img 
                                         className="post-image"
                                         key={index} 
-                                        // src={`http://localhost:4000${image}`} 
+                                        //src={`http://localhost:4000${image}`} 
                                         src={`${image}`}
                                         alt={post.title} 
                                         style={{ maxWidth: '261px'}}
@@ -190,9 +183,8 @@ function Mainpost() {
                                     {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
                                 </div>
                                 <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
-                                <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                    <Heart size={24} />
-                                    {currentLikes > 0 && <span>{currentLikes}</span>} {/* Show current like count */}
+                                <div className='likes-section'>                               
+                                    <LikeButton postId={post.id} initialLikes={post.post_likes} userId={post.user_id} />
                                 </div>
                                     
                             </div>
@@ -226,7 +218,7 @@ function Mainpost() {
                                             </div>
                                         ))
                                     ) : (
-                                        <p>No comments yet.</p>
+                                        <p className='no-comment'>No comments yet.</p>
                                     )}
                                 </div>
                             )}

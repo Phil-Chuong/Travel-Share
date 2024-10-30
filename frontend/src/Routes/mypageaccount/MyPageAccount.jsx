@@ -7,31 +7,32 @@ import Footer from '../../Components/footer/Footer';
 
 const MyPageAccount = () => {
   return (
-    <div className="settingparent">
-      <div className='settingheader-section'>
-        <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
-      </div>
+    <main className="settingparent">
+      <header className='settingheader-section'>
+        <h1>
+          TRAVEL<AirplaneTilt size={32} color="red" />
+          SHARE
+        </h1>
+      </header>
 
       <div className='settinglayout-container'> 
-
-        <div className='settingnavbar-section'>
+        <nav className='settingnavbar-section'>
           <Navbar />
-        </div>
+        </nav>
 
-        <div className='settingmainbody-section'>
+        <section className='settingmainbody-section'>
           <Account />
-        </div>
+        </section>
 
-        <div className='settingsection-section'>
-          <div>Section Component </div>
-        </div>
-
+        <aside className='settingsection-section'>
+          <section>Section Component </section>
+        </aside>
       </div>
 
-      <div className='settingfooter-section'>
+      <footer className='settingfooter-section'>
         <Footer />
-      </div>
-    </div>
+      </footer>
+    </main>
   )
 }
 

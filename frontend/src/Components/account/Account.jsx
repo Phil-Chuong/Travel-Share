@@ -19,8 +19,14 @@ function Account() {
 
     useEffect(() => {
         const fetchUserInfoData = async () => {
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get(`/users/${userId}`); ///CHANGE WHEN USER LOGIN
+                const response = await axios.get(`/users/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }); ///CHANGE WHEN USER LOGIN
                 setUser(response.data);
             } catch (err) {
                 setError('Failed to fetch users info')
@@ -28,8 +34,14 @@ function Account() {
         };
 
         const fetchCountries = async () => {
+            const token = localStorage.getItem('token');
+
             try {
-                const response = await axios.get('/countries');
+                const response = await axios.get('/countries', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setCountries(response.data);
             } catch (err) {
                 setError('Failed to fetch countries');
@@ -60,8 +72,13 @@ function Account() {
 
     // Save changes and update user info
     const handleSave = async () => {
+        const token = localStorage.getItem('token');
         try {
-            await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }); ///CHANGE WHEN USER LOGIN
+            await axios.put(`/users/edituser/${userId}`, { [editingField]: newFieldValue }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }); ///CHANGE WHEN USER LOGIN
             setUser({ ...user, [editingField]: newFieldValue }); // Update UI
             closeModal();
             setError(null); // Clear any previous errors

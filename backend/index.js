@@ -4,22 +4,25 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
-// const { Pool } = require('pg');
+const { Pool } = require('pg');
 const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const { pool } = require('./DB/db'); // Ensure this imports the pool directly
+//const { pool } = require('./DB/db'); // Ensure this imports the pool directly
 
 // Initialize the app
 const app = express();
 
 // Allow requests from specific origins
-app.use(cors({
-  origin: ['https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  credentials: true, // Allow credentials like cookies to be sent
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: ['https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+//   credentials: true, // Allow credentials like cookies to be sent
+// }));
+
+
 
 //Middleware
 app.use(express.json());
@@ -115,11 +118,11 @@ app.get('*', (req, res) => {
 });
 
 //Listen on PORT 4000
-// app.listen(config.PORT, () => {
-// console.log(`App listening on port ${config.PORT}`)
-// });
+app.listen(config.PORT, () => {
+console.log(`App listening on port ${config.PORT}`)
+});
 
 // Listen on specified PORT
-app.listen(process.env.PORT || 4000, () => {
-  console.log(`App listening on port ${process.env.PORT || 4000}`);
-});
+// app.listen(process.env.PORT || 4000, () => {
+//   console.log(`App listening on port ${process.env.PORT || 4000}`);
+// });

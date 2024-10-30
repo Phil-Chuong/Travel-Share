@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 import Comments from '../comment/Comments';
 import { useParams } from 'react-router-dom';
+import LikeButton from '../like-button/likeButton';
 
 function CountriesPosts() {
     const [posts, setPosts] = useState([]);
@@ -25,6 +26,8 @@ function CountriesPosts() {
 
     useEffect(() => {
         const fetchPostsByCountry = async () => {
+            const token = localStorage.getItem('token');
+
             try {
                 // Fetch country by ID
                 const countryResponse = await axios.get(`/countries/${countryId}`);
@@ -34,7 +37,11 @@ function CountriesPosts() {
                 const [postsResponse, usersResponse, commentsResponse] = await Promise.all([
                     axios.get(`/posts/country/${countryId}`),
                     // axios.get('/countries'),
-                    axios.get('/users'),
+                    axios.get('/users', {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }),
                     axios.get('/comments')
                 ]);
                 setPosts(postsResponse.data);
@@ -112,21 +119,6 @@ function CountriesPosts() {
         }
     };
 
-    const handleLikePost = async (postId) => {
-        try {
-            const response = await axios.post(`/posts/${postId}/like`);
-
-            // Update likes state with the latest count from the backend
-            const updatedLikes = response.data.post_likes;
-            setLikes(prevLikes => ({
-                ...prevLikes,
-                [postId]: updatedLikes
-            }));
-        } catch (error) {
-            console.error('Error liking post:', error);
-        }
-    };
-
     const toggleCommentsVisibility = (post_id) => {
         setVisibleCommentsPostId(visibleCommentsPostId === post_id ? null : post_id);
     };
@@ -191,7 +183,7 @@ function CountriesPosts() {
                                             <img 
                                             className="countrypost-image"
                                             key={index} 
-                                            // src={`http://localhost:4000${image}`} 
+                                            //src={`http://localhost:4000${image}`} 
                                             src={`${image}`}
                                             alt={post.title} 
                                             style={{ maxWidth: '261px'}}
@@ -210,9 +202,8 @@ function CountriesPosts() {
                                         {commentCount(post.id) > 0 && <span>{commentCount(post.id)}</span>}
                                     </div>
                                     <div className='create-section'>{formatDistanceToNow(parseISO(post.created), { addSuffix: true })}</div>
-                                    <div className='likes-section' onClick={() => handleLikePost(post.id)}>
-                                        <Heart size={24} />
-                                        {currentLikes > 0 && <span>{currentLikes}</span>}
+                                    <div className='likes-section'>
+                                        <LikeButton postId={post.id} initialLikes={post.post_likes} userId={post.user_id} />
                                     </div>
                                 </div>
 
@@ -245,7 +236,7 @@ function CountriesPosts() {
                                                 </div>
                                             ))
                                         ) : (
-                                            <p>No comments yet.</p>
+                                            <p className='no-comment'>No comments yet.</p>
                                         )}
                                     </div>
                                 )}

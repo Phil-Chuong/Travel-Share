@@ -8,31 +8,31 @@ import Footer from '../../Components/footer/Footer';
 
 const MyPage = () => {
   return (
-    <div className="myparent">
-      <div className='myheader-section'>
+    <main className="myparent">
+      <header className='myheader-section'>
         <h1>TRAVEL<AirplaneTilt size={32} color="red" />SHARE </h1>
-      </div>
+      </header>
 
       <div className='mylayout-container'> 
-
-        <div className='mynavbar-section'>
+        <nav className='mynavbar-section'>
           <Navbar />
-        </div>
+        </nav>
 
-        <div className='mymainbody-section'>
+        <section className='mymainbody-section'>
           <MyHomePage />
-        </div>
+        </section>
 
-        <div className='mysection-section'>
-          <div>Section Component </div>
-        </div>
-
+        <aside className='mysection-section'>
+          <section>Section Component </section>
+        </aside>
       </div>
+
       <ScrollToTopButton />
-      <div className='myfooter-section'>
+
+      <footer className='myfooter-section'>
         <Footer />
-      </div>
-    </div>
+      </footer>
+    </main>
   )
 }
 

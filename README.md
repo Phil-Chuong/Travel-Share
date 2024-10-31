@@ -2,6 +2,7 @@
  Travel Share, is a social platform designed for travelers to document and share their journeys with a global community. Users can create posts with photos and tag specific countries, creating a unique travel log that others can explore. Each country has its own feed, allowing users to discover destinations and experiences tagged by fellow travelers. With features for liking, commenting, and sharing posts, Travel Share aims to connect adventurers worldwide, fostering inspiration and community through shared travel experiences.
 
 📋 Table of Contents
+
 Features
 Tech Stack
 Getting Started
@@ -12,23 +13,30 @@ Future Enhancements
 License
 
 ✨ Features
+
 User Authentication: Secure signup and login, with JWT-based token authentication.
 
 Post Sharing: Create posts with multiple photos (up to 6) and tag locations by country.
 
-Photo Management: Upload and manage photos (compressed for efficiency).
+Photo Management: Upload and manage photos up to 10mb.
 
 Likes, Comments, and Replies: Engage with posts through likes, comments, and replies.
+
 Explore by Country: Browse posts by specific countries to discover new travel experiences.
+
 Personal Profile: View user-specific pages showing their posts and photos.
+
+Edit Account page: Editing names, username, email.
+
 Responsive Design: Optimized for both mobile and desktop.
+
 🛠 Tech Stack
+
 Frontend: React, Vite, CSS
 Backend: Node.js, Express.js
 Database: PostgreSQL
 Authentication: JWT tokens
-File Management: Multer for file uploads, Sharp for image resizing
-Testing: Jest, Supertest
+File Management: Multer for file uploads.
 Deployment: Render
 
 🚀 Getting Started

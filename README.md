@@ -13,8 +13,11 @@ License
 
 ✨ Features
 User Authentication: Secure signup and login, with JWT-based token authentication.
+
 Post Sharing: Create posts with multiple photos (up to 6) and tag locations by country.
+
 Photo Management: Upload and manage photos (compressed for efficiency).
+
 Likes, Comments, and Replies: Engage with posts through likes, comments, and replies.
 Explore by Country: Browse posts by specific countries to discover new travel experiences.
 Personal Profile: View user-specific pages showing their posts and photos.

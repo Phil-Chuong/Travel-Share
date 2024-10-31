@@ -1,6 +1,6 @@
 const pool = require('../DB/db');
-//const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
-const BASE_URL = 'http://localhost:4000'
+const BASE_URL = 'https://travel-share-backend-11c4.onrender.com';
+//const BASE_URL = 'http://localhost:4000'
 
 class Post {
     //GET REQUEST

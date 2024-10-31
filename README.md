@@ -122,9 +122,9 @@ Ensure the values match your PostgreSQL setup and JWT configurations.
 
 🪟 Preview screenshot
 
-![C:\Users\phi_c\Pictures\TRAVEL-SHARE\screenshot\login.jpg]
-
-
+![login](https://github.com/user-attachments/assets/c38322e6-47c2-4710-a6d4-d6c540ecf470) ![register](https://github.com/user-attachments/assets/b6e3ce5d-48fd-4c11-ae28-6902c470f7e4)
+![main](https://github.com/user-attachments/assets/4d46f9d7-b4b4-46bc-82ee-96bb0b8d9302) ![create](https://github.com/user-attachments/assets/7881d54e-e65f-4a55-9312-2457cbd7bcef)
+![accounts](https://github.com/user-attachments/assets/9f4f0161-4d41-4c53-81b6-4ffbfc6cf96a)
 
 🔮 Future Enhancements
 

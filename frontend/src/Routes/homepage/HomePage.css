@@ -10,7 +10,7 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: cornflowerblue;
+    background-color: whitesmoke;
 }
 
 .header-section {
@@ -67,7 +67,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    background-color: rgb(31, 46, 46);
+    background-color: rgb(76, 160, 112);
     color: white;
 }
 

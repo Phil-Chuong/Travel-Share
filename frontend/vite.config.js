@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     port: 3000, // Local development port
     proxy: {
-       //'/api': 'http://localhost:4000', // Development API endpoint
-      '/api': 'https://travel-share-backend-11c4.onrender.com'
+      '/api': 'http://localhost:4000', // Development API endpoint
+      //'/api': 'https://travel-share-backend-11c4.onrender.com'
     },
   },
   // Set base URL depending on environment (useful in production)

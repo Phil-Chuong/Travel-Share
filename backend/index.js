@@ -8,19 +8,19 @@ const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-//const { Pool } = require('pg');
-const { pool } = require('./DB/db'); // Ensure this imports the pool directly
+const { Pool } = require('pg');
+//const { pool } = require('./DB/db'); // Ensure this imports the pool directly
 
 // Initialize the app
 const app = express();
 
 // Allow requests from specific origins
-//app.use(cors());
-app.use(cors({
-  origin: ['https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  credentials: true, // Allow credentials like cookies to be sent
-}));
+app.use(cors());
+// app.use(cors({
+//   origin: ['https://travel-share-gc6z.onrender.com'], // Replace with your frontend URLs
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+//   credentials: true, // Allow credentials like cookies to be sent
+// }));
 
 //Middleware
 app.use(express.json());
@@ -119,8 +119,3 @@ app.get('*', (req, res) => {
 app.listen(config.PORT, () => {
 console.log(`App listening on port ${config.PORT}`)
 });
-
-// Listen on specified PORT
-// app.listen(process.env.PORT || 4000, () => {
-//   console.log(`App listening on port ${process.env.PORT || 4000}`);
-// });

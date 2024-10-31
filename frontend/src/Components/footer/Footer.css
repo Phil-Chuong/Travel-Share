@@ -1,18 +1,49 @@
 .footer-container {
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    height: fit-content;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: rgb(76, 160, 112);
+    color: #fff;
     text-align: center;
-}
-
-.footer-info {
-    margin: 5px;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  
+  .footer-summary {
+    padding: 5px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    cursor: pointer;
-    font-size: 0.7em;
-}
+  }
+  
+  .footer-info {
+    max-height: 0; /* Start hidden */
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  
+  .footer-container:hover .footer-info {
+    max-height: fit-content; /* Adjust to the height needed */
+    padding: 5px 0;
+  }
+  
+  .footer-section a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .footer-section a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer-section p {
+    margin: 1px 0;
+  }
+  
+
 
 /* TABLET MODE MIN-768PX */
 @media only screen and (min-width: 768px) {

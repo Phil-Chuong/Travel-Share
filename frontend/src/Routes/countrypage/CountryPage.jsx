@@ -25,14 +25,14 @@ const CountryPage = () => {
           <CountriesPosts />
         </section>
 
-        <aside className='section-section'>
+        <aside className='countrysection-section'>
           <section>Section Component </section>
         </aside>  
       </div>
 
       <ScrollToTopButton />
 
-      <footer className='footer-section'>
+      <footer className='countryfooter-section'>
         <Footer />
       </footer>     
     </main>

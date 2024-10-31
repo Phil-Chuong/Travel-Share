@@ -9,14 +9,11 @@ Features
 Tech Stack
 Getting Started
 Environment Variables
-API Endpoints
-Testing
 Future Enhancements
-License
 
 ✨ Features
 
-User Authentication: Secure signup and login, with JWT-based token authentication.
+User Authentication: Secure signup and Google login , with JWT-based token authentication.
 
 Post Sharing: Create posts with multiple photos (up to 6) and tag locations by country.
 
@@ -122,6 +119,10 @@ DATABASE_URL=postgresql://user:password@localhost:5432/travel_share
 JWT_SECRET=your_jwt_secret
 ```
 Ensure the values match your PostgreSQL setup and JWT configurations.
+
+🪟 Preview screenshot
+
+![C:\Users\phi_c\Pictures\TRAVEL-SHARE\screenshot\login.jpg]
 
 
 
